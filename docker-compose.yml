@@ -32,3 +32,17 @@ services:
       - /srv/docker/configs/qbittorrent:/config
       - /var/lib/qbittorrent/Downloads:/downloads
     restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    network_mode: host
+    environment:
+      - PUID=956
+      - PGID=947
+      - TZ=Asia/Kolkata
+    volumes:
+      - /srv/docker/configs/sonarr:/config
+      - /var/lib/qbittorrent/Downloads:/downloads
+      - /media/tv:/tv
+    restart: unless-stopped
