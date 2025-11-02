@@ -82,6 +82,22 @@ services:
       - TZ=Asia/Kolkata
     restart: unless-stopped
 
+  jellyseerr:
+    image: ghcr.io/fallenbagel/jellyseerr:latest
+    init: true
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Asia/Kolkata
+      - PORT=5055
+    networks:
+      - media_net
+    ports:
+      - 5055:5055
+    volumes:
+      - /srv/docker/configs/jellyseerr:/app/config
+    restart: unless-stopped
+
 networks:
   media_net:
     driver: bridge
