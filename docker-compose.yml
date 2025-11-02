@@ -5,8 +5,11 @@ services:
     user: 956:956
     group_add:
       - 947
-    network_mode: 'host'
+    networks:
+      - media_net
     restart: 'unless-stopped'
+    ports:
+      - 8096:8096
     environment:
       - JELLYFIN_CACHE_DIR=/var/cache/jellyfin
       - JELLYFIN_CONFIG_DIR=/etc/jellyfin
@@ -22,7 +25,10 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    network_mode: host
+    networks:
+      - media_net
+    ports:
+      - 8080:8080
     environment:
       - PUID=956
       - PGID=947
@@ -36,7 +42,10 @@ services:
   sonarr:
     image: linuxserver/sonarr
     container_name: sonarr
-    network_mode: host
+    networks:
+      - media_net
+    ports:
+      - 8989:8989
     environment:
       - PUID=956
       - PGID=947
@@ -46,3 +55,33 @@ services:
       - /var/lib/qbittorrent/Downloads:/downloads
       - /media/tv:/tv
     restart: unless-stopped
+
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr
+    networks:
+      - media_net
+    ports:
+      - 9696:9696
+    environment:
+      - PUID=956
+      - PGID=947
+      - TZ=Asia/Kolkata
+    volumes:
+      - /srv/docker/configs/prowlarr:/config
+    restart: unless-stopped
+
+  tor:
+    image: dperson/torproxy
+    container_name: tor
+    networks:
+      - media_net
+    ports:
+      - 9050:9050
+    environment:
+      - TZ=Asia/Kolkata
+    restart: unless-stopped
+
+networks:
+  media_net:
+    driver: bridge
