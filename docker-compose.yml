@@ -56,6 +56,23 @@ services:
       - /media/tv:/tv
     restart: unless-stopped
 
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    networks:
+      - media_net
+    ports:
+      - 8686:8686
+    environment:
+      - PUID=956
+      - PGID=947
+      - TZ=Asia/Kolkata
+    volumes:
+      - /srv/docker/configs/lidarr:/config
+      - /var/lib/qbittorrent/Downloads:/downloads
+      - /media/music:/music
+    restart: unless-stopped
+
   prowlarr:
     image: linuxserver/prowlarr
     container_name: prowlarr
