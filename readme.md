@@ -9,6 +9,9 @@ streaming and acquisition
 - jellyfin
 - jellyseerr
 - sonarr
+- lidarr
 - prowlarr
+- flaresolverr
 - qbittorrent
 - tor
+- dockge
