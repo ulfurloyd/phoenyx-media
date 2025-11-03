@@ -98,6 +98,18 @@ services:
       - /srv/docker/configs/jellyseerr:/app/config
     restart: unless-stopped
 
+  flaresolverr:
+    image: flaresolverr/flaresolverr
+    container_name: flaresolverr
+    networks:
+      - media_net
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Asia/Kolkata
+    ports:
+      - 8191:8191
+    restart: unless-stopped
+
   dockge:
     image: louislam/dockge:latest
     container_name: dockge
