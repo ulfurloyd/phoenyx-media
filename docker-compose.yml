@@ -73,6 +73,23 @@ services:
       - /media/music:/music
     restart: unless-stopped
 
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    networks:
+      - media_net
+    ports:
+      - 7878:7878
+    environment:
+      - PUID=956
+      - PGID=947
+      - TZ=Asia/Kolkata
+    volumes:
+      - /srv/docker/configs/radarr:/config
+      - /var/lib/qbittorrent/Downloads:/downloads
+      - /media/movies:/movies
+    restart: unless-stopped
+
   prowlarr:
     image: linuxserver/prowlarr
     container_name: prowlarr
