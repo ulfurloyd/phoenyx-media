@@ -9,6 +9,7 @@ streaming and acquisition
 - jellyfin
 - jellyseerr
 - sonarr
+- radarr
 - lidarr
 - prowlarr
 - flaresolverr
