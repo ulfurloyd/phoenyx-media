@@ -1,4 +1,18 @@
 services:
+  homarr:
+    image: ghcr.io/homarr-labs/homarr:latest
+    container_name: homarr
+    networks:
+      - media_net
+    ports:
+      - 7575:7575
+    environment:
+      - SECRET_ENCRYPTION_KEY=a70fe81b2e8f225399d729f7d5a1420b4b66cd291df0d865c81df9e82323adc9
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/docker/configs/homarr:/appdata
+    restart: unless-stopped
+
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
