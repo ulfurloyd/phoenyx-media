@@ -7,7 +7,7 @@ services:
     ports:
       - 7575:7575
     environment:
-      - SECRET_ENCRYPTION_KEY=a70fe81b2e8f225399d729f7d5a1420b4b66cd291df0d865c81df9e82323adc9
+      - SECRET_ENCRYPTION_KEY=${HOMARR_ENCRYPTION_KEY}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /srv/docker/configs/homarr:/appdata
@@ -16,9 +16,9 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    user: 956:956
+    user: ${PUID}:956
     group_add:
-      - 947
+      - ${PGID}
     networks:
       - media_net
     restart: 'unless-stopped'
@@ -44,9 +44,9 @@ services:
     ports:
       - 8080:8080
     environment:
-      - PUID=956
-      - PGID=947
-      - TZ=Asia/Kolkata
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - WEBUI_PORT=8080
     volumes:
       - /srv/docker/configs/qbittorrent:/config
@@ -61,9 +61,9 @@ services:
     ports:
       - 8989:8989
     environment:
-      - PUID=956
-      - PGID=947
-      - TZ=Asia/Kolkata
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
       - /srv/docker/configs/sonarr:/config
       - /var/lib/qbittorrent/Downloads:/downloads
@@ -78,9 +78,9 @@ services:
     ports:
       - 8686:8686
     environment:
-      - PUID=956
-      - PGID=947
-      - TZ=Asia/Kolkata
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
       - /srv/docker/configs/lidarr:/config
       - /var/lib/qbittorrent/Downloads:/downloads
@@ -95,9 +95,9 @@ services:
     ports:
       - 7878:7878
     environment:
-      - PUID=956
-      - PGID=947
-      - TZ=Asia/Kolkata
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
       - /srv/docker/configs/radarr:/config
       - /var/lib/qbittorrent/Downloads:/downloads
@@ -112,9 +112,9 @@ services:
     ports:
       - 9696:9696
     environment:
-      - PUID=956
-      - PGID=947
-      - TZ=Asia/Kolkata
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
       - /srv/docker/configs/prowlarr:/config
     restart: unless-stopped
@@ -127,7 +127,7 @@ services:
     ports:
       - 9050:9050
     environment:
-      - TZ=Asia/Kolkata
+      - TZ=${TZ}
     restart: unless-stopped
 
   jellyseerr:
@@ -136,7 +136,7 @@ services:
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=debug
-      - TZ=Asia/Kolkata
+      - TZ=${TZ}
       - PORT=5055
     networks:
       - media_net
@@ -153,7 +153,7 @@ services:
       - media_net
     environment:
       - LOG_LEVEL=info
-      - TZ=Asia/Kolkata
+      - TZ=${TZ}
     ports:
       - 8191:8191
     restart: unless-stopped
