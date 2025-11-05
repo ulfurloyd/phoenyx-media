@@ -144,19 +144,6 @@ services:
       - 8191:8191
     restart: unless-stopped
 
-  dockge:
-    image: louislam/dockge:latest
-    container_name: dockge
-    ports:
-      - "5001:5001"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/dockge/data:/app/data
-      - /home/wolf/Dev/Docker:/opt/stacks
-    environment:
-      - TZ=Asia/Kolkata
-    restart: unless-stopped
-
 networks:
   media_net:
     driver: bridge
