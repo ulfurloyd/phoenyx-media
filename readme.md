@@ -6,6 +6,7 @@ streaming and acquisition
 
 ## services
 
+- homarr
 - jellyfin
 - jellyseerr
 - sonarr
@@ -15,4 +16,3 @@ streaming and acquisition
 - flaresolverr
 - qbittorrent
 - tor
-- dockge
