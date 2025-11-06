@@ -39,10 +39,11 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    networks:
-      - media_net
-    ports:
-      - 8080:8080
+    network_mode: "service:gluetun"
+    # networks:
+    #   - media_net
+    # ports:
+    #   - 8080:8080
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -56,10 +57,11 @@ services:
   sonarr:
     image: linuxserver/sonarr
     container_name: sonarr
-    networks:
-      - media_net
-    ports:
-      - 8989:8989
+    network_mode: "service:gluetun"
+    # networks:
+    #   - media_net
+    # ports:
+    #   - 8989:8989
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -73,10 +75,11 @@ services:
   lidarr:
     image: linuxserver/lidarr
     container_name: lidarr
-    networks:
-      - media_net
-    ports:
-      - 8686:8686
+    network_mode: "service:gluetun"
+    # networks:
+    #   - media_net
+    # ports:
+    #   - 8686:8686
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -90,10 +93,11 @@ services:
   radarr:
     image: linuxserver/radarr
     container_name: radarr
-    networks:
-      - media_net
-    ports:
-      - 7878:7878
+    network_mode: "service:gluetun"
+    # networks:
+    #   - media_net
+    # ports:
+    #   - 7878:7878
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -107,10 +111,11 @@ services:
   prowlarr:
     image: linuxserver/prowlarr
     container_name: prowlarr
-    networks:
-      - media_net
-    ports:
-      - 9696:9696
+    network_mode: "service:gluetun"
+    # networks:
+    #   - media_net
+    # ports:
+    #   - 9696:9696
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -119,15 +124,30 @@ services:
       - /srv/docker/configs/prowlarr:/config
     restart: unless-stopped
 
-  tor:
-    image: dperson/torproxy
-    container_name: tor
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
     networks:
       - media_net
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
     ports:
-      - 9050:9050
+      - 7878:7878 # radarr
+      - 8686:8686 # lidarr
+      - 8989:8989 # sonarr
+      - 9696:9696 # prowlarr
+      - 8080:8080 # qbittorrent
+      - 6881:6881 # qbittorrent
+      - 6881:6881/udp # qbittorrent
     environment:
-      - TZ=${TZ}
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - SERVER_COUNTRIES=Netherlands
+      - SOCKS5=on
+      - DNS_KEEP_NAMESERVERS=on
     restart: unless-stopped
 
   jellyseerr:
