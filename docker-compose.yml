@@ -1,183 +1,161 @@
 services:
-  homarr:
-    image: ghcr.io/homarr-labs/homarr:latest
-    container_name: homarr
-    networks:
-      - media_net
-    ports:
-      - 7575:7575
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr
     environment:
-      - SECRET_ENCRYPTION_KEY=${HOMARR_ENCRYPTION_KEY}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /srv/docker/configs/homarr:/appdata
+      - ${CONFIG_BASE_PATH}/prowlarr:/config
     restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
 
-  jellyfin:
-    image: jellyfin/jellyfin
-    container_name: jellyfin
-    user: ${PUID}:956
-    group_add:
-      - ${PGID}
-    networks:
-      - media_net
-    restart: 'unless-stopped'
-    ports:
-      - 8096:8096
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
     environment:
-      - JELLYFIN_CACHE_DIR=/var/cache/jellyfin
-      - JELLYFIN_CONFIG_DIR=/etc/jellyfin
-      - JELLYFIN_DATA_DIR=/var/lib/jellyfin
-      - JELLYFIN_LOG_DIR=/var/log/jellyfin
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     volumes:
-      - /etc/jellyfin:/etc/jellyfin
-      - /var/cache/jellyfin:/var/cache/jellyfin
-      - /var/lib/jellyfin:/var/lib/jellyfin
-      - /var/log/jellyfin:/var/log/jellyfin
-      - /media:/media
+      - ${CONFIG_BASE_PATH}/radarr:/config
+      - ${MOVIES_LIBRARY_PATH}:/movies
+      - ${DOWNLOADS_PATH}:/downloads
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_BASE_PATH}/sonarr:/config
+      - ${SHOWS_LIBRARY_PATH}:/shows
+      - ${DOWNLOADS_PATH}:/downloads
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_BASE_PATH}/lidarr:/config
+      - ${MUSIC_LIBRARY_PATH}:/music
+      - ${DOWNLOADS_PATH}:/downloads
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
 
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent
     container_name: qbittorrent
-    network_mode: "service:gluetun"
-    # networks:
-    #   - media_net
-    # ports:
-    #   - 8080:8080
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
       - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
     volumes:
-      - /srv/docker/configs/qbittorrent:/config
-      - /var/lib/qbittorrent/Downloads:/downloads
+      - ${CONFIG_BASE_PATH}/qbittorrent:/config
+      - ${DOWNLOADS_PATH}:/downloads
     restart: unless-stopped
-
-  sonarr:
-    image: linuxserver/sonarr
-    container_name: sonarr
     network_mode: "service:gluetun"
-    # networks:
-    #   - media_net
-    # ports:
-    #   - 8989:8989
+    depends_on:
+      - gluetun
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=${TZ}
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /srv/docker/configs/sonarr:/config
-      - /var/lib/qbittorrent/Downloads:/downloads
-      - /media/tv:/tv
+      - ${CONFIG_BASE_PATH}/jellyfin:/config
+      - ${SHOWS_LIBRARY_PATH}:/shows
+      - ${MOVIES_LIBRARY_PATH}:/movies
+      - ${MUSIC_LIBRARY_PATH}:/music
     restart: unless-stopped
-
-  lidarr:
-    image: linuxserver/lidarr
-    container_name: lidarr
     network_mode: "service:gluetun"
-    # networks:
-    #   - media_net
-    # ports:
-    #   - 8686:8686
+    depends_on:
+      - gluetun
+    devices:
+      - /dev/dri:/dev/dri
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr
+    container_name: jellyseerr
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      - LOG_LEVEL=debug
       - TZ=${TZ}
     volumes:
-      - /srv/docker/configs/lidarr:/config
-      - /var/lib/qbittorrent/Downloads:/downloads
-      - /media/music:/music
+      - ${CONFIG_BASE_PATH}/jellyseerr:/app/config
     restart: unless-stopped
-
-  radarr:
-    image: linuxserver/radarr
-    container_name: radarr
     network_mode: "service:gluetun"
-    # networks:
-    #   - media_net
-    # ports:
-    #   - 7878:7878
+    depends_on:
+      - gluetun
+
+  homepage:
+    image: ghcr.io/gethomepage/homepage
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ${CONFIG_BASE_PATH}/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      - HOMEPAGE_ALLOWED_HOSTS:gethomepage.dev
       - PUID=${PUID}
       - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - /srv/docker/configs/radarr:/config
-      - /var/lib/qbittorrent/Downloads:/downloads
-      - /media/movies:/movies
-    restart: unless-stopped
-
-  prowlarr:
-    image: linuxserver/prowlarr
-    container_name: prowlarr
-    network_mode: "service:gluetun"
-    # networks:
-    #   - media_net
-    # ports:
-    #   - 9696:9696
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - /srv/docker/configs/prowlarr:/config
-    restart: unless-stopped
 
   gluetun:
     image: qmcgaw/gluetun
     container_name: gluetun
-    networks:
-      - media_net
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
-    ports:
-      - 7878:7878 # radarr
-      - 8686:8686 # lidarr
-      - 8989:8989 # sonarr
-      - 9696:9696 # prowlarr
-      - 8080:8080 # qbittorrent
-      - 6881:6881 # qbittorrent
-      - 6881:6881/udp # qbittorrent
     environment:
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - SERVER_COUNTRIES=Netherlands
-      - SOCKS5=on
-      - DNS_KEEP_NAMESERVERS=on
-    restart: unless-stopped
-
-  jellyseerr:
-    image: ghcr.io/fallenbagel/jellyseerr:latest
-    init: true
-    container_name: jellyseerr
-    environment:
-      - LOG_LEVEL=debug
-      - TZ=${TZ}
-      - PORT=5055
-    networks:
-      - media_net
     ports:
-      - 5055:5055
-    volumes:
-      - /srv/docker/configs/jellyseerr:/app/config
-    restart: unless-stopped
-
-  flaresolverr:
-    image: flaresolverr/flaresolverr
-    container_name: flaresolverr
-    networks:
-      - media_net
-    environment:
-      - LOG_LEVEL=info
-      - TZ=${TZ}
-    ports:
-      - 8191:8191
-    restart: unless-stopped
-
-networks:
-  media_net:
-    driver: bridge
+      - 8989:8989     # sonarr
+      - 7878:7878     # radarr
+      - 8686:8686     # lidarr
+      - 9696:9696     # prowlarr
+      - 8080:8080     # qbittorrent
+      - 6881:6881     # qbittorrent
+      - 6881:6881/udp # qbittorrent
+      - 8191:8191     # flaresolverr
+      - 8096:8096     # jellyfin
+      - 5055:5055     # jellyseerr

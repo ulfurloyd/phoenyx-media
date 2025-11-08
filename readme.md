@@ -10,7 +10,7 @@ streaming and acquisition
 
 ## services
 
-- homarr
+- homepage
 - jellyfin
 - jellyseerr
 - sonarr
@@ -19,4 +19,4 @@ streaming and acquisition
 - prowlarr
 - flaresolverr
 - qbittorrent
-- tor
+- gluetun
