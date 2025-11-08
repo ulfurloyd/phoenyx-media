@@ -54,7 +54,7 @@ services:
       - TZ=${TZ}
     volumes:
       - ${CONFIG_BASE_PATH}/lidarr:/config
-      - ${MUSIC_LIBRARY_PATH}:/shows
+      - ${MUSIC_LIBRARY_PATH}:/music
       - ${DOWNLOADS_PATH}:/downloads
     restart: unless-stopped
     network_mode: "service:gluetun"
@@ -99,10 +99,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - /etc/jellyfin:/etc/jellyfin
-      - /var/cache/jellyfin:/var/cache/jellyfin
-      - /var/lib/jellyfin:/var/lib/jellyfin
-      - /var/log/jellyfin:/var/log/jellyfin
+      - ${CONFIG_BASE_PATH}/jellyfin:/config
       - ${SHOWS_LIBRARY_PATH}:/shows
       - ${MOVIES_LIBRARY_PATH}:/movies
       - ${MUSIC_LIBRARY_PATH}:/music
@@ -120,14 +117,28 @@ services:
       - LOG_LEVEL=debug
       - TZ=${TZ}
     volumes:
-      - ${CONFIG_BASE_PATH}/jellyseerr:/config
+      - ${CONFIG_BASE_PATH}/jellyseerr:/app/config
     restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:
       - gluetun
 
+  homepage:
+    image: ghcr.io/gethomepage/homepage
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ${CONFIG_BASE_PATH}/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS:gethomepage.dev
+      - PUID=${PUID}
+      - PGID=${PGID}
+
   gluetun:
     image: qmcgaw/gluetun
+    container_name: gluetun
     cap_add:
       - NET_ADMIN
     devices:
