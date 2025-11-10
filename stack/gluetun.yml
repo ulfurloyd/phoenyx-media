@@ -25,3 +25,4 @@ services:
       - 8096:8096     # jellyfin
       - 5055:5055     # jellyseerr
       - 5454:5454     # notifiarr
+      - 3000:3000     # homepage
