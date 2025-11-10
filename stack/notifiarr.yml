@@ -1,0 +1,12 @@
+services:
+  notifiarr:
+    image: golift/notifiarr
+    container_name: notifiarr
+    volumes:
+      - ${CONFIG_BASE_PATH}/notifiarr:/config
+      - /var/run/utmp:/var/run/utmp
+      - /etc/machine-id:/etc/machine-id
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun

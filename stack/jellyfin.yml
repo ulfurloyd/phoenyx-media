@@ -1,0 +1,19 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_BASE_PATH}/jellyfin:/config
+      - ${SHOWS_LIBRARY_PATH}:/shows
+      - ${MOVIES_LIBRARY_PATH}:/movies
+      - ${MUSIC_LIBRARY_PATH}:/music
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    devices:
+      - /dev/dri:/dev/dri

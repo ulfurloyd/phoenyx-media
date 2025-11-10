@@ -1,0 +1,13 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ${CONFIG_BASE_PATH}/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS:gethomepage.dev
+      - PUID=${PUID}
+      - PGID=${PGID}

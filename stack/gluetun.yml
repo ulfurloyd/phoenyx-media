@@ -1,0 +1,27 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - SERVER_COUNTRIES=Netherlands
+      - PORT_FORWARD_ONLY=on
+      - VPN_PORT_FORWARDING=on
+    ports:
+      - 8989:8989     # sonarr
+      - 7878:7878     # radarr
+      - 8686:8686     # lidarr
+      - 9696:9696     # prowlarr
+      - 8080:8080     # qbittorrent
+      - 6881:6881     # qbittorrent
+      - 6881:6881/udp # qbittorrent
+      - 8191:8191     # flaresolverr
+      - 8096:8096     # jellyfin
+      - 5055:5055     # jellyseerr
+      - 5454:5454     # notifiarr
