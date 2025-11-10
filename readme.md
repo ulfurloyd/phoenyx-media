@@ -20,3 +20,4 @@ streaming and acquisition
 - flaresolverr
 - qbittorrent
 - gluetun
+- notifiarr
