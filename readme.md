@@ -5,39 +5,47 @@
     <img src="./.github/ulfurloyd.jpg" width="240" alt="ulfurloyd" /> <br />
 </h2>
 
-a self-hosted, automated media stack built around **jellyfin** and the **arr-stack** suite of programs.
+a self-hosted, automated media stack built around
+**jellyfin** and the **arr-stack** suite of programs.
 
-everything routes through a **protonvpn** wireguard tunnel through **gluetun** for a clean, secure, fully containerized setup.
+everything routes through a **protonvpn** wireguard tunnel through
+**gluetun** for a clean, secure, fully containerized setup.
 
 ## overview
 
-`phoenyx-media` is a personal self-hosting stack built with `docker-compose`, providing a fully automated media system that fetches, organizes, and serves movies, shows, and music to a `jellyfin` instance.
+`phoenyx-media` is a personal self-hosting stack built with `docker-compose`,
+providing a fully automated media system that fetches, organizes, and serves movies,
+shows, and music to a `jellyfin` instance.
 
-everything runs through a VPN (via `gluetun` + `protonvpn`) to stay private and avoid ISP interference.
+everything runs through a VPN (via `gluetun` + `protonvpn`) to stay
+private and avoid ISP interference.
 
 ## stack components
 
 ```
-| service | role |
-|----------|------|
-| **jellyfin** | media server (movies, shows, music) |
-| **jellyseerr** | request manager for jellyfin |
-| **prowlarr** | indexer management for the arrs |
-| **sonarr** | tv show automation |
-| **radarr** | movie automation |
-| **lidarr** | music automation |
-| **qbittorrent** | download client (routed through gluetun) |
-| **gluetun** | VPN gateway using ProtonVPN (WireGuard + port forwarding) |
-| **flaresolverr** | cloudflare bypass proxy for indexers |
-| **homepage** | lightweight dashboard for quick access to stack services |
+| service          | role                                                      |
+|------------------|-----------------------------------------------------------|
+| **jellyfin**     | media server (movies, shows, music)                       |
+| **jellyseerr**   | request manager for jellyfin                              |
+| **prowlarr**     | indexer management for the arrs                           |
+| **sonarr**       | tv show automation                                        |
+| **radarr**       | movie automation                                          |
+| **lidarr**       | music automation                                          |
+| **qbittorrent**  | download client (routed through gluetun)                  |
+| **gluetun**      | VPN gateway using ProtonVPN (WireGuard + port forwarding) |
+| **flaresolverr** | cloudflare bypass proxy for indexers                      |
+| **homepage**     | lightweight dashboard for quick access to stack services  |
 ```
 
 ## architecture
 
-traffic from all containers passes through `gluetun`, which establishes a secure wireguard tunnel with `protonvpn`.
-the `vpn_port_forwarding` option ensures reliable torrent peer connectivity, while `prowlarr` handles all indexer queries safely through the same route.
+traffic from all containers passes through `gluetun`, which establishes
+a secure wireguard tunnel with `protonvpn`.
+the `vpn_port_forwarding` option ensures reliable torrent peer connectivity,
+while `prowlarr` handles all indexer queries safely through the same route.
 
 media downloads are processed and imported automatically by the **arrs** stack:
+
 - `sonarr`, `radarr` and `lidarr` monitor ocmpleted downloads,
 - move them into `/media/`,
 - and clean up `qbittorrent` once imported.
@@ -71,9 +79,9 @@ media downloads are processed and imported automatically by the **arrs** stack:
 ## configuration notes
 
 - **VPN**: requires a ProtonVPN Plus/Unlimited account with WireGuard support.
-- **Port Forwarding**: must be set up in Qbittorrent by providing the forwarded port gluetun creates.
+- **Port Forwarding**: must be set up in Qbittorrent.
 - **Permissions**: all containers share a common PUID/PGID via `${PUID}` and `${PUID}`.
-- **Networking**: everything routes internally via `network_mode: "service:gluetun"`, exposing only safe public ports.
+- **Networking**: everything routes via `network_mode: "service:gluetun"`.
 
 ## automation features
 
