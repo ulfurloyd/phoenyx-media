@@ -7,7 +7,6 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
     volumes:
       - ${CONFIG_BASE_PATH}/qbittorrent:/config
       - ${DOWNLOADS_PATH}:/downloads
