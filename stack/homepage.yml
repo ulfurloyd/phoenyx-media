@@ -9,6 +9,7 @@ services:
       - HOMEPAGE_ALLOWED_HOSTS:gethomepage.dev
       - PUID=${PUID}
       - PGID=${PGID}
+    restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:
       - gluetun

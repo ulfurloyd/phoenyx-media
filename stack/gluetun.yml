@@ -13,6 +13,7 @@ services:
       - SERVER_COUNTRIES=Netherlands
       - PORT_FORWARD_ONLY=on
       - VPN_PORT_FORWARDING=on
+    restart: unless-stopped
     ports:
       - 8989:8989     # sonarr
       - 7878:7878     # radarr
