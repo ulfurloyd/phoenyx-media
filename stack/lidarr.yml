@@ -1,6 +1,6 @@
 services:
   lidarr:
-    image: linuxserver/lidarr
+    image: ghcr.io/hotio/lidarr
     container_name: lidarr
     environment:
       - PUID=${PUID}
