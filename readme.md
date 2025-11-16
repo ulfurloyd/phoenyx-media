@@ -35,6 +35,7 @@ private and avoid ISP interference.
 | **gluetun**      | VPN gateway using ProtonVPN (WireGuard + port forwarding) |
 | **flaresolverr** | cloudflare bypass proxy for indexers                      |
 | **homepage**     | lightweight dashboard for quick access to stack services  |
+| **dnsmasq**      | local DNS resolution for media services                   |
 ```
 
 ## architecture
@@ -49,6 +50,21 @@ media downloads are processed and imported automatically by the **arrs** stack:
 - `sonarr`, `radarr` and `lidarr` monitor ocmpleted downloads,
 - move them into `/media/`,
 - and clean up `qbittorrent` once imported.
+
+## local DNS (dnsmasq)
+
+there's an optional **dnsmasq** container that provides
+local DNS resolution for all media serves.
+
+this enables clean hostnames like:
+
+```bash
+http://jellyfin.phoenyx:8096
+http://sonarr.phoenyx:8989
+http://radarr.phoenyx:7878
+```
+
+instead of relying on `192.168.0.13:<port>` everywhere.
 
 ## directory structure
 
