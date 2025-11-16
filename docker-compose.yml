@@ -10,3 +10,4 @@ include:
   - stack/notifiarr.yml
   - stack/homepage.yml
   - stack/gluetun.yml
+  - stack/dnsmasq.yml
