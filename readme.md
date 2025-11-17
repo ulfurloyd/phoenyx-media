@@ -47,7 +47,7 @@ while `prowlarr` handles all indexer queries safely through the same route.
 
 media downloads are processed and imported automatically by the **arrs** stack:
 
-- `sonarr`, `radarr` and `lidarr` monitor ocmpleted downloads,
+- `sonarr`, `radarr` and `lidarr` monitor completed downloads,
 - move them into `/media/`,
 - and clean up `qbittorrent` once imported.
 
