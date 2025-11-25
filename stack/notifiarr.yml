@@ -2,6 +2,8 @@ services:
   notifiarr:
     image: golift/notifiarr
     container_name: notifiarr
+    environment:
+      - TZ=${TZ}
     volumes:
       - ${CONFIG_BASE_PATH}/notifiarr:/config
       - /var/run/utmp:/var/run/utmp
