@@ -3,6 +3,7 @@ include:
   - stack/radarr.yml
   - stack/sonarr.yml
   - stack/lidarr.yml
+  - stack/nicotine.yml
   - stack/qbittorrent.yml
   - stack/flaresolverr.yml
   - stack/jellyfin.yml
