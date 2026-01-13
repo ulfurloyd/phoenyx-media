@@ -31,6 +31,7 @@ private and avoid ISP interference.
 | **sonarr**       | tv show automation                                        |
 | **radarr**       | movie automation                                          |
 | **lidarr**       | music automation                                          |
+| **nicotine+**    | music automation but better                               |
 | **qbittorrent**  | download client (routed through gluetun)                  |
 | **gluetun**      | VPN gateway using ProtonVPN (WireGuard + port forwarding) |
 | **flaresolverr** | cloudflare bypass proxy for indexers                      |
