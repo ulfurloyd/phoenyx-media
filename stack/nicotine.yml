@@ -9,6 +9,7 @@ services:
     volumes:
       - ${CONFIG_BASE_PATH}/nicotine:/config
       - /downloads/music/incoming:/downloads
+      - /media/music:/music
     restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:
