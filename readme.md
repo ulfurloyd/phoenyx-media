@@ -26,7 +26,7 @@ private and avoid ISP interference.
 | service          | role                                                      |
 |------------------|-----------------------------------------------------------|
 | **jellyfin**     | media server (movies, shows, music)                       |
-| **jellyseerr**   | request manager for jellyfin                              |
+| **seerr**   | request manager for jellyfin                              |
 | **prowlarr**     | indexer management for the arrs                           |
 | **sonarr**       | tv show automation                                        |
 | **radarr**       | movie automation                                          |
@@ -75,16 +75,16 @@ instead of relying on `192.168.0.13:<port>` everywhere.
 ├── docker-compose.yml
 ├── .env
 ├── /stack
-│ ├── sonarr/
-│ ├── radarr/
-│ ├── lidarr/
-│ ├── prowlarr/
-│ ├── notifiarr/
-│ ├── qbittorrent/
-│ ├── jellyfin/
-│ ├── jellyseerr/
-│ ├── flaresolverr/
-└─└── homepage/
+│ ├── sonarr.yml
+│ ├── radarr.yml
+│ ├── lidarr.yml
+│ ├── prowlarr.yml
+│ ├── notifiarr.yml
+│ ├── qbittorrent.yml
+│ ├── jellyfin.yml
+│ ├── seerr.yml
+│ ├── flaresolverr.yml
+└─└── homepage.yml
 
 /media
 │
@@ -107,7 +107,7 @@ instead of relying on `192.168.0.13:<port>` everywhere.
 - **centralized indexer management** through `prowlarr`
 - **VPN-secured downloads** with Gluetun + ProtonVPN
 - **Cloudflare bypass** through `flaresolverr`
-- **Jellyseerr integration** with Jellyfin for user requests
+- **Seerr integration** with Jellyfin for user requests
 - **Homepage dashboard** for quick access to all services
 
 ## environment variables

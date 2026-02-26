@@ -6,7 +6,7 @@ include:
   - stack/qbittorrent.yml
   - stack/flaresolverr.yml
   - stack/jellyfin.yml
-  - stack/jellyseerr.yml
+  - stack/seerr.yml
   - stack/notifiarr.yml
   - stack/homepage.yml
   - stack/gluetun.yml
