@@ -1,4 +1,5 @@
 include:
+  - stack/nginx.yml
   - stack/prowlarr.yml
   - stack/radarr.yml
   - stack/sonarr.yml
