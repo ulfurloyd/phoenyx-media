@@ -13,3 +13,4 @@ include:
   - stack/gluetun.yml
   - stack/dnsmasq.yml
   - stack/navidrome.yml
+  - stack/bazarr.yml

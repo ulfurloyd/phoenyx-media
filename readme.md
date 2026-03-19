@@ -6,7 +6,7 @@
 </h2>
 
 a self-hosted, automated media stack built around
-**jellyfin** and the **arr-stack** suite of programs.
+**jellyfin**, **navidrome** and the **arr-stack** suite of programs.
 
 everything routes through a **protonvpn** wireguard tunnel through
 **gluetun** for a clean, secure, fully containerized setup.
@@ -26,17 +26,19 @@ private and avoid ISP interference.
 | service          | role                                                      |
 |------------------|-----------------------------------------------------------|
 | **jellyfin**     | media server (movies, shows, music)                       |
-| **seerr**   | request manager for jellyfin                              |
+| **seerr**        | request manager for jellyfin                              |
 | **prowlarr**     | indexer management for the arrs                           |
 | **sonarr**       | tv show automation                                        |
 | **radarr**       | movie automation                                          |
-| **lidarr**       | music automation                                          |
-| **nicotine+**    | music automation but better                               |
+| **bazarr**       | subtitle acquisition automation                           |
+| **nicotine+**    | music acquisition                                         |
+| **navidrome+**   | music server                                              |
 | **qbittorrent**  | download client (routed through gluetun)                  |
 | **gluetun**      | VPN gateway using ProtonVPN (WireGuard + port forwarding) |
 | **flaresolverr** | cloudflare bypass proxy for indexers                      |
 | **homepage**     | lightweight dashboard for quick access to stack services  |
 | **dnsmasq**      | local DNS resolution for media services                   |
+| **npm**          | local reverse proxy                                       |
 ```
 
 ## architecture
@@ -48,24 +50,22 @@ while `prowlarr` handles all indexer queries safely through the same route.
 
 media downloads are processed and imported automatically by the **arrs** stack:
 
-- `sonarr`, `radarr` and `lidarr` monitor completed downloads,
+- `sonarr` and `radarr` monitor completed downloads,
 - move them into `/media/`,
 - and clean up `qbittorrent` once imported.
 
-## local DNS (dnsmasq)
+## local reverse proxy (dnsmasq + nginx-proxy-manager)
 
-there's an optional **dnsmasq** container that provides
-local DNS resolution for all media serves.
+`dnsmasq` and `npm` work together to provide reverse
+proxy access to all services that have a WebUI
 
 this enables clean hostnames like:
 
 ```bash
-http://jellyfin.phoenyx:8096
-http://sonarr.phoenyx:8989
-http://radarr.phoenyx:7878
+http://jellyfin.phoenyx.com
+http://sonarr.phoenyx.com
+http://radarr.phoenyx.com
 ```
-
-instead of relying on `192.168.0.13:<port>` everywhere.
 
 ## directory structure
 
@@ -77,13 +77,18 @@ instead of relying on `192.168.0.13:<port>` everywhere.
 ├── /stack
 │ ├── sonarr.yml
 │ ├── radarr.yml
-│ ├── lidarr.yml
+│ ├── bazarr.yml
 │ ├── prowlarr.yml
 │ ├── notifiarr.yml
+│ ├── navidrome.yml
+│ ├── nicotine.yml
+│ ├── gluetun.yml
 │ ├── qbittorrent.yml
 │ ├── jellyfin.yml
 │ ├── seerr.yml
 │ ├── flaresolverr.yml
+│ ├── dnsmasq.yml
+│ ├── nginx.yml
 └─└── homepage.yml
 
 /media
@@ -102,12 +107,12 @@ instead of relying on `192.168.0.13:<port>` everywhere.
 
 ## automation features
 
-- **auto-fetches** requested content via `sonarr`, `radarr`, `lidarr`
+- **auto-fetches** requested content via `sonarr` and `radarr`
 - **cleans up** finished downloads after import into `/media`
 - **centralized indexer management** through `prowlarr`
 - **VPN-secured downloads** with Gluetun + ProtonVPN
 - **Cloudflare bypass** through `flaresolverr`
-- **Seerr integration** with Jellyfin for user requests
+- **Seerr integration** for user requests
 - **Homepage dashboard** for quick access to all services
 
 ## environment variables

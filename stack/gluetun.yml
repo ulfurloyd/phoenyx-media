@@ -29,3 +29,4 @@ services:
       - 5055:5055     # seerr
       - 5454:5454     # notifiarr
       - 3000:3000     # homepage
+      - 6767:6767     # bazarr
