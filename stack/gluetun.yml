@@ -18,7 +18,6 @@ services:
     ports:
       - 8989:8989     # sonarr
       - 7878:7878     # radarr
-      - 8686:8686     # lidarr
       - 6080:6080     # nicotine
       - 9696:9696     # prowlarr
       - 8080:8080     # qbittorrent
