@@ -16,7 +16,5 @@ services:
     restart: unless-stopped
     networks:
       - media_net
-    ports:
-      - 6767:6767
     depends_on:
       - gluetun

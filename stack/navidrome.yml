@@ -5,8 +5,6 @@ services:
     user: 1000:1000
     networks:
       - media_net
-    ports:
-      - "4533:4533"
     volumes:
       - ${CONFIG_BASE_PATH}/navidrome:/data
       - ${MUSIC_LIBRARY_PATH}:/music:ro

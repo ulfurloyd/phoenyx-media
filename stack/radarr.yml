@@ -13,7 +13,5 @@ services:
     restart: unless-stopped
     networks:
       - media_net
-    ports:
-      - 7878:7878
     depends_on:
       - gluetun
