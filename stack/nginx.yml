@@ -4,6 +4,8 @@ services:
     container_name: npm
     environment:
       - TZ=${TZ}
+    networks:
+      - media_net
     ports:
       - 80:80
       - 81:81

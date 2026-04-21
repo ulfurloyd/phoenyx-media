@@ -11,6 +11,9 @@ services:
       - ${MOVIES_LIBRARY_PATH}:/movies
       - ${DOWNLOADS_PATH}:/downloads
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 7878:7878
     depends_on:
       - gluetun

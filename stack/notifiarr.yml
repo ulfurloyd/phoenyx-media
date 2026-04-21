@@ -9,6 +9,9 @@ services:
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 5454:5454
     depends_on:
       - gluetun

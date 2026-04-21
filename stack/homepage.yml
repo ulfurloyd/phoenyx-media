@@ -11,6 +11,9 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 3000:3000
     depends_on:
       - gluetun

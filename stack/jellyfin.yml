@@ -12,7 +12,10 @@ services:
       - ${MOVIES_LIBRARY_PATH}:/movies
       - ${MUSIC_LIBRARY_PATH}:/music:ro
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 8096:8096
     depends_on:
       - gluetun
     devices:

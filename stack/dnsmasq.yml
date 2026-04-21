@@ -4,6 +4,8 @@ services:
     container_name: dnsmasq
     cap_add:
       - NET_ADMIN
+    networks:
+      - media_net
     ports:
       - 53:53/udp
       - 53:53/tcp

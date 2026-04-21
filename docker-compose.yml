@@ -1,3 +1,7 @@
+networks:
+  media_net:
+  vpn_net:
+
 include:
   - stack/nginx.yml
   - stack/prowlarr.yml

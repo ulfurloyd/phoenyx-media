@@ -8,6 +8,9 @@ services:
     volumes:
       - ${CONFIG_BASE_PATH}/seerr:/app/config
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 5055:5055
     depends_on:
       - gluetun

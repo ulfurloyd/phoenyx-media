@@ -11,6 +11,9 @@ services:
       - ${SHOWS_LIBRARY_PATH}:/shows
       - ${DOWNLOADS_PATH}:/downloads
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 8989:8989
     depends_on:
       - gluetun

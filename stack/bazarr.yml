@@ -14,6 +14,9 @@ services:
       - ${SHOWS_LIBRARY_PATH}:/shows
       - ${MOVIES_LIBRARY_PATH}:/movies
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    networks:
+      - media_net
+    ports:
+      - 6767:6767
     depends_on:
       - gluetun

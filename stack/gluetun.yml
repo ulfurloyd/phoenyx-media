@@ -15,17 +15,13 @@ services:
       - VPN_PORT_FORWARDING=on
       - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
     restart: unless-stopped
+    networks:
+      - vpn_net
+      - media_net
     ports:
-      - 8989:8989     # sonarr
-      - 7878:7878     # radarr
       - 6080:6080     # nicotine
       - 9696:9696     # prowlarr
       - 8080:8080     # qbittorrent
       - 6881:6881     # qbittorrent
       - 6881:6881/udp # qbittorrent
       - 8191:8191     # flaresolverr
-      - 8096:8096     # jellyfin
-      - 5055:5055     # seerr
-      - 5454:5454     # notifiarr
-      - 3000:3000     # homepage
-      - 6767:6767     # bazarr

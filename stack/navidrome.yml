@@ -3,6 +3,8 @@ services:
     image: deluan/navidrome
     container_name: navidrome
     user: 1000:1000
+    networks:
+      - media_net
     ports:
       - "4533:4533"
     volumes:
