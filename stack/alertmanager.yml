@@ -1,0 +1,13 @@
+services:
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    networks:
+      - media_net
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_BASE_PATH}/alertmanager:/etc/alertmanager
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+    restart: unless-stopped
