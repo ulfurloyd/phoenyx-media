@@ -140,7 +140,6 @@ labels:
 - **VPN**: requires a ProtonVPN Plus/Unlimited account with WireGuard support.
 - **Port Forwarding**: must be set up in Qbittorrent.
 - **Permissions**: all containers share a common PUID/PGID via `${PUID}` and `${PUID}`.
-- **Networking**: everything routes via `network_mode: "service:gluetun"`.
 
 ## automation features
 
