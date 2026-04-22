@@ -13,6 +13,8 @@ services:
       - ${CONFIG_BASE_PATH}/bazarr/data:/data
       - ${SHOWS_LIBRARY_PATH}:/shows
       - ${MOVIES_LIBRARY_PATH}:/movies
+    labels:
+      - diun.enable=true
     restart: unless-stopped
     networks:
       - media_net

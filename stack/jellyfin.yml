@@ -11,6 +11,8 @@ services:
       - ${SHOWS_LIBRARY_PATH}:/shows
       - ${MOVIES_LIBRARY_PATH}:/movies
       - ${MUSIC_LIBRARY_PATH}:/music:ro
+    labels:
+      - diun.enable=true
     restart: unless-stopped
     networks:
       - media_net

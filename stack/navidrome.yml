@@ -8,4 +8,6 @@ services:
     volumes:
       - ${CONFIG_BASE_PATH}/navidrome:/data
       - ${MUSIC_LIBRARY_PATH}:/music:ro
+    labels:
+      - diun.enable=true
     restart: unless-stopped

@@ -39,63 +39,100 @@ private and avoid ISP interference.
 | **homepage**     | lightweight dashboard for quick access to stack services  |
 | **dnsmasq**      | local DNS resolution for media services                   |
 | **npm**          | local reverse proxy                                       |
+| **diun**         | tracking and notifying image updates                      |
 ```
 
 ## architecture
 
-traffic from all containers passes through `gluetun`, which establishes
-a secure wireguard tunnel with `protonvpn`.
-the `vpn_port_forwarding` option ensures reliable torrent peer connectivity,
-while `prowlarr` handles all indexer queries safely through the same route.
+the stack is built around a **two-network model** that cleanly separates
+internal service communication from vpn-routed traffic:
 
-media downloads are processed and imported automatically by the **arrs** stack:
-
-- `sonarr` and `radarr` monitor completed downloads,
-- move them into `/media/`,
-- and clean up `qbittorrent` once imported.
-
-## local reverse proxy (dnsmasq + nginx-proxy-manager)
-
-`dnsmasq` and `npm` work together to provide reverse
-proxy access to all services that have a WebUI
-
-this enables clean hostnames like:
-
-```bash
-http://jellyfin.phoenyx.com
-http://sonarr.phoenyx.com
-http://radarr.phoenyx.com
+```plaintext
+media_net -> internal service communication
+vpn_net   -> outbound traffic through vpn (via gluetun)
 ```
 
-## directory structure
+### vpn routing (gluetun)
+`gluetun` acts as a dedicated vpn gateway using wireguard with protonvpn.
+
+only services that require anonymity or external scraping are routed through it:
+
+- `qbittorrent` (torrent traffic)
+- `prowlarr` (indexer queries)
+- `flaresolverr` (anti-bot bypass)
+- `nicotine` (music)
+
+these containers share `gluetun`'s network namespace (`network_mode: service:gluetun`), ensuring all their trafficexits through the vpn tunnel.
+
+`gluetun` is also attached to `media_net`, allowing internal services to access
+vpn-routed services via:
+
+```plaintext
+http://gluetun:<port>
+```
+
+### internal service mesh (media_net)
+
+all core applications run on `media_net`, forming a clean internal network:
+
+- `sonarr`, `radarr`, `bazarr`
+- `seerr`
+- `jellyfin`
+- `navidrome`
+- `homepage`
+- `notifiarr`
+
+services communicate using docker dns:
+
+```plaintext
+http://sonarr:8989
+http://radarr:7878
+http://gluetun:9696  # prowlarr via vpn
+http://gluetun:8080  # qbittorent via vpn
+```
+
+this avoids localhost/ip-based routing and ensures reliable inter-service
+communication.
+
+### download + media workflow
+
+the arr stack automates the full pipeline:
+
+- prowlarr aggregates indexers (via vpn)
+- sonarr / radarr handle search and download requests
+- qbittorrent downloads content (via vpn)
+- completed downloads are:
+    - imported into /media
+    - organized automatically
+    - removed from the download client
+
+### ingress (dnsmasq + nginx proxy manager)
+
+all user access flows through a single ingress layer:
+
+- dnsmasq resolves *.phoenyx.com → local server ip
+- Nginx Proxy Manager handles routing + https termination
+
+this enables clean, consistent endpoints:
 
 ```bash
-~/Dev/Docker/phoenyx-media/
-│
-├── docker-compose.yml
-├── .env
-├── /stack
-│ ├── sonarr.yml
-│ ├── radarr.yml
-│ ├── bazarr.yml
-│ ├── prowlarr.yml
-│ ├── notifiarr.yml
-│ ├── navidrome.yml
-│ ├── nicotine.yml
-│ ├── gluetun.yml
-│ ├── qbittorrent.yml
-│ ├── jellyfin.yml
-│ ├── seerr.yml
-│ ├── flaresolverr.yml
-│ ├── dnsmasq.yml
-│ ├── nginx.yml
-└─└── homepage.yml
+https://jellyfin.phoenyx.com
+https://sonarr.phoenyx.com
+https://radarr.phoenyx.com
+https://homepage.phoenyx.com
+```
 
-/media
-│
-├── movies/
-├── shows/
-└── music/
+no services are exposed directly via host ports (except ingress and vpn endpoints)
+
+### update monitoring
+
+Diun monitors container images and sends notifications (via discord webhook) when updates are available.
+
+only selected containers are tracked using labels:
+
+```yaml
+labels:
+  - diun.enable=true
 ```
 
 ## configuration notes

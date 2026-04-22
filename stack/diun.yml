@@ -1,0 +1,17 @@
+services:
+  diun:
+    image: crazymax/diun
+    container_name: diun
+    networks:
+      - media_net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${CONFIG_BASE_PATH}/diun:/data
+    environment:
+      - TZ=${TZ}
+      - DIUN_PROVIDERS_DOCKER=true
+      - DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=false
+      - DIUN_WATCH_SCHEDULE=0 */6 * * * # every 6 hours
+      - DIUN_NOTIF_DISCORD_WEBHOOKURL=${DIUN_DISCORD_WEBHOOK_URL}
+      - DIUN_NOTIF_DISCORD_TEMPLATEBODY={{ .Entry.Image }} → {{ .Entry.NewVersion }}
+    restart: unless-stopped
