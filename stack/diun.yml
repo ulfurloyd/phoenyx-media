@@ -13,5 +13,5 @@ services:
       - DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=false
       - DIUN_WATCH_SCHEDULE=0 */6 * * * # every 6 hours
       - DIUN_NOTIF_DISCORD_WEBHOOKURL=${DIUN_DISCORD_WEBHOOK_URL}
-      - DIUN_NOTIF_DISCORD_TEMPLATEBODY={{ .Entry.Image }} → {{ .Entry.NewVersion }}
+      - DIUN_NOTIF_DISCORD_TEMPLATEBODY={{ .Entry.Image }} {{ .Entry.Provider }} → {{ .Entry.Status }}
     restart: unless-stopped
