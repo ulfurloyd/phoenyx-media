@@ -1,0 +1,12 @@
+services:
+  cadvisor:
+    image: ghcr.io/google/cadvisor
+    container_name: cadvisor
+    networks:
+      - media_net
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart: unless-stopped

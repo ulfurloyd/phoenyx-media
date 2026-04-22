@@ -1,0 +1,7 @@
+services:
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    networks:
+      - media_net
+    restart: unless-stopped

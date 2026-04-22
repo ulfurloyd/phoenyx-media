@@ -1,0 +1,9 @@
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    networks:
+      - media_net
+    volumes:
+      - ${CONFIG_BASE_PATH}/grafana:/var/lib/grafana
+    restart: unless-stopped

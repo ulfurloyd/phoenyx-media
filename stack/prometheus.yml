@@ -1,0 +1,11 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    networks:
+      - media_net
+    volumes:
+      - ${CONFIG_BASE_PATH}/prometheus:/etc/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    restart: unless-stopped

@@ -19,3 +19,7 @@ include:
   - stack/navidrome.yml
   - stack/bazarr.yml
   - stack/diun.yml
+  - stack/prometheus.yml
+  - stack/cadvisor.yml
+  - stack/node-exporter.yml
+  - stack/grafana.yml
