@@ -24,3 +24,4 @@ include:
   - stack/node-exporter.yml
   - stack/grafana.yml
   - stack/alertmanager.yml
+  # - stack/homarr.yml
