@@ -7,7 +7,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${CONFIG_BASE_PATH}/homepage-images:/app/public/images
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS=homepage.phoenyx.com
+      - HOMEPAGE_ALLOWED_HOSTS=homepage.phoenyxlab.duckdns.org
       - PUID=${PUID}
       - PGID=${PGID}
     restart: unless-stopped

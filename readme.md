@@ -17,8 +17,11 @@ everything routes through a **protonvpn** wireguard tunnel through
 providing a fully automated media system that fetches, organizes, and serves movies,
 shows, and music to a `jellyfin` instance.
 
-everything runs through a VPN (via `gluetun` + `protonvpn`) to stay
+sensitive data runs through a VPN (via `gluetun` + `protonvpn`) to stay
 private and avoid ISP interference.
+
+traffic is routed through the network using a `duckdns` domain.
+`nginx-proxy-manager` controls TLS certificates using the `duckdns` domain.
 
 ## stack components
 
@@ -110,16 +113,16 @@ the arr stack automates the full pipeline:
 
 all user access flows through a single ingress layer:
 
-- dnsmasq resolves *.phoenyx.com → local server ip
+- dnsmasq resolves *.phoenyxlab.duckdns.org → local server ip
 - Nginx Proxy Manager handles routing + https termination
 
 this enables clean, consistent endpoints:
 
 ```bash
-https://jellyfin.phoenyx.com
-https://sonarr.phoenyx.com
-https://radarr.phoenyx.com
-https://homepage.phoenyx.com
+https://jellyfin.phoenyxlab.duckdns.org
+https://sonarr.phoenyxlab.duckdns.org
+https://radarr.phoenyxlab.duckdns.org
+https://homepage.phoenyxlab.duckdns.org
 ```
 
 no services are exposed directly via host ports (except ingress and vpn endpoints)
