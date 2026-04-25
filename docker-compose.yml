@@ -7,6 +7,8 @@ include:
   - stack/prowlarr.yml
   - stack/radarr.yml
   - stack/sonarr.yml
+  - stack/lidarr.yml
+  - stack/slskd.yml
   - stack/nicotine.yml
   - stack/qbittorrent.yml
   - stack/flaresolverr.yml

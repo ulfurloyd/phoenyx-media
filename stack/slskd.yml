@@ -1,0 +1,22 @@
+services:
+  slskd:
+    image: slskd/slskd
+    container_name: slskd
+    ports:
+      - "5030:5030"
+      - "50300:50300"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - SLSKD_REMOTE_CONFIGURATION=true
+    volumes:
+      - ${CONFIG_BASE_PATH}/slskd:/app
+      - ${SLSKD_DL_PATH}:/downloads
+    labels:
+      - diun.enable=true
+    restart: unless-stopped
+    networks:
+      - media_net
+    depends_on:
+      - gluetun
