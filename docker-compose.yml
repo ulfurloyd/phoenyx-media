@@ -9,7 +9,7 @@ include:
   - stack/sonarr.yml
   - stack/lidarr.yml
   - stack/slskd.yml
-  - stack/nicotine.yml
+  # - stack/nicotine.yml
   - stack/qbittorrent.yml
   - stack/flaresolverr.yml
   - stack/jellyfin.yml
