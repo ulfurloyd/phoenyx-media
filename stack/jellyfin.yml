@@ -13,6 +13,10 @@ services:
       - ${MUSIC_LIBRARY_PATH}:/music:ro
     labels:
       - diun.enable=true
+      - dynacat.name=Jellyfin
+      - dynacat.icon=sh:jellyfin
+      - dynacat.url=https://jellyfin.phoenyxlab.duckdns.org
+      - dynacat.description=Media Library
     restart: unless-stopped
     networks:
       - media_net

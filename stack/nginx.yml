@@ -13,4 +13,9 @@ services:
     volumes:
       - ${CONFIG_BASE_PATH}/nginx:/data
       - ${CONFIG_BASE_PATH}/letsencrypt:/etc/letsencrypt
+    labels:
+      - dynacat.name=Nginx Proxy Manager
+      - dynacat.icon=sh:nginx
+      - dynacat.url=https://npm.phoenyxlab.duckdns.org
+      - dynacat.description=Reverse Proxy
     restart: unless-stopped

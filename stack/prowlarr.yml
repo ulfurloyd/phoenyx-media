@@ -10,6 +10,10 @@ services:
       - ${CONFIG_BASE_PATH}/prowlarr:/config
     labels:
       - diun.enable=true
+      - dynacat.name=prowlarr
+      - dynacat.icon=sh:prowlarr
+      - dynacat.url=https://prowlarr.phoenyxlab.duckdns.org
+      - dynacat.description=Indexer Proxy
     restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:

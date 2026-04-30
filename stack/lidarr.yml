@@ -13,6 +13,10 @@ services:
       - ${SLSKD_DL_PATH}/completed:/slskd
     labels:
       - diun.enable=true
+      - dynacat.name=Lidarr
+      - dynacat.icon=sh:lidarr
+      - dynacat.url=https://lidarr.phoenyxlab.duckdns.org
+      - dynacat.description=Music acquisition
     restart: unless-stopped
     networks:
       - media_net

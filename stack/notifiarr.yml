@@ -9,6 +9,11 @@ services:
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
     restart: unless-stopped
+    labels:
+      - dynacat.name=Notifiarr
+      - dynacat.icon=sh:notifiarr
+      - dynacat.url=https://notifiarr.phoenyxlab.duckdns.org
+      - dynacat.description=Notification Server
     networks:
       - media_net
     depends_on:

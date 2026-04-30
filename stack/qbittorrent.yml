@@ -12,6 +12,10 @@ services:
       - ${DOWNLOADS_PATH}:/downloads
     labels:
       - diun.enable=true
+      - dynacat.name=Qbittorrent
+      - dynacat.icon=sh:qbittorrent
+      - dynacat.url=https://qbittorrent.phoenyxlab.duckdns.org
+      - dynacat.description=Torrent Client
     restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:

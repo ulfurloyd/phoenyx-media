@@ -10,4 +10,8 @@ services:
       - ${MUSIC_LIBRARY_PATH}:/music:ro
     labels:
       - diun.enable=true
+      - dynacat.name=Navidrome
+      - dynacat.icon=sh:navidrome
+      - dynacat.url=https://navidrome.phoenyxlab.duckdns.org
+      - dynacat.description=Music Library
     restart: unless-stopped

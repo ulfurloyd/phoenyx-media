@@ -1,0 +1,12 @@
+services:
+  dynacat:
+    container_name: dynacat
+    image: panonim/dynacat:latest
+    restart: unless-stopped
+    volumes:
+      - ${CONFIG_BASE_PATH}/dynacat:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - media_net
+    labels:
+      - dynacat.hide=true

@@ -8,6 +8,8 @@ services:
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=${TZ}
     restart: unless-stopped
+    labels:
+      - dynacat.hide=true
     network_mode: "service:gluetun"
     depends_on:
       - gluetun

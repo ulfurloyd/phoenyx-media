@@ -12,6 +12,10 @@ services:
       - ${DOWNLOADS_PATH}:/downloads
     labels:
       - diun.enable=true
+      - dynacat.name=Sonarr
+      - dynacat.icon=sh:sonarr
+      - dynacat.url=https://sonarr.phoenyxlab.duckdns.org
+      - dynacat.description=Shows Acquisition
     restart: unless-stopped
     networks:
       - media_net

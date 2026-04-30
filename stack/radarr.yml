@@ -12,6 +12,10 @@ services:
       - ${DOWNLOADS_PATH}:/downloads
     labels:
       - diun.enable=true
+      - dynacat.name=Radarr
+      - dynacat.icon=sh:radarr
+      - dynacat.url=https://radarr.phoenyxlab.duckdns.org
+      - dynacat.description=Movie Acquisition
     restart: unless-stopped
     networks:
       - media_net

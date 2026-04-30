@@ -9,13 +9,13 @@ include:
   - stack/sonarr.yml
   - stack/lidarr.yml
   - stack/slskd.yml
-  # - stack/nicotine.yml
   - stack/qbittorrent.yml
   - stack/flaresolverr.yml
   - stack/jellyfin.yml
   - stack/seerr.yml
   - stack/notifiarr.yml
   - stack/homepage.yml
+  - stack/dynacat.yml
   - stack/gluetun.yml
   - stack/dnsmasq.yml
   - stack/navidrome.yml
@@ -27,3 +27,4 @@ include:
   - stack/grafana.yml
   - stack/alertmanager.yml
   # - stack/homarr.yml
+  # - stack/nicotine.yml

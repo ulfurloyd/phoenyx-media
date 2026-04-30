@@ -18,6 +18,8 @@ services:
     networks:
       - vpn_net
       - media_net
+    labels:
+      - dynacat.hide=true
     ports:
       - 6080:6080     # nicotine
       - 9696:9696     # prowlarr

@@ -15,6 +15,10 @@ services:
       - ${SLSKD_DL_PATH}:/downloads
     labels:
       - diun.enable=true
+      - dynacat.name=slskd
+      - dynacat.icon=sh:slskd
+      - dynacat.url=https://slskd.phoenyxlab.duckdns.org
+      - dynacat.description=Lidarr Backend
     restart: unless-stopped
     networks:
       - media_net

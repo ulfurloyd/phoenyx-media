@@ -10,5 +10,10 @@ services:
     restart: unless-stopped
     networks:
       - media_net
+    labels:
+      - dynacat.name=Seerr
+      - dynacat.icon=sh:seerr
+      - dynacat.url=https://seerr.phoenyxlab.duckdns.org
+      - dynacat.description=Media Requests
     depends_on:
       - gluetun

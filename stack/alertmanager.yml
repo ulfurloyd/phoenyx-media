@@ -10,4 +10,6 @@ services:
       - ${CONFIG_BASE_PATH}/alertmanager:/etc/alertmanager
     command:
       - "--config.file=/etc/alertmanager/alertmanager.yml"
+    labels:
+      - dynacat.hide=true
     restart: unless-stopped

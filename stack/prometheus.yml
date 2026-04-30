@@ -8,4 +8,9 @@ services:
       - ${CONFIG_BASE_PATH}/prometheus:/etc/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
+    labels:
+      - dynacat.name=Prometheus
+      - dynacat.icon=sh:prometheus
+      - dynacat.url=https://prometheus.phoenyxlab.duckdns.org
+      - dynacat.description=Logging and Alerts
     restart: unless-stopped

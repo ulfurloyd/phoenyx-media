@@ -6,4 +6,9 @@ services:
       - media_net
     volumes:
       - ${CONFIG_BASE_PATH}/grafana:/var/lib/grafana
+    labels:
+      - dynacat.name=Grafana
+      - dynacat.icon=sh:grafana
+      - dynacat.url=https://grafana.phoenyxlab.duckdns.org
+      - dynacat.description=Observability
     restart: unless-stopped

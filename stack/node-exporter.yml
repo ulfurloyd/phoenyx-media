@@ -4,4 +4,6 @@ services:
     container_name: node-exporter
     networks:
       - media_net
+    labels:
+      - dynacat.hide=true
     restart: unless-stopped

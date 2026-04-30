@@ -15,6 +15,10 @@ services:
       - ${MOVIES_LIBRARY_PATH}:/movies
     labels:
       - diun.enable=true
+      - dynacat.name=Bazarr
+      - dynacat.icon=sh:bazarr
+      - dynacat.url=https://bazarr.phoenyxlab.duckdns.org
+      - dynacat.description=Subtitles
     restart: unless-stopped
     networks:
       - media_net
