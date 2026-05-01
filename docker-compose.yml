@@ -17,7 +17,8 @@ include:
   - stack/homepage.yml
   - stack/dynacat.yml
   - stack/gluetun.yml
-  - stack/dnsmasq.yml
+  # - stack/dnsmasq.yml
+  - stack/pihole.yml
   - stack/navidrome.yml
   - stack/bazarr.yml
   - stack/diun.yml
