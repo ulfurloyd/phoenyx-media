@@ -24,3 +24,15 @@ services:
       - ${CONFIG_BASE_PATH}/pihole:/etc/pihole
       - ${CONFIG_BASE_PATH}/pihole-dnsmasq:/etc/dnsmasq.d
     restart: unless-stopped
+
+  pihole-exporter:
+    image: ekofr/pihole-exporter:latest
+    container_name: pihole-exporter
+    networks:
+      - media_net
+    environment:
+      PIHOLE_HOSTNAME: pihole
+      PIHOLE_PASSWORD: ${PH_PASS}
+      PIHOLE_PORT: 80
+      PIHOLE_PROTOCOL: http
+    restart: unless-stopped
