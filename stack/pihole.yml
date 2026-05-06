@@ -35,4 +35,6 @@ services:
       PIHOLE_PASSWORD: ${PH_PASS}
       PIHOLE_PORT: 80
       PIHOLE_PROTOCOL: http
+    labels:
+      - dynacat.hide=true
     restart: unless-stopped
