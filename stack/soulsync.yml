@@ -18,16 +18,18 @@ services:
       - "8888:8888"
       - "8889:8889"
     volumes:
-      # App config/data
       - ${CONFIG_BASE_PATH}/soulsync/config:/app/config
       - ${CONFIG_BASE_PATH}/soulsync/logs:/app/logs
       - ${CONFIG_BASE_PATH}/soulsync/data:/app/data
-      # Shared slskd downloads
       - ${SLSKD_DL_PATH}:/downloads
-      # Your actual music library
       - ${MUSIC_LIBRARY_PATH}:/music
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    labels:
+      - dynacat.name=SoulSync
+      - dynacat.icon=sh:soulsync
+      - dynacat.url=https://soulsync.phoenyxlab.duckdns.org
+      - dynacat.description=Music Server
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8008/"]
