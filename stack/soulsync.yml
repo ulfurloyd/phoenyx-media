@@ -1,0 +1,37 @@
+services:
+  soulsync:
+    image: boulderbadgedad/soulsync:latest
+    container_name: soulsync
+    networks:
+      - media_net
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=022
+      - TZ=${TZ}
+      - PYTHONPATH=/app
+      - SOULSYNC_CONFIG_PATH=/app/config/config.json
+      # OAuth callback ports
+      - SOULSYNC_SPOTIFY_CALLBACK_PORT=8888
+      - SOULSYNC_TIDAL_CALLBACK_PORT=8889
+    ports:
+      - "8888:8888"
+      - "8889:8889"
+    volumes:
+      # App config/data
+      - ${CONFIG_BASE_PATH}/soulsync/config:/app/config
+      - ${CONFIG_BASE_PATH}/soulsync/logs:/app/logs
+      - ${CONFIG_BASE_PATH}/soulsync/data:/app/data
+      # Shared slskd downloads
+      - ${SLSKD_DL_PATH}:/downloads
+      # Your actual music library
+      - ${MUSIC_LIBRARY_PATH}:/music
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8008/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
