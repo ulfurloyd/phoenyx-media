@@ -29,5 +29,5 @@ include:
   - stack/alertmanager.yml
   - stack/soulsync.yml
   # - stack/manga.yml
-  # - stack/homarr.yml
+  - stack/homarr.yml
   # - stack/nicotine.yml
