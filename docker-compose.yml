@@ -30,4 +30,5 @@ include:
   - stack/soulsync.yml
   # - stack/manga.yml
   - stack/homarr.yml
+  - stack/glances.yml
   # - stack/nicotine.yml
