@@ -15,9 +15,7 @@ include:
   - stack/seerr.yml
   - stack/notifiarr.yml
   - stack/homepage.yml
-  - stack/dynacat.yml
   - stack/gluetun.yml
-  # - stack/dnsmasq.yml
   - stack/pihole.yml
   - stack/navidrome.yml
   - stack/bazarr.yml
@@ -28,7 +26,5 @@ include:
   - stack/grafana.yml
   - stack/alertmanager.yml
   - stack/soulsync.yml
-  # - stack/manga.yml
   - stack/homarr.yml
   - stack/glances.yml
-  # - stack/nicotine.yml
