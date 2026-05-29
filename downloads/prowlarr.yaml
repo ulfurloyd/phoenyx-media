@@ -56,7 +56,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/prowlarr
+            path: /srv/k3s/prowlarr/config
 
         - name: tun-device
           hostPath:
