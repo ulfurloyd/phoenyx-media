@@ -68,8 +68,12 @@ metadata:
 spec:
   ingressClassName: traefik
 
+  tls:
+    - hosts:
+        - grafana.phoenyxlab.xyz
+
   rules:
-    - host: grafana.hermes.local
+    - host: grafana.phoenyxlab.xyz
 
       http:
         paths:

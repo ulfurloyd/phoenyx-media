@@ -43,6 +43,10 @@ spec:
           ports:
             - containerPort: 9696
 
+          volumeMounts:
+            - name: config
+              mountPath: /config
+
           env:
             - name: PUID
               value: "1000"
@@ -92,8 +96,12 @@ metadata:
 spec:
   ingressClassName: traefik
 
+  tls:
+    - hosts:
+        - prowlarr.phoenyxlab.xyz
+
   rules:
-    - host: prowlarr.hermes.local
+    - host: prowlarr.phoenyxlab.xyz
 
       http:
         paths:
@@ -106,5 +114,3 @@ spec:
 
                 port:
                   number: 9696
-
-

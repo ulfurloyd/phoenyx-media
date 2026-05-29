@@ -89,8 +89,12 @@ metadata:
 spec:
   ingressClassName: traefik
 
+  tls:
+    - hosts:
+        - sonarr.phoenyxlab.xyz
+
   rules:
-    - host: sonarr.hermes.local
+    - host: sonarr.phoenyxlab.xyz
 
       http:
         paths:

@@ -73,8 +73,12 @@ metadata:
 spec:
   ingressClassName: traefik
 
+  tls:
+    - hosts:
+        - jellyfin.phoenyxlab.xyz
+
   rules:
-    - host: jellyfin.hermes.local
+    - host: jellyfin.phoenyxlab.xyz
 
       http:
         paths:
