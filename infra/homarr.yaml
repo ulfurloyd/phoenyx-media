@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: homarr
+  namespace: infra
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: homarr
+
+  template:
+    metadata:
+      labels:
+        app: homarr
+
+    spec:
+      containers:
+        - name: homarr
+          image: ghcr.io/homarr-labs/homarr:latest
+
+          envFrom:
+            - secretRef:
+                name: homarr-secret
+
+          ports:
+            - containerPort: 7575
+
+          volumeMounts:
+            - name: config
+              mountPath: /appdata
+
+      volumes:
+        - name: config
+          hostPath:
+            path: /srv/k3s/phoenyx-media/homarr/config
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: homarr
+  namespace: infra
+
+spec:
+  selector:
+    app: homarr
+
+  ports:
+    - port: 7575
+      targetPort: 7575
+
+  type: ClusterIP
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: homarr
+  namespace: infra
+
+spec:
+  ingressClassName: traefik
+
+  tls:
+    - hosts:
+        - homarr.phoenyxlab.xyz
+
+  rules:
+    - host: homarr.phoenyxlab.xyz
+
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+
+            backend:
+              service:
+                name: homarr
+
+                port:
+                  number: 7575
