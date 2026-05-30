@@ -5,6 +5,9 @@
     <img src="./.github/ulfurloyd.jpg" width="240" alt="ulfurloyd" /> <br />
 </h2>
 
+> [!NOTE]
+> ongoing migration from docker compose to k3s
+
 a self-hosted, automated media stack built around
 **jellyfin**, **navidrome** and the **arr-stack** suite of programs.
 
