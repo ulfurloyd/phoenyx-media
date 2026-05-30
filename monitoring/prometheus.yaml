@@ -48,7 +48,7 @@ spec:
 
         - name: data
           hostPath:
-            path: /srv/k3s/phoenyx-media/prometheus/data
+            path: /srv/k3s/phoenyx-media/prometheus/config
 
 ---
 apiVersion: v1

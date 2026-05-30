@@ -29,8 +29,16 @@ spec:
             - name: config
               mountPath: /config
 
-            - name: media
-              mountPath: /media
+            - name: movies
+              mountPath: /movies
+              readOnly: true
+
+            - name: music
+              mountPath: /music
+              readOnly: true
+
+            - name: shows
+              mountPath: /shows
               readOnly: true
 
       volumes:
@@ -38,9 +46,17 @@ spec:
           hostPath:
             path: /srv/k3s/phoenyx-media/jellyfin/config
 
-        - name: media
+        - name: movies
           hostPath:
-            path: /srv/media
+            path: /media/movies
+
+        - name: music
+          hostPath:
+            path: /media/music
+
+        - name: shows
+          hostPath:
+            path: /media/tv
 
 ---
 
