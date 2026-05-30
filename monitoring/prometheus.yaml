@@ -80,7 +80,7 @@ spec:
   ingressClassName: traefik
 
   rules:
-    - host: prometheus.hermes.local
+    - host: prometheus.phoenyxlab.xyz
 
       http:
         paths:

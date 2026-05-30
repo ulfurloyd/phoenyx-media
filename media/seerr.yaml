@@ -64,7 +64,7 @@ spec:
   ingressClassName: traefik
 
   rules:
-    - host: seerr.hermes.local
+    - host: seerr.phoenyxlab.xyz
 
       http:
         paths:

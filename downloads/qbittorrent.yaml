@@ -112,7 +112,7 @@ spec:
   ingressClassName: traefik
 
   rules:
-    - host: qbittorrent.hermes.local
+    - host: qbittorrent.phoenyxlab.xyz
 
       http:
         paths:

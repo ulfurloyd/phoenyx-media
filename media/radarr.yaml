@@ -90,7 +90,7 @@ spec:
   ingressClassName: traefik
 
   rules:
-    - host: radarr.hermes.local
+    - host: radarr.phoenyxlab.xyz
 
       http:
         paths:
