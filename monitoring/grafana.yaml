@@ -37,7 +37,7 @@ spec:
       volumes:
         - name: data
           hostPath:
-            path: /srv/k3s/grafana/data
+            path: /srv/k3s/phoenyx-media/grafana/data
 
 ---
 apiVersion: v1

@@ -48,7 +48,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/sonarr/config
+            path: /srv/k3s/phoenyx-media/sonarr/config
 
         - name: downloads
           hostPath:

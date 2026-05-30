@@ -49,11 +49,11 @@ spec:
       volumes:
         - name: pihole
           hostPath:
-            path: /srv/k3s/pihole/etc-pihole
+            path: /srv/k3s/phoenyx-media/pihole/etc-pihole
 
         - name: dnsmasq
           hostPath:
-            path: /srv/k3s/pihole/etc-dnsmasq.d
+            path: /srv/k3s/phoenyx-media/pihole/etc-dnsmasq.d
 
 ---
 

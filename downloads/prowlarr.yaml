@@ -60,7 +60,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/prowlarr/config
+            path: /srv/k3s/phoenyx-media/prowlarr/config
 
         - name: tun-device
           hostPath:

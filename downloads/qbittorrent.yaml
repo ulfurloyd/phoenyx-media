@@ -69,7 +69,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/qbittorrent/config
+            path: /srv/k3s/phoenyx-media/qbittorrent/config
 
         - name: downloads
           hostPath:

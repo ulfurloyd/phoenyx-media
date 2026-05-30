@@ -48,7 +48,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/radarr/config
+            path: /srv/k3s/phoenyx-media/radarr/config
 
         - name: downloads
           hostPath:

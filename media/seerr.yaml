@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/seerr/config
+            path: /srv/k3s/phoenyx-media/seerr/config
 
 ---
 apiVersion: v1

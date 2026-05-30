@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: config
           hostPath:
-            path: /srv/k3s/jellyfin/config
+            path: /srv/k3s/phoenyx-media/jellyfin/config
 
         - name: media
           hostPath:
