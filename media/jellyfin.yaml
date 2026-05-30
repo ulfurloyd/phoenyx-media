@@ -64,7 +64,7 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: jellyfin
+  name: phoenyxfin
   namespace: media
 
 spec:
@@ -103,6 +103,6 @@ spec:
 
             backend:
               service:
-                name: jellyfin
+                name: phoenyxfin
                 port:
                   number: 8096
