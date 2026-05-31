@@ -11,7 +11,8 @@ self-hosted home network server running via **kubernetes**
 ## overview
 
 `phoenyxlab` is a personal self-hosting stack running in `kubernetes`,
-managing my home network bottom-up.
+providing media, monitoring, DNS, and infrastructure services for my
+home network.
 
 secure HTTPS routing for all services from a domain I own (`phoenyxlab.xyz`).
 
@@ -39,18 +40,32 @@ complete reverse-proxy support via `traefik`
 | **node-exporter**  | node-exporter  | monitoring  | 9100  | Host metrics   |
 | **prometheus**     | prometheus     | monitoring  | 9090  | Metrics        |
 ```
-...all accessible at `<service>.phoenyxlab.xyz`
+...all accessible at `https://<service>.phoenyxlab.xyz`
 
 ## kubernetes
 
 while the choice of using **kubernetes** started as a way to learn the tech,
 it's quickly become a beloved set of tools that runs my entire infra.
 
+### core infrastructure
+
+- **traefik** for ingress and HTTPS routing
+- **pi-hole** for network-wide DNS and local service discovery
+- **prometheus** + **grafana** for monitoring
+- **homarr** as the primary service dashboard
+
+### monitoring
+
+- **prometheus** for metrics collection
+- **grafana** for dashboards
+- **cadvisor** for container metrics
+- **node exporter** for host metrics
+
 ### namespaces
 
 namespaces provide logical partitioning between pods.
 services in different namespaces can find each other by
-looking for `<podname>.<namespace>:<port>`. for example,
+looking for `<service>.<namespace>:<port>`. for example,
 `soulsync` finds `slskd` at `slskd.downloads:5030`
 
 - media
@@ -76,6 +91,5 @@ the arr stack automates the full pipeline:
 - **cleans up** finished downloads after import into `/media`
 - **centralized indexer management** through `prowlarr`
 - **VPN-secured downloads** with Gluetun + ProtonVPN
-- **Cloudflare bypass** through `flaresolverr`
 - **Seerr integration** for user requests
 - **Homarr dashboard** for quick access to all services
