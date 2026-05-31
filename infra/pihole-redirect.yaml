@@ -1,0 +1,12 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+
+metadata:
+  name: pihole-admin-redirect
+  namespace: infra
+
+spec:
+  redirectRegex:
+    regex: ^https://pihole\.phoenyxlab\.xyz/$
+    replacement: https://pihole.phoenyxlab.xyz/admin/
+    permanent: true
