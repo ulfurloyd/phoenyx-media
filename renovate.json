@@ -10,10 +10,10 @@
 
 	"packageRules": [
 		{
-			"matchPackagePrefixes": [
-				"lscr.io/linuxserver/"
-			],
-			"groupName": "linuxserver"
+			"groupName": "linuxserver",
+			"matchPackageNames": [
+				"lscr.io/linuxserver/{/,}**"
+			]
 		}
 	]
 }
