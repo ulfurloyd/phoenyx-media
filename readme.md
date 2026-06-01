@@ -25,6 +25,7 @@ complete reverse-proxy support via `traefik`
 | hostname           | service        | namespace   | port  | description    |
 |--------------------+----------------+-------------+-------+----------------|
 | **homarr**         | homarr         | infra       | 7575  | Dashboard      |
+| **notifiarr**      | notifiarr      | infra       | 5454  | Notifications  |
 | **pi-hole**        | pihole         | infra       | 80    | DNS            |
 | **jellyfin**       | phoenyxfin     | media       | 8096  | Media Server   |
 | **navidrome**      | navidrome      | media       | 4533  | Music Server   |
