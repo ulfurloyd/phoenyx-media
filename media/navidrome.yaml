@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: navidrome
-          image: deluan/navidrome:latest
+          image: deluan/navidrome:0.61.2
           ports:
             - containerPort: 4533
           volumeMounts:

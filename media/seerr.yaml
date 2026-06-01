@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: seerr
-          image: ghcr.io/seerr-team/seerr:latest
+          image: ghcr.io/seerr-team/seerr:3.2.0
           ports:
             - containerPort: 5055
           volumeMounts:

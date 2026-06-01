@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: gluetun
-          image: qmcgaw/gluetun:latest
+          image: qmcgaw/gluetun:v3.40
           securityContext:
             privileged: true
             capabilities:
@@ -28,7 +28,7 @@ spec:
             - name: tun-device
               mountPath: /dev/net/tun
         - name: prowlarr
-          image: lscr.io/linuxserver/prowlarr:latest
+          image: lscr.io/linuxserver/prowlarr:2.3.5
           ports:
             - containerPort: 9696
           volumeMounts:

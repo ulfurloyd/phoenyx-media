@@ -17,7 +17,7 @@ spec:
       hostPID: true
       containers:
         - name: node-exporter
-          image: quay.io/prometheus/node-exporter:latest
+          image: quay.io/prometheus/node-exporter:1.11.1
           args:
             - --path.rootfs=/host
           ports:
