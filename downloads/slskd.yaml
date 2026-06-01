@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: slskd
-          image: slskd/slskd:0.25.0
+          image: slskd/slskd:0.25.1
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
