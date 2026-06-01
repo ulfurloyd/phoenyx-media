@@ -4,16 +4,17 @@
 		"config:recommended"
 	],
 
-	"enabledManagers": [
-		"kubernetes",
-		"dockerfile"
-	],
-
-	"major": {
-		"enabled": false
+	"kubernetes": {
+		"managerFilePatterns": [
+			"/(^|/)(downloads|infra|media|monitoring)/.*\\.ya?ml$/"
+		]
 	},
 
 	"packageRules": [
+		{
+			"matchUpdateTypes": ["major"],
+			"enabled": false
+		},
 		{
 			"groupName": "linuxserver",
 			"matchPackageNames": [
