@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: gluetun
-          image: qmcgaw/gluetun:v3.40
+          image: qmcgaw/gluetun:v3.41
           securityContext:
             privileged: true
             capabilities:
