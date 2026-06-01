@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifiarr
+  namespace: infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifiarr
+  template:
+    metadata:
+      labels:
+        app: notifiarr
+    spec:
+      containers:
+      - name: notifiarr
+        image: golift/notifiarr:latest
+        env:
+          - name: TZ
+            value: "Asia/Kolkata"
+        ports:
+        - containerPort: 5454
+          name: notifiarr
+        volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: utmp
+            mountPath: /var/run/utmp
+            readOnly: true
+          - name: machine-id
+            mountPath: /etc/machine-id
+            readOnly: true
+      volumes:
+        - name: config
+          hostPath:
+            path: /srv/k3s/phoenyx-media/notifiarr/config
+            type: DirectoryOrCreate
+        - name: utmp
+          hostPath:
+            path: /var/run/utmp
+        - name: machine-id
+          hostPath:
+            path: /etc/machine-id
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifiarr
+  namespace: infra
+spec:
+  selector:
+    app: notifiarr
+  type: ClusterIP
+  ports:
+  - name: notifiarr
+    protocol: TCP
+    port: 5454
+    targetPort: 5454
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notifiarr
+  namespace: infra
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - notifiarr.phoenyxlab.xyz
+  rules:
+    - host: notifiarr.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: notifiarr
+                port:
+                  number: 5454
+---
