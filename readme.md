@@ -93,3 +93,10 @@ the arr stack automates the full pipeline:
 - **VPN-secured downloads** with Gluetun + ProtonVPN
 - **Seerr integration** for user requests
 - **Homarr dashboard** for quick access to all services
+
+
+## bootstrap
+- secrets
+- namespaces
+- tlsstore
+- pihole-redirect middleware
