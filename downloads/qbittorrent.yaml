@@ -1,127 +1,94 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: qbittorrent
   namespace: downloads
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: qbittorrent
-
   template:
     metadata:
       labels:
         app: qbittorrent
-
     spec:
       containers:
         - name: gluetun
           image: qmcgaw/gluetun:latest
-
           securityContext:
             privileged: true
-
             capabilities:
               add:
                 - NET_ADMIN
-
           envFrom:
             - secretRef:
                 name: gluetun-secret
-
           volumeMounts:
             - name: downloads
               mountPath: /downloads
-
             - name: tun-device
               mountPath: /dev/net/tun
-
         - name: qbittorrent
           image: lscr.io/linuxserver/qbittorrent:latest
-
           ports:
             - containerPort: 8080
-
           env:
             - name: PUID
               value: "1000"
-
             - name: PGID
               value: "1000"
-
             - name: TZ
               value: "Asia/Kolkata"
-
             - name: WEBUI_PORT
               value: "8080"
-
           volumeMounts:
             - name: config
               mountPath: /config
-
             - name: downloads
               mountPath: /downloads
-
       volumes:
         - name: config
           hostPath:
             path: /srv/k3s/phoenyx-media/qbittorrent/config
-
         - name: downloads
           hostPath:
             path: /downloads/qbittorrent
             type: Directory
-
         - name: tun-device
           hostPath:
             path: /dev/net/tun
             type: CharDevice
-
 ---
 apiVersion: v1
 kind: Service
-
 metadata:
   name: qbittorrent
   namespace: downloads
-
 spec:
   selector:
     app: qbittorrent
-
   ports:
     - name: webui
       port: 8080
       targetPort: 8080
-
   type: ClusterIP
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: qbittorrent
   namespace: downloads
-
 spec:
   ingressClassName: traefik
-
   rules:
     - host: qbittorrent.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: qbittorrent
-
                 port:
                   number: 8080

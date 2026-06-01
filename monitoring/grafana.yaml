@@ -1,85 +1,64 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: grafana
   namespace: monitoring
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: grafana
-
   template:
     metadata:
       labels:
         app: grafana
-
     spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
-
       containers:
         - name: grafana
           image: grafana/grafana:latest
-
           ports:
             - containerPort: 3000
-
           volumeMounts:
             - name: data
               mountPath: /var/lib/grafana
-
       volumes:
         - name: data
           hostPath:
             path: /srv/k3s/phoenyx-media/grafana/config
-
 ---
 apiVersion: v1
 kind: Service
-
 metadata:
   name: grafana
   namespace: monitoring
-
 spec:
   selector:
     app: grafana
-
   ports:
     - port: 3000
       targetPort: 3000
-
   type: ClusterIP
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: grafana
   namespace: monitoring
-
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
         - grafana.phoenyxlab.xyz
-
   rules:
     - host: grafana.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: grafana

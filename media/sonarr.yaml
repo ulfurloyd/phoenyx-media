@@ -1,106 +1,77 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: sonarr
   namespace: media
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: sonarr
-
   template:
     metadata:
       labels:
         app: sonarr
-
     spec:
       containers:
         - name: sonarr
           image: lscr.io/linuxserver/sonarr:latest
-
           ports:
             - containerPort: 8989
-
           env:
             - name: PUID
               value: "1000"
-
             - name: PGID
               value: "1000"
-
             - name: TZ
               value: "Asia/Kolkata"
-
           volumeMounts:
             - name: config
               mountPath: /config
-
             - name: downloads
               mountPath: /media
-
             - name: media
               mountPath: /shows
-
       volumes:
         - name: config
           hostPath:
             path: /srv/k3s/phoenyx-media/sonarr/config
-
         - name: downloads
           hostPath:
             path: /downloads/qbittorrent
-
         - name: media
           hostPath:
             path: /media/tv
-
 ---
-
 apiVersion: v1
 kind: Service
-
 metadata:
   name: sonarr
   namespace: media
-
 spec:
   selector:
     app: sonarr
-
   ports:
     - port: 8989
       targetPort: 8989
-
   type: ClusterIP
-
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: sonarr
   namespace: media
-
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
         - sonarr.phoenyxlab.xyz
-
   rules:
     - host: sonarr.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: sonarr

@@ -1,98 +1,72 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: slskd
   namespace: downloads
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: slskd
-
   template:
     metadata:
       labels:
         app: slskd
-
     spec:
       containers:
         - name: slskd
           image: slskd/slskd:latest
-
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
-
           ports:
             - containerPort: 5030
             - containerPort: 50300
-
           volumeMounts:
             - name: config
               mountPath: /app
-
             - name: downloads
               mountPath: /downloads
-
       volumes:
         - name: config
           hostPath:
             path: /srv/k3s/phoenyx-media/slskd/config
-
         - name: downloads
           hostPath:
             path: /downloads/slskd
-
 ---
-
 apiVersion: v1
 kind: Service
-
 metadata:
   name: slskd
   namespace: downloads
-
 spec:
   selector:
     app: slskd
-
   ports:
     - name: web
       port: 5030
       targetPort: 5030
-
   type: ClusterIP
-
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: slskd
   namespace: downloads
-
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
         - slskd.phoenyxlab.xyz
-
   rules:
     - host: slskd.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: slskd
-
                 port:
                   number: 5030

@@ -1,110 +1,80 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: soulsync
   namespace: media
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: soulsync
-
   template:
     metadata:
       labels:
         app: soulsync
-
     spec:
       containers:
         - name: soulsync
           image: boulderbadgedad/soulsync:latest
-
           ports:
             - containerPort: 8008
-
           volumeMounts:
             - name: config
               mountPath: /app/config
-
             - name: logs
               mountPath: /app/logs
-
             - name: data
               mountPath: /app/data
-
             - name: downloads
               mountPath: /downloads
-
             - name: music
               mountPath: /music
-
       volumes:
         - name: config
           hostPath:
             path: /srv/k3s/phoenyx-media/soulsync/config
-
         - name: logs
           hostPath:
             path: /srv/k3s/phoenyx-media/soulsync/logs
-
         - name: data
           hostPath:
             path: /srv/k3s/phoenyx-media/soulsync/data
-
         - name: downloads
           hostPath:
             path: /downloads/slskd
-
         - name: music
           hostPath:
             path: /media/music
-
 ---
-
 apiVersion: v1
 kind: Service
-
 metadata:
   name: soulsync
   namespace: media
-
 spec:
   selector:
     app: soulsync
-
   ports:
     - port: 8008
       targetPort: 8008
-
   type: ClusterIP
-
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: soulsync
   namespace: media
-
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
         - soulsync.phoenyxlab.xyz
-
   rules:
     - host: soulsync.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: soulsync

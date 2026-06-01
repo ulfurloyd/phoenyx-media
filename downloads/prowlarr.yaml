@@ -1,116 +1,86 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: prowlarr
   namespace: downloads
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: prowlarr
-
   template:
     metadata:
       labels:
         app: prowlarr
-
     spec:
       containers:
         - name: gluetun
           image: qmcgaw/gluetun:latest
-
           securityContext:
             privileged: true
-
             capabilities:
               add:
                 - NET_ADMIN
-
           envFrom:
             - secretRef:
                 name: gluetun-secret
-
           volumeMounts:
             - name: tun-device
               mountPath: /dev/net/tun
-
         - name: prowlarr
           image: lscr.io/linuxserver/prowlarr:latest
-
           ports:
             - containerPort: 9696
-
           volumeMounts:
             - name: config
               mountPath: /config
-
           env:
             - name: PUID
               value: "1000"
-
             - name: PGID
               value: "1000"
-
             - name: TZ
               value: "Asia/Kolkata"
-
       volumes:
         - name: config
           hostPath:
             path: /srv/k3s/phoenyx-media/prowlarr/config
-
         - name: tun-device
           hostPath:
             path: /dev/net/tun
             type: CharDevice
-
 ---
 apiVersion: v1
 kind: Service
-
 metadata:
   name: prowlarr
   namespace: downloads
-
 spec:
   selector:
     app: prowlarr
-
   ports:
     - port: 9696
       targetPort: 9696
-
   type: ClusterIP
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: prowlarr
   namespace: downloads
-
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
         - prowlarr.phoenyxlab.xyz
-
   rules:
     - host: prowlarr.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: prowlarr
-
                 port:
                   number: 9696

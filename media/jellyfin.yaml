@@ -1,106 +1,78 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: jellyfin
   namespace: media
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: jellyfin
-
   template:
     metadata:
       labels:
         app: jellyfin
-
     spec:
       containers:
         - name: jellyfin
           image: jellyfin/jellyfin:latest
-
           ports:
             - containerPort: 8096
-
           volumeMounts:
             - name: config
               mountPath: /config
-
             - name: movies
               mountPath: /movies
               readOnly: true
-
             - name: music
               mountPath: /music
               readOnly: true
-
             - name: shows
               mountPath: /shows
               readOnly: true
-
       volumes:
         - name: config
           hostPath:
             path: /srv/k3s/phoenyx-media/jellyfin/config
-
         - name: movies
           hostPath:
             path: /media/movies
-
         - name: music
           hostPath:
             path: /media/music
-
         - name: shows
           hostPath:
             path: /media/tv
-
 ---
-
 apiVersion: v1
 kind: Service
-
 metadata:
   name: phoenyxfin
   namespace: media
-
 spec:
   selector:
     app: jellyfin
-
   ports:
     - port: 8096
       targetPort: 8096
-
   type: ClusterIP
-
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: jellyfin
   namespace: media
-
 spec:
   ingressClassName: traefik
-
   tls:
     - hosts:
         - jellyfin.phoenyxlab.xyz
-
   rules:
     - host: jellyfin.phoenyxlab.xyz
-
       http:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: phoenyxfin
