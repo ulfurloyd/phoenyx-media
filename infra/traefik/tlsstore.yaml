@@ -3,7 +3,7 @@ kind: TLSStore
 
 metadata:
   name: default
-  namespace: traefik
+  namespace: kube-system
 
 spec:
   defaultCertificate:
