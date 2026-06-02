@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jackett
+  namespace: downloads
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jackett
+  template:
+    metadata:
+      labels:
+        app: jackett
+    spec:
+      containers:
+        - name: jackett
+          image: lscr.io/linuxserver/jackett:0.24.1905
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Asia/Kolkata"
+          ports:
+            - containerPort: 9117
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      initContainers:
+        - name: flaresolverr
+          image: ghcr.io/flaresolverr/flaresolverr:v3.5.0
+          restartPolicy: Always
+          env:
+            - name: LOG_LEVEL
+              value: "info"
+            - name: LOG_HTML
+              value: "false"
+            - name: CAPTCHA_SOLVER
+              value: "none"
+            - name: TZ
+              value: "Asia/Kolkata"
+          ports:
+            - containerPort: 8191
+      volumes:
+        - name: config
+          hostPath:
+            path: /srv/k3s/phoenyx-media/jackett/config
+        - name: tun-device
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jackett
+  namespace: downloads
+spec:
+  selector:
+    app: jackett
+  ports:
+    - port: 9117
+      targetPort: 9117
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jackett
+  namespace: downloads
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - jackett.phoenyxlab.xyz
+  rules:
+    - host: jackett.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jackett
+                port:
+                  number: 9117
