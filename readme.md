@@ -104,7 +104,7 @@ the arr stack automates the full pipeline:
 
 
 ## bootstrap
-- secrets
-- namespaces
-- tlsstore
-- pihole-redirect middleware
+- decrypt and apply secrets with sops/age
+- apply namespaces
+- apply tlsstore
+- apply pihole-redirect middleware
