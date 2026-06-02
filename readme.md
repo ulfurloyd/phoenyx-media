@@ -22,6 +22,8 @@ container images are locked to the latest stable tag.
 `renovate` keeps track of image updates and opens a PR whenever a
 new image is available.
 
+`sops` and `age` encrypt `secrets/*`
+
 
 ## network
 
@@ -37,6 +39,7 @@ new image is available.
 | **seerr**          | seerr          | media       | 5055  | Requests       |
 | **sonarr**         | sonarr         | media       | 8989  | Shows          |
 | **soulsync**       | soulsync       | media       | 8008  | Music Syncing  |
+| **jackett**        | jackett        | downloads   | 9117  | Indexers       |
 | **prowlarr**       | prowlarr       | downloads   | 9696  | Indexers       |
 | **qbittorrent**    | qbittorrent    | downloads   | 8080  | Torrents       |
 | **slskd**          | slskd          | downloads   | 5030  | Soulseek       |
