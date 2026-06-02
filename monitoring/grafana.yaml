@@ -19,7 +19,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: grafana
-          image: grafana/grafana:13.1.0
+          image: grafana/grafana:13.0.2
           ports:
             - containerPort: 3000
           volumeMounts:
