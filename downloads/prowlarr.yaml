@@ -14,19 +14,6 @@ spec:
         app: prowlarr
     spec:
       containers:
-        - name: gluetun
-          image: qmcgaw/gluetun:v3.41
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - NET_ADMIN
-          envFrom:
-            - secretRef:
-                name: gluetun-secret
-          volumeMounts:
-            - name: tun-device
-              mountPath: /dev/net/tun
         - name: prowlarr
           image: lscr.io/linuxserver/prowlarr:2.3.5
           ports:
@@ -41,6 +28,23 @@ spec:
               value: "1000"
             - name: TZ
               value: "Asia/Kolkata"
+      initContainers:
+        - name: gluetun
+          image: qmcgaw/gluetun:v3.41
+          restartPolicy: Always
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - NET_ADMIN
+          envFrom:
+            - configMapRef:
+                name: gluetun-config
+            - secretRef:
+                name: gluetun-secret
+          volumeMounts:
+            - name: tun-device
+              mountPath: /dev/net/tun
       volumes:
         - name: config
           hostPath:
