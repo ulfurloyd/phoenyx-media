@@ -20,7 +20,7 @@ complete reverse-proxy support via `traefik`.
 
 container images are locked to the latest stable tag.
 `renovate` keeps track of image updates and opens a PR whenever a
-new image is available
+new image is available.
 
 
 ## network
