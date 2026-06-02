@@ -16,7 +16,11 @@ home network.
 
 secure HTTPS routing for all services from a domain I own (`phoenyxlab.xyz`).
 
-complete reverse-proxy support via `traefik`
+complete reverse-proxy support via `traefik`.
+
+container images are locked to the latest stable tag.
+`renovate` keeps track of image updates and opens a PR whenever a
+new image is available
 
 
 ## network
