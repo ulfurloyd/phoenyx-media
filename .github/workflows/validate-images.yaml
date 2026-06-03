@@ -1,0 +1,44 @@
+name: Validate Images
+
+on:
+  pull_request:
+    push:
+      branches:
+        - main
+
+jobs:
+  validate-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Install yq
+        run: |
+          sudo wget -O /usr/local/bin/yq \
+                      https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Validate image tags
+        run: |
+          set -euo pipefail
+
+          images=$(
+            find downloads infra media monitoring -type f \( -name '*.yaml' -o -name '*.yml' \) \
+              -exec yq '.. | .image? // empty' {} \; |
+              sort -u
+          )
+
+          echo "Found images:"
+          echo "$images"
+
+          for image in $images; do
+            echo
+            echo "Checking $image"
+
+            docker manifest inspect "$image" > /dev/null
+          done
+
+          echo
+          echo "All images validated successfully"
