@@ -12,31 +12,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Install yq
-        run: |
-          sudo wget -O /usr/local/bin/yq \
-            https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
-
       - name: Validate image tags
         run: |
           set -euo pipefail
 
           images=$(
-            find downloads infra media monitoring -type f \( -name '*.yaml' -o -name '*.yml' \) \
-              -exec yq '.. | .image? // empty' {} \; |
-              sort -u
+            grep -RhoP 'image:\s*\K\S+' \
+              downloads infra media monitoring |
+            sort -u
           )
 
           echo "Found images:"
           echo "$images"
 
-          for image in $images; do
-            echo
-            echo "Checking $image"
+          while read -r image; do
+            [ -z "$image" ] && continue
 
+            echo "::group::$image"
             docker manifest inspect "$image" >/dev/null
-          done
+            echo "OK"
+            echo "::endgroup::"
+          done <<< "$images"
 
           echo
           echo "All images validated successfully."
