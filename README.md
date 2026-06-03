@@ -45,6 +45,7 @@ new image is available.
 | **prowlarr**       | prowlarr       | downloads   | 9696  | Indexers       |
 | **qbittorrent**    | qbittorrent    | downloads   | 8080  | Torrents       |
 | **slskd**          | slskd          | downloads   | 5030  | Soulseek       |
+| **alertmanager**   | alertmanager   | monitoring  | 9093  | Alerts         |
 | **cadvisor**       | cadvisor       | monitoring  | 8080  | Containers     |
 | **grafana**        | grafana        | monitoring  | 3000  | Dashboards     |
 | **node-exporter**  | node-exporter  | monitoring  | 9100  | Host metrics   |
