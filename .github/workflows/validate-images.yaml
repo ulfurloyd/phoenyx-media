@@ -1,23 +1,21 @@
-name: Validate Images
-
 on:
   pull_request:
-    push:
-      branches:
-        - main
+  push:
+    branches:
+      - main
 
 jobs:
   validate-images:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v5
 
       - name: Install yq
         run: |
           sudo wget -O /usr/local/bin/yq \
-                      https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+            https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod +x /usr/local/bin/yq
 
       - name: Validate image tags
@@ -37,8 +35,8 @@ jobs:
             echo
             echo "Checking $image"
 
-            docker manifest inspect "$image" > /dev/null
+            docker manifest inspect "$image" >/dev/null
           done
 
           echo
-          echo "All images validated successfully"
+          echo "All images validated successfully."
