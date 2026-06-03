@@ -1,22 +1,9 @@
 on:
   pull_request:
-    paths:
-      - 'downloads/**'
-      - 'infra/**'
-      - 'media/**'
-      - 'monitoring/**'
-      - 'monitoring/**'
-      - 'configmaps/**'
   push:
     branches:
       - main
-    paths:
-      - 'downloads/**'
-      - 'infra/**'
-      - 'media/**'
-      - 'monitoring/**'
-      - 'monitoring/**'
-      - 'configmaps/**'
+  workflow_dispatch:
 
 jobs:
   validate-images:
@@ -25,8 +12,36 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check for manifest changes
+        id: changes
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            files=$(git diff --name-only \
+              origin/${{ github.base_ref }}...HEAD)
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            files=$(git diff --name-only \
+              ${{ github.event.before }} \
+              ${{ github.sha }})
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "$files"
+
+          if echo "$files" | grep -qE '^(downloads|infra|media|monitoring)/'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Validate image tags
+        if: steps.changes.outputs.changed == 'true'
         run: |
           set -euo pipefail
 
@@ -50,3 +65,9 @@ jobs:
 
           echo
           echo "All images validated successfully."
+
+      - name: Skip validation
+        if: steps.changes.outputs.changed == 'false'
+        run: |
+          echo "No Kube manifest changes detected."
+          echo "Skipping image validation"
