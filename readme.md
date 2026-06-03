@@ -5,6 +5,8 @@
     <img src="./.github/ulfurloyd.jpg" width="240" alt="ulfurloyd" /> <br />
 </h2>
 
+[![.github/workflows/validate-images.yaml](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml/badge.svg?branch=main)](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml)
+
 self-hosted home network server running via **kubernetes**
 
 
@@ -81,13 +83,18 @@ looking for `<service>.<namespace>:<port>`. for example,
 - infra
 - monitoring
 
+### continuous deployment
+
+`FluxCD` provides continuous deployment features, watching
+the repo for changes and applying them locally.
+
 ## download + media workflow
 
 the arr stack automates the full pipeline:
 
-- prowlarr aggregates indexers (via vpn)
+- jackett aggregates indexers
 - sonarr / radarr handle search and download requests
-- qbittorrent downloads content (via vpn)
+- qbittorrent downloads content
 - completed downloads are:
     - imported into /media
     - organized automatically
