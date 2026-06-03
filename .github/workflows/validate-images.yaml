@@ -1,8 +1,22 @@
 on:
   pull_request:
+    paths:
+      - 'downloads/**'
+      - 'infra/**'
+      - 'media/**'
+      - 'monitoring/**'
+      - 'monitoring/**'
+      - 'configmaps/**'
   push:
     branches:
       - main
+    paths:
+      - 'downloads/**'
+      - 'infra/**'
+      - 'media/**'
+      - 'monitoring/**'
+      - 'monitoring/**'
+      - 'configmaps/**'
 
 jobs:
   validate-images:
