@@ -5,7 +5,7 @@
     <img src="./.github/ulfurloyd.jpg" width="240" alt="ulfurloyd" /> <br />
 </h2>
 
-[![.github/workflows/validate-images.yaml](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml/badge.svg?branch=main)](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml)
+[![.github/workflows/validate-images.yaml](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml/badge.svg?branch=main)](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml) [![Validate Kubernetes](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-kubernetes.yaml/badge.svg)](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-kubernetes.yaml)
 
 self-hosted home network server running via **kubernetes**
 
