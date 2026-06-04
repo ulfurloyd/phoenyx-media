@@ -1,0 +1,66 @@
+name: Validate Kubernetes
+
+on:
+  pull_request:
+    push:
+      branches:
+        - main
+  workflow_dispatch:
+
+jobs:
+  kubeconform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check for manifest changes
+        id: changes
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            files=$(git diff --name-only \
+              origin/${{ github.base_ref }}...HEAD)
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            files=$(git diff --name-only \
+              ${{ github.event.before }} \
+              ${{ github.sha }})
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "$files"
+
+          if echo "$files" | grep -qE '^(downloads|infra|media|monitoring|configmaps|flyx-system)/'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install kubeconform
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          curl -L https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz \
+          | tar xz
+          sudo mv kubeconform /usr/local/bin/kubeconform
+
+      - name: Validate manifests
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          kubeconform \
+            -strict \
+            -summary \
+            -ignore-missing-schemas \
+            $(find downloads infra media monitoring configmaps flux-system \
+              -name '*.yaml')
+
+      - name: Skip validation
+        if: steps.changes.outputs.changed == 'false'
+        run: |
+          echo "No Kubernetes manifest changes detected"
+          echo "Skipping validation."
