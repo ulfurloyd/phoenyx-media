@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: godaddy-webhook
+  namespace: cert-manager
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: godaddy-webhook
+      sourceRef:
+        kind: HelmRepository
+        name: godaddy-webhook
+        namespace: flux-system
+
+  values:
+    groupName: acme.phoenyxlab.xyz
