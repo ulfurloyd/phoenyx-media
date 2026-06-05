@@ -4,8 +4,10 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    server: https://acme-v02.api/letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     email: wolfinthedepths@proton.me
+    privateKeySecretRef:
+      name: letsencrypt-prod
     solvers:
       - selector:
           dnsZones:
