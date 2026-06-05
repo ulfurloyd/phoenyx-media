@@ -6,17 +6,17 @@ spec:
   acme:
     server: https://acme-v02.api/letsencrypt.org/directory
     email: wolfinthedepths@proton.me
-  solvers:
-    - selector:
-        dnsZones:
-          - phoenyxlab.xyz
-      dns01:
-        webhook:
-          groupName: acme.phoenyxlab.xyz
-          solverName: godaddy
-          config:
-            apiKeySecretRef:
-              name: godaddy-api-key
-              key: token
-            production: true
-            ttl: 600
+    solvers:
+      - selector:
+          dnsZones:
+            - phoenyxlab.xyz
+        dns01:
+          webhook:
+            groupName: acme.phoenyxlab.xyz
+            solverName: godaddy
+            config:
+              apiKeySecretRef:
+                name: godaddy-api-key
+                key: token
+              production: true
+              ttl: 600
