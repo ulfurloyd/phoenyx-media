@@ -41,8 +41,8 @@ spec:
               mountPath: /downloads
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/slskd/config
+          persistentVolumeClaim:
+            claimName: slskd-config
         - name: downloads
           hostPath:
             path: /downloads/slskd

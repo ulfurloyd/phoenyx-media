@@ -39,8 +39,8 @@ spec:
               mountPath: /var/lib/grafana
       volumes:
         - name: data
-          hostPath:
-            path: /srv/k3s/phoenyx-media/grafana/config
+          persistentVolumeClaim:
+            claimName: grafana-config
 ---
 apiVersion: v1
 kind: Service

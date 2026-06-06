@@ -67,8 +67,8 @@ spec:
               mountPath: /dev/net/tun
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/qbittorrent/config
+          persistentVolumeClaim:
+            claimName: qbittorrent-config
         - name: downloads
           hostPath:
             path: /downloads/qbittorrent

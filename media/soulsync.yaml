@@ -33,24 +33,21 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /app/config
-            - name: logs
+              subPath: config
+            - name: config
               mountPath: /app/logs
-            - name: data
+              subPath: logs
+            - name: config
               mountPath: /app/data
+              subPath: data
             - name: downloads
               mountPath: /downloads
             - name: music
               mountPath: /music
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/soulsync/config
-        - name: logs
-          hostPath:
-            path: /srv/k3s/phoenyx-media/soulsync/logs
-        - name: data
-          hostPath:
-            path: /srv/k3s/phoenyx-media/soulsync/data
+          persistentVolumeClaim:
+            claimName: soulsync-config
         - name: downloads
           hostPath:
             path: /downloads/slskd
