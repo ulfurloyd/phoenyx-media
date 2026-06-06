@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: restic-snapshots
+  name: restic-snapshots-v2
   namespace: backup
 spec:
   backoffLimit: 0
