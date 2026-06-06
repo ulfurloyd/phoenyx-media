@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: restic-backup-once
+  namespace: backup
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: restic
+          image: restic/restic:0.18.0
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: restic-r2-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: restic-r2-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_DEFAULT_REGION
+              value: auto
+            - name: RESTIC_REPOSITORY
+              value: s3:https://755952d0223278203eaf855988b6e073.r2.cloudflarestorage.com/phoenyxlab-backups
+            - name: RESTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: restic-r2-secret
+                  key: RESTIC_PASSWORD
+          volumeMounts:
+            - name: storage
+              mountPath: /backup-data
+              readOnly: true
+          command:
+            - /bin/sh
+            - -c
+            - |
+              restic backup /backup-data
+      volumes:
+        - name: storage
+          hostPath:
+            path: /var/lib/rancher/k3s/storage
