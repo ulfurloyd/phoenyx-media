@@ -33,9 +33,8 @@ spec:
             readOnly: true
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/notifiarr/config
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: notifiarr-config
         - name: utmp
           hostPath:
             path: /var/run/utmp
