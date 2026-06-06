@@ -38,8 +38,8 @@ spec:
               readOnly: true
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/navidrome/config
+          persistentVolumeClaim:
+            claimName: navidrome-config
         - name: music
           hostPath:
             path: /media/music
