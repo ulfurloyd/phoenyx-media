@@ -46,8 +46,8 @@ spec:
               mountPath: /shows
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/sonarr/config
+          persistentVolumeClaim:
+            claimName: sonarr-config
         - name: downloads
           hostPath:
             path: /downloads/qbittorrent

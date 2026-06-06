@@ -59,8 +59,8 @@ spec:
               mountPath: /dev/net/tun
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/prowlarr/config
+          persistentVolumeClaim:
+            claimName: prowlarr-config
         - name: tun-device
           hostPath:
             path: /dev/net/tun

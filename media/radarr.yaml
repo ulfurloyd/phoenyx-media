@@ -46,8 +46,8 @@ spec:
               mountPath: /movies
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/radarr/config
+          persistentVolumeClaim:
+            claimName: radarr-config
         - name: downloads
           hostPath:
             path: /downloads/qbittorrent
