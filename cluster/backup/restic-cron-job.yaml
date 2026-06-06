@@ -4,7 +4,8 @@ metadata:
   name: restic-backup
   namespace: backup
 spec:
-  schedule: "0 3 1 * *"
+  schedule: "0 2 1 * *"
+  timeZone: "Asia/Kolkata"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
