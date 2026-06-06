@@ -47,8 +47,8 @@ spec:
           configMap:
             name: prometheus-config
         - name: data
-          hostPath:
-            path: /srv/k3s/phoenyx-media/prometheus/config
+          persistentVolumeClaim:
+            claimName: prometheus-config
 ---
 apiVersion: v1
 kind: Service
