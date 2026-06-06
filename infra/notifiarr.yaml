@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: notifiarr-config
+  namespace: infra
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -78,15 +90,3 @@ spec:
                 name: notifiarr
                 port:
                   number: 5454
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: notifiarr-config
-  namespace: infra
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
