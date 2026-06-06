@@ -16,7 +16,7 @@ metadata:
   name: qbittorrent
   namespace: downloads
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: qbittorrent
