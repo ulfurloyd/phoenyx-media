@@ -44,8 +44,8 @@ spec:
               readOnly: true
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/jellyfin/config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
         - name: movies
           hostPath:
             path: /media/movies
