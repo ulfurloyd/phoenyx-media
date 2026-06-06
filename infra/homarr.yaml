@@ -26,8 +26,8 @@ spec:
               mountPath: /appdata
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/homarr/config
+          persistentVolumeClaim:
+            claimName: homarr-config
 ---
 apiVersion: v1
 kind: Service
