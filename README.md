@@ -18,11 +18,11 @@ home network.
 
 secure HTTPS routing for all services from a domain I own (`phoenyxlab.xyz`).
 
-complete reverse-proxy support via `traefik`.
+reverse-proxy and ingress management via `traefik`.
 
-container images are locked to the latest stable tag.
-`renovate` keeps track of image updates and opens a PR whenever a
-new image is available.
+container images are locked to explicit versions.
+`renovate` monitors upstream releases and opens a PR whenever a
+new version is available.
 
 `sops` and `age` encrypt `secrets/*`
 
@@ -58,9 +58,26 @@ new image is available.
 while the choice of using **kubernetes** started as a way to learn the tech,
 it's quickly become a beloved set of tools that runs my entire infra.
 
+### cluster architecture
+
+```
+Git
+ ↓
+FluxCD
+ ↓
+Kubernetes
+ ├─ media
+ ├─ downloads
+ ├─ infra
+ ├─ monitoring
+ ├─ cert-manager
+ └─ backup
+```
+
 ### core infrastructure
 
 - **traefik** for ingress and HTTPS routing
+- **cert-manager** for automatic TLS certificate issuance and renewal
 - **pi-hole** for network-wide DNS and local service discovery
 - **prometheus** + **grafana** for monitoring
 - **homarr** as the primary service dashboard
@@ -83,11 +100,23 @@ looking for `<service>.<namespace>:<port>`. for example,
 - downloads
 - infra
 - monitoring
+- cert-manager
+- backup
+
+### persistent storage
+
+all service configuration files are stored in **Persistent
+Volume Claims**.
+
+configuration is backed up monthly to Cloudflare R2 using **Restic**.
 
 ### continuous deployment
 
-`FluxCD` provides continuous deployment features, watching
-the repo for changes and applying them locally.
+`FluxCD` watches the repo for changes and reconciles
+cluster state automatically.
+
+deployment events and failures are sent to Discord via
+Flux notifications.
 
 ## download + media workflow
 
@@ -112,7 +141,17 @@ the arr stack automates the full pipeline:
 
 
 ## bootstrap
-- decrypt and apply secrets with sops/age
-- apply namespaces
-- apply tlsstore
-- apply pihole-redirect middleware
+
+1. install k3s
+2. install FluxCD
+3. restore the SOPS age key
+4. bootstrap Flux against the repo
+5. Flux reconciles cluster state
+
+## disaster recovery
+
+- monthly Restic backups run via a Kubernetes CronJob
+- backups are encrypted client-side before upload
+- snapshots are stored in a Cloudflare R2 bucket
+- monthly retention policy keeps 12 snapshots
+- `restic-r2-secret` contains repo credentials
