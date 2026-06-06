@@ -35,8 +35,8 @@ spec:
               mountPath: /app/config
       volumes:
         - name: config
-          hostPath:
-            path: /srv/k3s/phoenyx-media/seerr/config
+          persistentVolumeClaim:
+            claimName: seerr-config
 ---
 apiVersion: v1
 kind: Service
