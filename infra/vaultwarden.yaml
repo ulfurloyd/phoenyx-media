@@ -34,7 +34,7 @@ spec:
             - name: DOMAIN
               value: "https://vaultwarden.phoenyxlab.xyz"
             - name: SIGNUPS_ALLOWED
-              value: "true"
+              value: "false"
           volumeMounts:
             - name: config
               mountPath: /data
