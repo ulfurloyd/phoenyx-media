@@ -36,7 +36,7 @@ spec:
             - name: SIGNUPS_ALLOWED
               value: "false"
             - name: ADMIN_TOKEN
-              vauleFrom:
+              valueFrom:
                 secretKeyRef:
                   name: vaultwarden-admin-secret
                   key: ADMIN_TOKEN
