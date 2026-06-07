@@ -35,6 +35,11 @@ spec:
               value: "https://vaultwarden.phoenyxlab.xyz"
             - name: SIGNUPS_ALLOWED
               value: "false"
+            - name: ADMIN_TOKEN
+              vauleFrom:
+                secretKeyRef:
+                  name: vaultwarden-admin-secret
+                  key: ADMIN_TOKEN
           volumeMounts:
             - name: config
               mountPath: /data
