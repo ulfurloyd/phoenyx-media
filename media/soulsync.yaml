@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: soulsync
-          image: boulderbadgedad/soulsync:2.6.8
+          image: boulderbadgedad/soulsync:2.6.9
           ports:
             - containerPort: 8008
           volumeMounts:
