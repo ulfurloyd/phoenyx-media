@@ -50,6 +50,7 @@ new version is available.
 | grafana            | grafana        | monitoring  | 3000  | Dashboards     |
 | node-exporter      | node-exporter  | monitoring  | 9100  | Host metrics   |
 | prometheus         | prometheus     | monitoring  | 9090  | Metrics        |
+| uptime-kuma        | uptime-kuma    | monitoring  | 3001  | Uptime         |
 ```
 ...all accessible at `https://<service>.phoenyxlab.xyz`
 
