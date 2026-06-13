@@ -32,24 +32,24 @@ new version is available.
 ```
 | hostname           | service        | namespace   | port  | description    |
 |--------------------+----------------+-------------+-------+----------------|
-| **homarr**         | homarr         | infra       | 7575  | Dashboard      |
-| **notifiarr**      | notifiarr      | infra       | 5454  | Notifications  |
-| **pi-hole**        | pihole         | infra       | 80    | DNS            |
-| **jellyfin**       | phoenyxfin     | media       | 8096  | Media Server   |
-| **navidrome**      | navidrome      | media       | 4533  | Music Server   |
-| **radarr**         | radarr         | media       | 7878  | Movies         |
-| **seerr**          | seerr          | media       | 5055  | Requests       |
-| **sonarr**         | sonarr         | media       | 8989  | Shows          |
-| **soulsync**       | soulsync       | media       | 8008  | Music Syncing  |
-| **jackett**        | jackett        | downloads   | 9117  | Indexers       |
-| **prowlarr**       | prowlarr       | downloads   | 9696  | Indexers       |
-| **qbittorrent**    | qbittorrent    | downloads   | 8080  | Torrents       |
-| **slskd**          | slskd          | downloads   | 5030  | Soulseek       |
-| **alertmanager**   | alertmanager   | monitoring  | 9093  | Alerts         |
-| **cadvisor**       | cadvisor       | monitoring  | 8080  | Containers     |
-| **grafana**        | grafana        | monitoring  | 3000  | Dashboards     |
-| **node-exporter**  | node-exporter  | monitoring  | 9100  | Host metrics   |
-| **prometheus**     | prometheus     | monitoring  | 9090  | Metrics        |
+| homarr             | homarr         | infra       | 7575  | Dashboard      |
+| notifiarr          | notifiarr      | infra       | 5454  | Notifications  |
+| pi-hole            | pihole         | infra       | 80    | DNS            |
+| jellyfin           | phoenyxfin     | media       | 8096  | Media Server   |
+| navidrome          | navidrome      | media       | 4533  | Music Server   |
+| radarr             | radarr         | media       | 7878  | Movies         |
+| seerr              | seerr          | media       | 5055  | Requests       |
+| sonarr             | sonarr         | media       | 8989  | Shows          |
+| soulsync           | soulsync       | media       | 8008  | Music Syncing  |
+| jackett            | jackett        | downloads   | 9117  | Indexers       |
+| prowlarr           | prowlarr       | downloads   | 9696  | Indexers       |
+| qbittorrent        | qbittorrent    | downloads   | 8080  | Torrents       |
+| slskd              | slskd          | downloads   | 5030  | Soulseek       |
+| alertmanager       | alertmanager   | monitoring  | 9093  | Alerts         |
+| cadvisor           | cadvisor       | monitoring  | 8080  | Containers     |
+| grafana            | grafana        | monitoring  | 3000  | Dashboards     |
+| node-exporter      | node-exporter  | monitoring  | 9100  | Host metrics   |
+| prometheus         | prometheus     | monitoring  | 9090  | Metrics        |
 ```
 ...all accessible at `https://<service>.phoenyxlab.xyz`
 
