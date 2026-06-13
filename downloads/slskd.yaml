@@ -37,20 +37,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /app
-            - name: downloads-completed
-              mountPath: /downloads/completed
-            - name: downloads-incomplete
-              mountPath: /downloads/incomplete
+            - name: downloads
+              mountPath: /downloads
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: slskd-config
-        - name: downloads-completed
+        - name: downloads
           hostPath:
-            path: /downloads/slskd/completed
-        - name: downloads-incomplete
-          hostPath:
-            path: /downloads/slskd/incomplete
+            path: /downloads/slskd
 ---
 apiVersion: v1
 kind: Service
