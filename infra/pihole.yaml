@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: pihole
-          image: pihole/pihole:2026.05.0
+          image: pihole/pihole:2026.06.0
           env:
             - name: TZ
               value: "Asia/Kolkata"
