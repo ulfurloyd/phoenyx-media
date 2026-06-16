@@ -31,6 +31,12 @@ data:
     - Infrastructure:
         - Pi-hole:
             href: https://pihole.phoenyxlab.xyz
+            icon: pihole
+            widget:
+              type: pihole
+              url: http://pihole.infra
+              version: 6
+              password: "{{HOMEPAGE_VAR_PIHOLE_PASSWD}}"
         - Vaultwarden:
             href: https://vaultwarden.phoenyxlab.xyz
         - Notifiarr:
