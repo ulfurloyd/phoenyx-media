@@ -60,7 +60,6 @@ data:
             widget:
               type: grafana
               version: 2
-              alerts: alertmanager
               url: http://grafana.monitoring:3000
               username: wolf
               password: "{{HOMEPAGE_VAR_GRAFANA_PASSWD}}"
