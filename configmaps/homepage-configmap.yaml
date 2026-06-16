@@ -56,8 +56,20 @@ data:
               slug: lab
         - Grafana:
             href: https://grafana.phoenyxlab.xyz
+            icon: grafana
+            widget:
+              type: grafana
+              version: 2
+              alerts: alertmanager
+              url: http://grafana.monitoring:3000
+              username: wolf
+              password: "{{HOMEPAGE_VAR_GRAFANA_PASSWD}}"
         - Prometheus:
             href: https://prometheus.phoenyxlab.xyz
+            icon: prometheus
+            widget:
+              type: prometheus
+              url: http://prometheus.monitoring:9090
         - Alertmanager:
             href: https://alertmanager.phoenyxlab.xyz
     - Media:
