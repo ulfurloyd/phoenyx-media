@@ -59,7 +59,7 @@ data:
             icon: navidrome
             widget:
               type: navidrome
-              url: http:.//navidrome.media:4533
+              url: http://navidrome.media:4533
               user: wolf
               salt: 07df30
               token: fff885aee2b12bd47f961543a5da3f05
