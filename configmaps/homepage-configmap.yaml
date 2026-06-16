@@ -10,13 +10,19 @@ data:
     title: phoenyxlab
     theme: dark
     layout:
-      Infrastructure:
+      Dashboards:
+        tab: Infrastructure
+      Core Infrastructure:
+        tab: Infrastructure
+      Security:
         tab: Infrastructure
       Monitoring:
         tab: Monitoring
       Media:
         tab: Media
-      Media Management:
+      Music:
+        tab: Media
+      Arr Stack:
         tab: Media
       Downloads:
         tab: Media
@@ -93,7 +99,11 @@ data:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - Infrastructure:
+    - Dashboards:
+        - Homarr:
+            href: https://homarr.phoenyxlab.xyz
+            icon: homarr
+    - Core Infrastructure:
         - Pi-hole:
             href: https://pihole.phoenyxlab.xyz
             icon: pi-hole
@@ -102,15 +112,13 @@ data:
               url: http://pihole.infra
               version: 6
               key: "{{HOMEPAGE_VAR_PIHOLE_PASSWD}}"
-        - Vaultwarden:
-            href: https://vaultwarden.phoenyxlab.xyz
-            icon: vaultwarden
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
             icon: notifiarr
-        - Homarr:
-            href: https://homarr.phoenyxlab.xyz
-            icon: homarr
+    - Security:
+        - Vaultwarden:
+            href: https://vaultwarden.phoenyxlab.xyz
+            icon: vaultwarden
     - Monitoring:
         - Uptime Kuma:
             href: https://uptime.phoenyxlab.xyz
@@ -145,6 +153,7 @@ data:
               type: jellyfin
               url: http://phoenyxfin.media:8096
               key: "{{HOMEPAGE_VAR_JELLYFIN_KEY}}"
+    - Music:
         - Navidrome:
             href: https://navidrome.phoenyxlab.xyz
             icon: navidrome
@@ -157,7 +166,7 @@ data:
         - SoulSync:
             href: https://soulsync.phoenyxlab.xyz
             icon: soulsync
-    - Media Management:
+    - Arr Stack:
         - Sonarr:
             href: https://sonarr.phoenyxlab.xyz
             icon: sonarr
