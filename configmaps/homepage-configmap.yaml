@@ -6,7 +6,20 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
-  settings.yaml: ""
+  settings.yaml: |
+    title: phoenyxlab
+    theme: dark
+    layout:
+      Infrastructure:
+        tab: Infrastructure
+      Monitoring:
+        tab: Monitoring
+      Media:
+        tab: Media
+      Media Management:
+        tab: Media
+      Downloads:
+        tab: Media
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -15,20 +28,49 @@ data:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
-
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
-
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
+    - Infrastructure:
+        - Pi-hole:
+            href: https://pihole.phoenyxlab.xyz
+        - Vaultwarden:
+            href: https://vaultwarden.phoenyxlab.xyz
+        - Notifiarr:
+            href: https://notifiarr.phoenyxlab.xyz
+        - Homarr:
+            href: https://homarr.phoenyxlab.xyz
+    - Monitoring:
+        - Uptime Kuma:
+            href: https://uptime.phoenyxlab.xyz
+        - Grafana:
+            href: https://grafana.phoenyxlab.xyz
+        - Prometheus:
+            href: https://prometheus.phoenyxlab.xyz
+        - Alertmanager:
+            href: https://alertmanager.phoenyxlab.xyz
+    - Media:
+        - Jellyfin:
+            href: https://jellyfin.phoenyxlab.xyz
+        - Navidrome:
+            href: https://navidrome.phoenyxlab.xyz
+        - SoulSync:
+            href: https://soulsync.phoenyxlab.xyz
+    - Media Management:
+        - Sonarr:
+            href: https://sonarr.phoenyxlab.xyz
+        - Radarr:
+            href: https://radarr.phoenyxlab.xyz
+        - Lidarr:
+            href: https://lidarr.phoenyxlab.xyz
+        - Prowlarr:
+            href: https://prowlarr.phoenyxlab.xyz
+        - Seerr:
+            href: https://seerr.phoenyxlab.xyz
+    - Downloads:
+        - qBittorrent:
+            href: https://qbittorrent.phoenyxlab.xyz
+        - Jackett:
+            href: https://jackett.phoenyxlab.xyz
+        - slskd:
+            href: https://slskd.phoenyxlab.xyz
   widgets.yaml: |
     - kubernetes:
         cluster:
