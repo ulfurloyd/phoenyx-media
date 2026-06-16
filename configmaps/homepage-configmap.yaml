@@ -48,37 +48,12 @@ data:
       background: #151922 !important;
       border-bottom: 1px solid #4d0b79;
     }
-    #layout-groups,
-    #information-widgets,
-    #tabs,
-    #bookmarks {
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #tabs button {
-      background: transparent !important;
-      border: none !important;
-      color: var(--text-muted) !important;
-      font-family:
-        "Iosevka",
-        "JetBrains Mono",
-        monospace;
-    }
-    #tabs button::before {
-      content: "~/";
-      opacity: 0.5;
-    }
-    #tabs button[data-selected="true"] {
-      color: #812be2 #important;
-    }
     /* Service cards */
     .service-card,
     .card {
       background: #151922 !important;
       border: 1px solid transparent;
       transition: all 0.2s ease;
-      padding: 0.75rem !important;
     }
     .service-card:hover,
     .card:hover {
