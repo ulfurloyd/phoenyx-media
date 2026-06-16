@@ -23,6 +23,9 @@ spec:
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: "homepage.phoenyxlab.xyz,gethomepage.dev"
+          envFrom:
+            - secretRef:
+                name: homepage-apis-secret
           volumeMounts:
             - name: config
               mountPath: /app/config
