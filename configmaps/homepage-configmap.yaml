@@ -49,8 +49,20 @@ data:
     - Media:
         - Jellyfin:
             href: https://jellyfin.phoenyxlab.xyz
+            icon: jellyfin
+            widget:
+              type: jellyfin
+              url: http://phoenyxfin.media:8096
+              key: 891ddf8e84d34eb19cc2e53d7304bee6
         - Navidrome:
             href: https://navidrome.phoenyxlab.xyz
+            icon: navidrome
+            widget:
+              type: navidrome
+              url: http:.//navidrome.media:4533
+              user: wolf
+              salt: 07df30
+              token: fff885aee2b12bd47f961543a5da3f05
         - SoulSync:
             href: https://soulsync.phoenyxlab.xyz
     - Media Management:
