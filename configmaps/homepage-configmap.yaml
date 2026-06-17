@@ -8,6 +8,7 @@ data:
     mode: cluster
   settings.yaml: |
     title: phoenyxlab
+    favicon: /images/phoenyx.png
     theme: dark
     color: slate
     background:
