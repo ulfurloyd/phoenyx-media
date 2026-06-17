@@ -145,6 +145,12 @@ data:
               type: jellyfin
               url: http://phoenyxfin.media:8096
               key: "{{HOMEPAGE_VAR_JELLYFIN_KEY}}"
+              fields:
+                - movies
+                - series
+                - songs
+              enableBlocks: true
+              enableNowPlaying: false
 
     - Music:
         - Navidrome:
