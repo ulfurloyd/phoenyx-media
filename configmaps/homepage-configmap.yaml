@@ -12,20 +12,36 @@ data:
     layout:
       Dashboards:
         tab: Infrastructure
+        style: row
+        columns: 3
       Core Infrastructure:
         tab: Infrastructure
+        style: row
+        columns: 3
       Security:
         tab: Infrastructure
+        style: row
+        columns: 3
       Monitoring:
         tab: Monitoring
+        style: row
+        columns: 3
       Media:
         tab: Media
+        style: row
+        columns: 3
       Music:
         tab: Media
+        style: row
+        columns: 3
       Arr Stack:
         tab: Media
+        style: row
+        columns: 3
       Downloads:
         tab: Media
+        style: row
+        columns: 3
   custom.css: |
     :root {
       --background: #0f1115;
