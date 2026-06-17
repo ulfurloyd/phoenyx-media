@@ -8,12 +8,13 @@ data:
     mode: cluster
   settings.yaml: |
     title: phoenyxlab
+    theme: dark
+    color: slate
     background:
       image: /images/PurpleSkullGuy.png
     cardBlur: xl
 
     statusStyle: dot
-    theme: dark
 
     layout:
       Dashboards:
@@ -64,6 +65,7 @@ data:
         columns: 3
         header: false
         useEqualHeights: true
+
   custom.css: |
     body {
       font-family:
@@ -71,17 +73,21 @@ data:
         "JetBrains Mono",
         monospace !important;
     }
+
   custom.js: ""
+
   bookmarks.yaml: |
     - Developer:
         - Github:
             - abbr: GH
               href: https://github.com/
+
   services.yaml: |
     - Dashboards:
         - Homarr:
             href: https://homarr.phoenyxlab.xyz
             icon: homarr
+
     - Core Infrastructure:
         - Pi-hole:
             href: https://pihole.phoenyxlab.xyz
@@ -91,13 +97,16 @@ data:
               url: http://pihole.infra
               version: 6
               key: "{{HOMEPAGE_VAR_PIHOLE_PASSWD}}"
+
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
             icon: notifiarr
+
     - Security:
         - Vaultwarden:
             href: https://vaultwarden.phoenyxlab.xyz
             icon: vaultwarden
+
     - Monitoring:
         - Uptime Kuma:
             href: https://uptime.phoenyxlab.xyz
@@ -106,6 +115,7 @@ data:
               type: uptimekuma
               url: https://uptime-internal.phoenyxlab.xyz
               slug: lab
+
         - Grafana:
             href: https://grafana.phoenyxlab.xyz
             icon: grafana
@@ -115,15 +125,18 @@ data:
               url: http://grafana.monitoring:3000
               username: wolf
               password: "{{HOMEPAGE_VAR_GRAFANA_PASSWD}}"
+
         - Prometheus:
             href: https://prometheus.phoenyxlab.xyz
             icon: prometheus
             widget:
               type: prometheus
               url: http://prometheus.monitoring:9090
+
         - Alertmanager:
             href: https://alertmanager.phoenyxlab.xyz
             icon: alertmanager
+
     - Media:
         - Jellyfin:
             href: https://jellyfin.phoenyxlab.xyz
@@ -132,6 +145,7 @@ data:
               type: jellyfin
               url: http://phoenyxfin.media:8096
               key: "{{HOMEPAGE_VAR_JELLYFIN_KEY}}"
+
     - Music:
         - Navidrome:
             href: https://navidrome.phoenyxlab.xyz
@@ -142,9 +156,11 @@ data:
               user: wolf
               salt: "{{HOMEPAGE_VAR_NAVIDROME_SALT}}"
               token: "{{HOMEPAGE_VAR_NAVIDROME_TOKEN}}"
+
         - SoulSync:
             href: https://soulsync.phoenyxlab.xyz
             icon: soulsync
+
     - Arr Stack:
         - Sonarr:
             href: https://sonarr.phoenyxlab.xyz
@@ -153,6 +169,7 @@ data:
               type: sonarr
               url: http://sonarr.media:8989
               key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
+
         - Radarr:
             href: https://radarr.phoenyxlab.xyz
             icon: radarr
@@ -160,6 +177,7 @@ data:
               type: radarr
               url: http://radarr.media:7878
               key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
+
         - Lidarr:
             href: https://lidarr.phoenyxlab.xyz
             icon: lidarr
@@ -167,6 +185,7 @@ data:
               type: lidarr
               url: http://lidarr.media:8686
               key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
+
         - Prowlarr:
             href: https://prowlarr.phoenyxlab.xyz
             icon: prowlarr
@@ -174,6 +193,7 @@ data:
               type: prowlarr
               url: http://prowlarr.downloads:9696
               key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
+
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
             icon: seerr
@@ -181,6 +201,7 @@ data:
               type: seerr
               url: http://seerr.media:5055
               key: "{{HOMEPAGE_VAR_SEERR_API_KEY}}"
+
     - Downloads:
         - qBittorrent:
             href: https://qbittorrent.phoenyxlab.xyz
@@ -190,6 +211,7 @@ data:
               url: http://qbittorrent.downloads:8080
               username: wolf
               password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWD}}"
+
         - Jackett:
             href: https://jackett.phoenyxlab.xyz
             icon: jackett
@@ -197,6 +219,7 @@ data:
               type: jackett
               url: http://jackett.downloads:9117
               password: "{{HOMEPAGE_VAR_JACKETT_PASSWD}}"
+
         - slskd:
             href: https://slskd.phoenyxlab.xyz
             icon: slskd
@@ -204,6 +227,7 @@ data:
               type: slskd
               url: http://slskd.downloads:5030
               key: abcd1234
+
   widgets.yaml: |
     - kubernetes:
         cluster:
