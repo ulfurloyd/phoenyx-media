@@ -75,7 +75,7 @@ data:
         useEqualHeights: true
       Quick Links:
         style: row
-        columns: 7
+        columns: 6
         header: false
 
   custom.css: |
