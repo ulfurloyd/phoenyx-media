@@ -45,13 +45,12 @@ data:
   custom.css: |
     :root {
       --background: #0f1115;
-      --card-background: #151922;
-      --card-background-hover: #1b202b;
-      --text: #e8eaed;
-      --text-muted: #8b949e;
+      --card-background: rgba(21, 25, 34, 0.72);
       --primary: #812be2;
       --primary-hover: #a566d1;
-      --border-radius: 10px;
+      --text: #e8eaed;
+      --text-muted: #8b949e;
+      --border-radius: 14px;
     }
     body {
       font-family:
@@ -59,43 +58,38 @@ data:
         "JetBrains Mono",
         monospace !important;
     }
-    /* Header */
-    header {
-      background: #151922 !important;
-      border-bottom: 1px solid #4d0b79;
-    }
-    /* Service cards */
     .service-card,
     .card {
-      background: #151922 !important;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
+      background: rgba(21, 25, 34, 0.72) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(129, 43, 226, 0.15);
+      transition:
+        transform 0.15s ease,
+        border-color 0.15s ease;
     }
     .service-card:hover,
     .card:hover {
       border-color: #812be2;
+      transform: translateY(-2px);
     }
-    /* Group titles */
-    h2,
+    .group-header,
     .group-title {
-      color: #a566d1 !important;
-      font-weight: normal;
+      background: rgba(129, 43, 226, 0.12);
+      border: 1px solid rgba(129, 43, 226, 0.2);
+      border-radius: 12px;
+      padding: 8px 16px;
     }
-    /* Links */
-    a:hover {
-      color: #a566d1 !important;
+    header {
+      background: rgba(15, 17, 21, 0.75) !important;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(129, 43, 226, 0.25);
     }
-    /* Search box */
-    input,
-    .search-container input {
-      background: #151922 !important;
-      border: 1px solid #4d0b79 !important;
-      color: #e8eaed !important;
+    .status-dot {
+      background: #812be2 !important;
     }
-    /* Selected text */
-    ::selection {
-      background: #660ea0;
-      color: #ffffff;
+    .widget {
+      background: transparent !important;
     }
   custom.js: ""
   bookmarks.yaml: |
