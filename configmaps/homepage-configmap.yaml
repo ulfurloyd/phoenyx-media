@@ -97,6 +97,10 @@ data:
               url: http://pihole.infra
               version: 6
               key: "{{HOMEPAGE_VAR_PIHOLE_PASSWD}}"
+              fields:
+                - queries
+                - blocked
+                - gravity
 
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
@@ -115,6 +119,11 @@ data:
               type: uptimekuma
               url: https://uptime-internal.phoenyxlab.xyz
               slug: lab
+              fields:
+                - up
+                - down
+                - uptime
+                - incident
 
         - Grafana:
             href: https://grafana.phoenyxlab.xyz
@@ -125,6 +134,9 @@ data:
               url: http://grafana.monitoring:3000
               username: wolf
               password: "{{HOMEPAGE_VAR_GRAFANA_PASSWD}}"
+              fields:
+                - dashboards
+                - alertstriggered
 
         - Prometheus:
             href: https://prometheus.phoenyxlab.xyz
@@ -171,6 +183,7 @@ data:
         - Sonarr:
             href: https://sonarr.phoenyxlab.xyz
             icon: sonarr
+            enableQueue: true
             widget:
               type: sonarr
               url: http://sonarr.media:8989
@@ -179,6 +192,7 @@ data:
         - Radarr:
             href: https://radarr.phoenyxlab.xyz
             icon: radarr
+            enableQueue: true
             widget:
               type: radarr
               url: http://radarr.media:7878
@@ -217,6 +231,9 @@ data:
               url: http://qbittorrent.downloads:8080
               username: wolf
               password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWD}}"
+              fields:
+                - download
+                - seed
 
         - Jackett:
             href: https://jackett.phoenyxlab.xyz
@@ -233,6 +250,9 @@ data:
               type: slskd
               url: http://slskd.downloads:5030
               key: abcd1234
+              fields:
+                - slskStatus
+                - downloads
 
   widgets.yaml: |
     - kubernetes:
