@@ -8,78 +8,68 @@ data:
     mode: cluster
   settings.yaml: |
     title: phoenyxlab
+    background:
+      image: /images/PurpleSkullGuy.png
+    cardBlur: xl
+
+    statusStyle: dot
     theme: dark
+
     layout:
       Dashboards:
         tab: Infrastructure
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Core Infrastructure:
         tab: Infrastructure
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Security:
         tab: Infrastructure
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Monitoring:
-        tab: Monitoring
+        tab: Observability
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Media:
         tab: Media
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Music:
         tab: Media
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Arr Stack:
         tab: Media
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
       Downloads:
         tab: Media
+        style: row
+        columns: 3
+        header: false
+        useEqualHeights: true
   custom.css: |
-    :root {
-      --background: #0f1115;
-      --card-background: #151922;
-      --card-background-hover: #1b202b;
-      --text: #e8eaed;
-      --text-muted: #8b949e;
-      --primary: #812be2;
-      --primary-hover: #a566d1;
-      --border-radius: 10px;
-    }
     body {
       font-family:
         "Iosevka",
         "JetBrains Mono",
         monospace !important;
-    }
-    /* Header */
-    header {
-      background: #151922 !important;
-      border-bottom: 1px solid #4d0b79;
-    }
-    /* Service cards */
-    .service-card,
-    .card {
-      background: #151922 !important;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-    }
-    .service-card:hover,
-    .card:hover {
-      border-color: #812be2;
-    }
-    /* Group titles */
-    h2,
-    .group-title {
-      color: #a566d1 !important;
-      font-weight: normal;
-    }
-    /* Links */
-    a:hover {
-      color: #a566d1 !important;
-    }
-    /* Search box */
-    input,
-    .search-container input {
-      background: #151922 !important;
-      border: 1px solid #4d0b79 !important;
-      color: #e8eaed !important;
-    }
-    /* Selected text */
-    ::selection {
-      background: #660ea0;
-      color: #ffffff;
     }
   custom.js: ""
   bookmarks.yaml: |
