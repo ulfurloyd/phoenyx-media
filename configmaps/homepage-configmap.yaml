@@ -10,7 +10,7 @@ data:
     title: phoenyxlab
     background:
       image: /images/PurpleSkullGuy.png
-      cardBlur: xl
+    cardBlur: xl
     statusStyle: dot
     theme: dark
     layout:
