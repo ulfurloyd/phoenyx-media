@@ -18,13 +18,6 @@ data:
     statusStyle: dot
 
     layout:
-      Dashboards:
-        tab: Infrastructure
-        style: row
-        columns: 3
-        header: false
-        headerStyle: boxed
-        useEqualHeights: true
       Core Infrastructure:
         tab: Infrastructure
         style: row
@@ -85,11 +78,6 @@ data:
   bookmarks.yaml: ""
 
   services.yaml: |
-    - Dashboards:
-        - Homarr:
-            href: https://homarr.phoenyxlab.xyz
-            icon: homarr
-
     - Core Infrastructure:
         - Pi-hole:
             href: https://pihole.phoenyxlab.xyz
