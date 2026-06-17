@@ -8,6 +8,8 @@ data:
     mode: cluster
   settings.yaml: |
     title: phoenyxlab
+    bacakground:
+      image: /images/PurpleSkullGuy.png
     theme: dark
     layout:
       Dashboards:
