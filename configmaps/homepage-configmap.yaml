@@ -73,7 +73,7 @@ data:
         header: false
         headerStyle: boxed
         useEqualHeights: true
-      QuickLinks:
+      Quick Links:
         style: row
         header: false
 
@@ -264,6 +264,25 @@ data:
               fields:
                 - slskStatus
                 - downloads
+
+    - Quick Links:
+        - Homepage:
+            href: https://gethomepage.dev/
+
+        - Reddit:
+            href: https://www.reddit.com/
+
+        - YouTube:
+            href: https://youtube.com/
+
+        - ProtonMail:
+            href: https://mail.proton.me/
+
+        - GitHub:
+            href: https://github.com/
+
+        - Amazon:
+            href: https://www.amazon.in/
 
   widgets.yaml: |
     - kubernetes:
