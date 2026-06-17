@@ -178,7 +178,7 @@ data:
 
         - SoulSync:
             href: https://soulsync.phoenyxlab.xyz
-            icon: soulsync.svg
+            icon: /images/soulsync.png
 
     - Arr Stack:
         - Sonarr:
