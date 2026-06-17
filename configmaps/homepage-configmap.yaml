@@ -88,11 +88,7 @@ data:
 
   custom.js: ""
 
-  bookmarks.yaml: |
-    - Developer:
-        - Github:
-            - abbr: GH
-              href: https://github.com/
+  bookmarks.yaml: ""
 
   services.yaml: |
     - Dashboards:
@@ -189,7 +185,7 @@ data:
 
         - SoulSync:
             href: https://soulsync.phoenyxlab.xyz
-            icon: soulsync
+            icon: soulsync.svg
 
     - Arr Stack:
         - Sonarr:
@@ -268,21 +264,27 @@ data:
 
     - Quick Links:
         - Homepage:
+            icon: homepage
             href: https://gethomepage.dev/
 
         - Reddit:
+            icon: reddit
             href: https://www.reddit.com/
 
         - YouTube:
+            icon: youtube
             href: https://youtube.com/
 
         - ProtonMail:
+            icon: proton-mail
             href: https://mail.proton.me/
 
         - GitHub:
+            icon: github
             href: https://github.com/
 
         - Amazon:
+            icon: amazon
             href: https://www.amazon.in/
 
   widgets.yaml: |
