@@ -11,8 +11,10 @@ data:
     background:
       image: /images/PurpleSkullGuy.png
     cardBlur: xl
+
     statusStyle: dot
     theme: dark
+
     layout:
       Dashboards:
         tab: Infrastructure
@@ -63,53 +65,11 @@ data:
         header: false
         useEqualHeights: true
   custom.css: |
-    :root {
-      --background: #0f1115;
-      --card-background: rgba(21, 25, 34, 0.72);
-      --primary: #812be2;
-      --primary-hover: #a566d1;
-      --text: #e8eaed;
-      --text-muted: #8b949e;
-      --border-radius: 14px;
-    }
     body {
       font-family:
         "Iosevka",
         "JetBrains Mono",
         monospace !important;
-    }
-    .service-card,
-    .card {
-      background: rgba(15, 17, 21, 0.88) !important;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(129, 43, 226, 0.15);
-      transition:
-        transform 0.15s ease,
-        border-color 0.15s ease;
-    }
-    .service-card:hover,
-    .card:hover {
-      border-color: #812be2;
-      transform: translateY(-2px);
-    }
-    .group-header,
-    .group-title {
-      background: rgba(129, 43, 226, 0.12);
-      border: 1px solid rgba(129, 43, 226, 0.2);
-      border-radius: 12px;
-      padding: 8px 16px;
-    }
-    header {
-      background: rgba(15, 17, 21, 0.75) !important;
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(129, 43, 226, 0.25);
-    }
-    .status-dot {
-      background: #812be2 !important;
-    }
-    .widget {
-      background: transparent !important;
     }
   custom.js: ""
   bookmarks.yaml: |
