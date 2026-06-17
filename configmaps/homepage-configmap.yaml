@@ -53,13 +53,6 @@ data:
         header: false
         headerStyle: boxed
         useEqualHeights: true
-      Music:
-        tab: Media
-        style: row
-        columns: 3
-        header: false
-        headerStyle: boxed
-        useEqualHeights: true
       Arr Stack:
         tab: Media
         style: row
@@ -173,7 +166,6 @@ data:
               enableBlocks: true
               enableNowPlaying: false
 
-    - Music:
         - Navidrome:
             href: https://navidrome.phoenyxlab.xyz
             icon: navidrome
