@@ -10,40 +10,58 @@ data:
     title: phoenyxlab
     background:
       image: /images/PurpleSkullGuy.png
+      cardBlur: xl
+    statusStyle: dot
     theme: dark
     layout:
       Dashboards:
         tab: Infrastructure
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Core Infrastructure:
         tab: Infrastructure
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Security:
         tab: Infrastructure
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Monitoring:
-        tab: Monitoring
+        tab: Observability
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Media:
         tab: Media
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Music:
         tab: Media
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Arr Stack:
         tab: Media
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
       Downloads:
         tab: Media
         style: row
         columns: 3
+        header: false
+        useEqualHeights: true
   custom.css: |
     :root {
       --background: #0f1115;
@@ -62,7 +80,7 @@ data:
     }
     .service-card,
     .card {
-      background: rgba(21, 25, 34, 0.72) !important;
+      background: rgba(15, 17, 21, 0.88) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(129, 43, 226, 0.15);
