@@ -22,49 +22,60 @@ data:
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Core Infrastructure:
         tab: Infrastructure
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Security:
         tab: Infrastructure
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Monitoring:
         tab: Observability
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Media:
         tab: Media
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Music:
         tab: Media
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Arr Stack:
         tab: Media
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
       Downloads:
         tab: Media
         style: row
         columns: 3
         header: false
+        headerStyle: boxed
         useEqualHeights: true
+      QuickLinks:
+        style: row
+        header: false
 
   custom.css: |
     body {
