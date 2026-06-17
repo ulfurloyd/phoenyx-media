@@ -267,8 +267,17 @@ data:
           cpu: true
           memory: true
           showLabel: true
+
     - search:
         provider: duckduckgo
         target: _blank
+
+    - datetime:
+        text_size: x1
+        format:
+          timeStyle: short
+          hourCycle: h23
+          hour12: false
+
   docker.yaml: ""
   proxmox.yaml: ""
