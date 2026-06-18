@@ -191,6 +191,8 @@ data:
             href: https://sonarr.phoenyxlab.xyz
             icon: sonarr
             enableQueue: true
+            namespace: media
+            app: sonarr
             widget:
               type: sonarr
               url: http://sonarr.media:8989
@@ -200,6 +202,8 @@ data:
             href: https://radarr.phoenyxlab.xyz
             icon: radarr
             enableQueue: true
+            namespace: media
+            app: radarr
             widget:
               type: radarr
               url: http://radarr.media:7878
@@ -208,6 +212,8 @@ data:
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
             icon: seerr
+            namespace: media
+            app: seerr
             widget:
               type: seerr
               url: http://seerr.media:5055

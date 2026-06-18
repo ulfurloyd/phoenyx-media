@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: seerr
   namespace: media
+  labels:
+    app: seerr
+    app.kubernetes.io/name: seerr
+    app.kubernetes.io/instance: seerr
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: seerr
+        app.kubernetes.io/name: seerr
+        app.kubernetes.io/instance: seerr
     spec:
       containers:
         - name: seerr

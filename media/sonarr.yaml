@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: sonarr
   namespace: media
+  labels:
+    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: sonarr
+        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/instance: sonarr
     spec:
       containers:
         - name: sonarr
