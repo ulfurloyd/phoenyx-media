@@ -20,7 +20,6 @@ data:
 
     layout:
       Glances:
-        tab: Glances
         style: row
         columns: 2
         header: false
@@ -91,11 +90,13 @@ data:
             widget:
               type: glances
               url: http://glances.monitoring:61208
+              version: 4
               metric: cpu
         - Memory:
             widget:
               type: glances
               url: http://glances.monitoring:61208
+              version: 4
               metric: memory
     - Core Infrastructure:
         - Pi-hole:
