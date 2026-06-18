@@ -208,22 +208,6 @@ data:
                 - download
                 - seed
 
-        - Prowlarr:
-            href: https://prowlarr.phoenyxlab.xyz
-            icon: prowlarr
-            widget:
-              type: prowlarr
-              url: http://prowlarr.downloads:9696
-              key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
-
-        - Jackett:
-            href: https://jackett.phoenyxlab.xyz
-            icon: jackett
-            widget:
-              type: jackett
-              url: http://jackett.downloads:9117
-              password: "{{HOMEPAGE_VAR_JACKETT_PASSWD}}"
-
         - slskd:
             href: https://slskd.phoenyxlab.xyz
             icon: slskd
@@ -234,6 +218,14 @@ data:
               fields:
                 - slskStatus
                 - downloads
+
+        - Jackett:
+            href: https://jackett.phoenyxlab.xyz
+            icon: jackett
+            widget:
+              type: jackett
+              url: http://jackett.downloads:9117
+              password: "{{HOMEPAGE_VAR_JACKETT_PASSWD}}"
 
     - Quick Links:
         - Homepage:
