@@ -87,6 +87,7 @@ data:
   services.yaml: |
     - Glances:
         - CPU:
+            href: https://glances.phoenyxlab.xyz
             widget:
               type: glances
               url: http://glances.monitoring:61208
@@ -95,6 +96,7 @@ data:
               metric: cpu
 
         - Memory:
+            href: https://glances.phoenyxlab.xyz
             widget:
               type: glances
               url: http://glances.monitoring:61208
@@ -103,6 +105,7 @@ data:
               metric: memory
 
         - Disk Usage:
+            href: https://glances.phoenyxlab.xyz
             widget:
               type: glances
               url: http://glances.monitoring:61208
