@@ -15,6 +15,7 @@ data:
       image: /images/PurpleSkullGuy.png
     cardBlur: xl
 
+    showStats: true
     statusStyle: dot
 
     layout:
