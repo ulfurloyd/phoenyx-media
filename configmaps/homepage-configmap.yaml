@@ -19,6 +19,13 @@ data:
     statusStyle: dot
 
     layout:
+      Glances:
+        tab: Glances
+        style: row
+        columns: 2
+        header: false
+        headerStyle: boxed
+        useEqualHeights: true
       Quick Links:
         style: row
         columns: 6
@@ -79,6 +86,17 @@ data:
   bookmarks.yaml: ""
 
   services.yaml: |
+    - Glances:
+        - CPU:
+            widget:
+              type: glances
+              url: http://glances.monitoring:61208
+              metric: cpu
+        - Memory:
+            widget:
+              type: glances
+              url: http://glances.monitoring:61208
+              metric: memory
     - Core Infrastructure:
         - Pi-hole:
             href: https://pihole.phoenyxlab.xyz
