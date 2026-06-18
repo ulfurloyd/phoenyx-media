@@ -124,6 +124,8 @@ data:
         - Grafana:
             href: https://grafana.phoenyxlab.xyz
             icon: grafana
+            namespace: monitoring
+            app: grafana
             widget:
               type: grafana
               version: 2
