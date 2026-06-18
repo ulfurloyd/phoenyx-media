@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: qbittorrent
   namespace: downloads
+  labels:
+    app: qbittorrent
+    app.kubernetes.io/name: qbittorrent
+    app.kubernetes.io/instance: qbittorrent
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: qbittorrent
+        app.kubernetes.io/name: qbittorrent
+        app.kubernetes.io/instance: qbittorrent
     spec:
       containers:
         - name: qbittorrent

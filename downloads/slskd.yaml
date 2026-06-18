@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: slskd
   namespace: downloads
+  labels:
+    app: slskd
+    app.kubernetes.io/name: slskd
+    app.kubernetes.io/instance: slskd
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: slskd
+        app.kubernetes.io/name: slskd
+        app.kubernetes.io/instance: slskd
     spec:
       containers:
         - name: slskd

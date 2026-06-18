@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: jackett
   namespace: downloads
+  labels:
+    app: jackett
+    app.kubernetes.io/name: jackett
+    app.kubernetes.io/instance: jackett
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: jackett
+        app.kubernetes.io/name: jackett
+        app.kubernetes.io/instance: jackett
     spec:
       containers:
         - name: jackett

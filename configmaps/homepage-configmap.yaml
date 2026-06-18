@@ -223,6 +223,8 @@ data:
         - qBittorrent:
             href: https://qbittorrent.phoenyxlab.xyz
             icon: qbittorrent
+            namespace: downloads
+            app: qbittorrent
             widget:
               type: qbittorrent
               url: http://qbittorrent.downloads:8080
@@ -235,6 +237,8 @@ data:
         - slskd:
             href: https://slskd.phoenyxlab.xyz
             icon: slskd
+            namespace: downloads
+            app: slskd
             widget:
               type: slskd
               url: http://slskd.downloads:5030
@@ -246,6 +250,8 @@ data:
         - Jackett:
             href: https://jackett.phoenyxlab.xyz
             icon: jackett
+            namespace: downloads
+            app: jackett
             widget:
               type: jackett
               url: http://jackett.downloads:9117
