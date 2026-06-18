@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: navidrome
   namespace: media
+  labels:
+    app: navidrome
+    app.kubernetes.io/name: navidrome
+    app.kubernetes.io/instance: navidrome
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: navidrome
+        app.kubernetes.io/name: navidrome
+        app.kubernetes.io/instance: navidrome
     spec:
       containers:
         - name: navidrome

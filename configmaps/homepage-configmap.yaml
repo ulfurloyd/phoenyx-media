@@ -155,6 +155,8 @@ data:
         - Jellyfin:
             href: https://jellyfin.phoenyxlab.xyz
             icon: jellyfin
+            namespace: media
+            app: jellyfin
             widget:
               type: jellyfin
               url: http://phoenyxfin.media:8096
@@ -169,6 +171,8 @@ data:
         - Navidrome:
             href: https://navidrome.phoenyxlab.xyz
             icon: navidrome
+            namespace: media
+            app: navidrome
             widget:
               type: navidrome
               url: http://navidrome.media:4533
@@ -179,6 +183,8 @@ data:
         - SoulSync:
             href: https://soulsync.phoenyxlab.xyz
             icon: /images/soulsync.png
+            namespace: media
+            app: soulsync
 
     - Arr Stack:
         - Sonarr:

@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: jellyfin
   namespace: media
+  labels:
+    app: jellyfin
+    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/instance: jellyfin
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: jellyfin
+        app.kubernetes.io/name: jellyfin
+        app.kubernetes.io/instance: jellyfin
     spec:
       containers:
         - name: jellyfin
