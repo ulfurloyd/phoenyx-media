@@ -66,7 +66,7 @@ spec:
             path: /etc/os-release
             type: File
         - name: config
-          configMap:
+          persistentVolumeClaim
             name: glances-config
         - name: tmp
           emptyDir: {}
