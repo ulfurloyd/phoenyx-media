@@ -37,7 +37,7 @@ new version is available.
 | homepage           | homepage       | infra       | 3000  | Dashboard      |
 | notifiarr          | notifiarr      | infra       | 5454  | Notifications  |
 | pi-hole            | pihole         | infra       | 80    | DNS            |
-| vaultwarden        | vaultwarden    | infra       | 80    | passwords      |
+| vaultwarden        | vaultwarden    | infra       | 80    | Passwords      |
 | jellyfin           | phoenyxfin     | media       | 8096  | Media Server   |
 | navidrome          | navidrome      | media       | 4533  | Music Server   |
 | radarr             | radarr         | media       | 7878  | Movies         |
