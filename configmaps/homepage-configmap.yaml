@@ -27,7 +27,7 @@ data:
         useEqualHeights: true
       Quick Links:
         style: row
-        columns: 6
+        columns: 8
         header: false
       Core Infrastructure:
         tab: Infrastructure
@@ -287,6 +287,14 @@ data:
               password: "{{HOMEPAGE_VAR_JACKETT_PASSWD}}"
 
     - Quick Links:
+        - PhoenyxLab:
+            icon: /images/phoenyx.png
+            href: https://github.com/ulfurloyd/phoenyxlab
+
+        - Phoenyx:
+            icon: /images/phoenyx.png
+            href: https://github.com/ulfurloyd/phoenyx
+
         - Homepage:
             icon: homepage
             href: https://gethomepage.dev/
