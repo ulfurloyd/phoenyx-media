@@ -103,5 +103,5 @@ spec:
             backend:
               service:
                 name: glances
-              port:
-                number: 61208
+                port:
+                  number: 61208
