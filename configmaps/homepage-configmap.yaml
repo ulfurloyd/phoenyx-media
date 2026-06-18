@@ -187,22 +187,6 @@ data:
               url: http://radarr.media:7878
               key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
 
-        - Lidarr:
-            href: https://lidarr.phoenyxlab.xyz
-            icon: lidarr
-            widget:
-              type: lidarr
-              url: http://lidarr.media:8686
-              key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
-
-        - Prowlarr:
-            href: https://prowlarr.phoenyxlab.xyz
-            icon: prowlarr
-            widget:
-              type: prowlarr
-              url: http://prowlarr.downloads:9696
-              key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
-
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
             icon: seerr
@@ -223,6 +207,14 @@ data:
               fields:
                 - download
                 - seed
+
+        - Prowlarr:
+            href: https://prowlarr.phoenyxlab.xyz
+            icon: prowlarr
+            widget:
+              type: prowlarr
+              url: http://prowlarr.downloads:9696
+              key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
 
         - Jackett:
             href: https://jackett.phoenyxlab.xyz
