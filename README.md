@@ -30,11 +30,14 @@ new version is available.
 ## network
 
 ```
++--------------------+----------------+-------------+-------+----------------+
 | hostname           | service        | namespace   | port  | description    |
 |--------------------+----------------+-------------+-------+----------------|
 | homarr             | homarr         | infra       | 7575  | Dashboard      |
+| homepage           | homepage       | infra       | 3000  | Dashboard      |
 | notifiarr          | notifiarr      | infra       | 5454  | Notifications  |
 | pi-hole            | pihole         | infra       | 80    | DNS            |
+| vaultwarden        | vaultwarden    | infra       | 80    | passwords      |
 | jellyfin           | phoenyxfin     | media       | 8096  | Media Server   |
 | navidrome          | navidrome      | media       | 4533  | Music Server   |
 | radarr             | radarr         | media       | 7878  | Movies         |
@@ -47,10 +50,11 @@ new version is available.
 | slskd              | slskd          | downloads   | 5030  | Soulseek       |
 | alertmanager       | alertmanager   | monitoring  | 9093  | Alerts         |
 | cadvisor           | cadvisor       | monitoring  | 8080  | Containers     |
+| glances            | glances        | monitoring  | 61208 | System Stats   |
 | grafana            | grafana        | monitoring  | 3000  | Dashboards     |
 | node-exporter      | node-exporter  | monitoring  | 9100  | Host metrics   |
 | prometheus         | prometheus     | monitoring  | 9090  | Metrics        |
-| uptime-kuma        | uptime-kuma    | monitoring  | 3001  | Uptime         |
++--------------------+----------------+-------------+-------+----------------+
 ```
 ...all accessible at `https://<service>.phoenyxlab.xyz`
 
@@ -140,6 +144,13 @@ the arr stack automates the full pipeline:
 - **Seerr integration** for user requests
 - **Homarr dashboard** for quick access to all services
 
+## uptime monitoring
+
+- **uptime-kuma** is hosted externally via a Oracle Cloud Infrastructure
+(OCI) virtual machine.
+- it's accessible at `uptime.phoenyxlab.xyz`, secured behind 2FA.
+- the VM is configured as a tailscale node so cluster services can
+access it via a private, internal connection.
 
 ## bootstrap
 
