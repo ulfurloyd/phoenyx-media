@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: prometheus
   namespace: monitoring
+  labels:
+    app: prometheus
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/instance: prometheus
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: prometheus
+        app.kubernetes.io/name: prometheus
+        app.kubernetes.io/instance: prometheus
     spec:
       securityContext:
         runAsUser: 1000

@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: alertmanager
   namespace: monitoring
+  labels:
+    app: alertmanager
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/instance: alertmanager
 spec:
   replicas: 1
   selector:
@@ -12,6 +16,8 @@ spec:
     metadata:
       labels:
         app: alertmanager
+        app.kubernetes.io/name: alertmanager
+        app.kubernetes.io/instance: alertmanager
     spec:
       containers:
         - name: alertmanager
