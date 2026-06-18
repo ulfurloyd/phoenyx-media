@@ -104,6 +104,8 @@ data:
         - Vaultwarden:
             href: https://vaultwarden.phoenyxlab.xyz
             icon: vaultwarden
+            namespace: infra
+            app: vaultwarden
 
     - Monitoring:
         - Uptime Kuma:
