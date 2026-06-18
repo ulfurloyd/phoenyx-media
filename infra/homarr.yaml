@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: homarr
   namespace: infra
+  labels:
+    app: homarr
+    app.kubernetes.io/name: homarr
+    app.kubernetes.io/instance: homarr
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: homarr
+        app.kubernetes.io/name: homarr
+        app.kubernetes.io/instance: homarr
     spec:
       containers:
         - name: homarr

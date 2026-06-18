@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: homepage
   namespace: infra
+  labels:
+    app: homepage
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/instance: homepage
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: homepage
+        app.kubernetes.io/name: homepage
+        app.kubernetes.io/instance: homepage
     spec:
       serviceAccountName: homepage
       automountServiceAccountToken: true
