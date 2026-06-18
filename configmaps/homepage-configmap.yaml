@@ -97,6 +97,8 @@ data:
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
             icon: notifiarr
+            namespace: infra
+            app: notifiarr
 
     - Security:
         - Vaultwarden:

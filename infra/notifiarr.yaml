@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: notifiarr
   namespace: infra
+  labels:
+    app: notifiarr
+    app.kubernetes.io/name: notifiarr
+    app.kubernetes.io/instance: notifiarr
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: notifiarr
+        app.kubernetes.io/name: notifiarr
+        app.kubernetes.io/instance: notifiarr
     spec:
       containers:
       - name: notifiarr
