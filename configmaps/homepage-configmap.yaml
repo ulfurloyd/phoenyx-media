@@ -21,7 +21,7 @@ data:
     layout:
       Glances:
         style: row
-        columns: 3
+        columns: 2
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -93,6 +93,7 @@ data:
               refreshInterval: 10000
               version: 4
               metric: cpu
+
         - Memory:
             widget:
               type: glances
@@ -100,6 +101,14 @@ data:
               refreshInterval: 10000
               version: 4
               metric: memory
+
+        - Overview:
+            widget:
+              type: glances
+              url: http://glances.monitoring:61208
+              refreshInterval: 10000
+              version: 4
+
         - Disk Usage:
             widget:
               type: glances
@@ -107,6 +116,7 @@ data:
               refreshInterval: 10000
               version: 4
               metric: fs:/rootfs
+
     - Core Infrastructure:
         - Pi-hole:
             href: https://pihole.phoenyxlab.xyz
