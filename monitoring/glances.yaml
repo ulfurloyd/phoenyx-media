@@ -1,0 +1,107 @@
+# https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: glances-config
+  namespace: monitoring
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glances
+  namespace: monitoring
+  labels:
+    app: glances
+    app.kubernetes.io/name: glances
+    app.kubernetes.io/instance: glances
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: glances
+  template:
+    metadata:
+      labels:
+        app: glances
+        app.kubernetes.io/name: glances
+        app.kubernetes.io/instance: glances
+    spec:
+      hostPID: true
+      containers:
+        - name: glances
+          image: nicolargo/glances:4.5.5
+          env:
+            - name: GLANCES_OPT
+              value: "-C /glances/conf/glances.conf -w --enable-plugin smart"
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: PYTHONCACHEPREFIX
+              value: "/tmp/py_caches"
+          ports:
+            - containerPort: 61208
+          volumeMounts:
+            - name: rootfs
+              mountPath: /rootfs
+              readOnly: true
+            - name: config
+              mountPath: /glances/conf
+            - name: os-release
+              mountPath: /etc/os-release
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: rootfs
+          hostPath:
+            path: /
+            type: Directory
+        - name: os-release
+          hostPath:
+            path: /etc/os-release
+            type: File
+        - name: config
+          configMap:
+            name: glances-config
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: glances
+  namespace: monitoring
+spec:
+  selector:
+    app: glances
+  ports:
+    - port: 61208
+      targetPort: 61208
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: glances
+  namespace: monitoring
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - glances.phoenyxlab.xyz
+  rules:
+    - host: glances.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: glances
+              port:
+                number: 61208
