@@ -21,7 +21,7 @@ data:
     layout:
       Glances:
         style: row
-        columns: 2
+        columns: 3
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -101,13 +101,6 @@ data:
               refreshInterval: 10000
               version: 4
               metric: memory
-
-        - Overview:
-            widget:
-              type: glances
-              url: http://glances.monitoring:61208
-              refreshInterval: 10000
-              version: 4
 
         - Disk Usage:
             widget:
