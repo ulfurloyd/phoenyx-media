@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: pihole
   namespace: infra
+  labels:
+    app: pihole
+    app.kubernetes.io/name: pihole
+    app.kubernetes.io/instance: pihole
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: pihole
+        app.kubernetes.io/name: pihole
+        app.kubernetes.io/instance: pihole
     spec:
       containers:
         - name: pihole
