@@ -38,7 +38,7 @@ spec:
           image: nicolargo/glances:4.5.5
           env:
             - name: GLANCES_OPT
-              value: "-C /glances/conf/glances.conf -w --enable-plugin smart"
+              value: "-w --enable-plugin smart"
             - name: TZ
               value: "Asia/Kolkata"
             - name: PYTHONCACHEPREFIX
@@ -66,8 +66,8 @@ spec:
             path: /etc/os-release
             type: File
         - name: config
-          persistentVolumeClaim
-            name: glances-config
+          persistentVolumeClaim:
+            claimName: glances-config
         - name: tmp
           emptyDir: {}
 ---
