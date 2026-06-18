@@ -90,18 +90,21 @@ data:
             widget:
               type: glances
               url: http://glances.monitoring:61208
+              refreshInterval: 10000
               version: 4
               metric: cpu
         - Memory:
             widget:
               type: glances
               url: http://glances.monitoring:61208
+              refreshInterval: 10000
               version: 4
               metric: memory
         - Disk Usage:
             widget:
               type: glances
               url: http://glances.monitoring:61208
+              refreshInterval: 10000
               version: 4
               metric: fs:/rootfs
     - Core Infrastructure:
