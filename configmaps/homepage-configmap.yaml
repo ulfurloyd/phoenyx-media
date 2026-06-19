@@ -96,7 +96,7 @@ data:
         - Nyx:
             widget:
               type: iframe
-              src: https://grafana.phopenyxlab.xyz/public-dashboards/8dfa5c50505a4cab8c577cb8f9865540
+              src: https://grafana.phoenyxlab.xyz/public-dashboards/8dfa5c50505a4cab8c577cb8f9865540
 
     - Glances:
         - CPU:
