@@ -19,6 +19,13 @@ data:
     statusStyle: dot
 
     layout:
+      Metrics:
+        tab: Metrics
+        style: row
+        columns: 2
+        header: false
+        headerStyle: boxed
+        useEqualHeights: true
       Glances:
         style: row
         columns: 3
@@ -85,6 +92,12 @@ data:
   bookmarks.yaml: ""
 
   services.yaml: |
+    - Metrics:
+        - Nyx:
+            widget:
+              type: iframe
+              url: https://grafana.phopenyxlab.xyz/public-dashboards/8dfa5c50505a4cab8c577cb8f9865540
+
     - Glances:
         - CPU:
             href: https://glances.phoenyxlab.xyz
