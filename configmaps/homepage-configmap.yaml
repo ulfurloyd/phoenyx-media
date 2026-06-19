@@ -22,10 +22,7 @@ data:
       Metrics:
         tab: Metrics
         style: row
-        columns: 2
         header: false
-        headerStyle: boxed
-        useEqualHeights: true
       Glances:
         style: row
         columns: 3
