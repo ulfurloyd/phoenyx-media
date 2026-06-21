@@ -1,0 +1,138 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pinepods-data
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pinepods
+  namespace: media
+  labels:
+    app: pinepods
+    app.kubernetes.io/name: pinepods
+    app.kubernetes.io/instance: pinepods
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pinepods
+  template:
+    metadata:
+      labels:
+        app: pinepods
+        app.kubernetes.io/name: pinepods
+        app.kubernetes.io/instance: pinepods
+    spec:
+      containers:
+        - name: pinepods
+          image: madeofpendletonwool/pinepods:0.8.2
+          ports:
+            - containerPort: 8040
+          env:
+            - name: SEARCH_API_URL
+              value: "https://search.pinepods.online/api/search"
+            - name: PEOPLE_API_URL
+              value: "https:/people.pinepods.online"
+            - name: HOSTNAME
+              value: "https://pinepods.phoenyxlab.xyz"
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: pinepods-secret
+                  key: ADMIN_USERNAME
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pinepods-secret
+                  key: ADMIN_PASSWORD
+            - name: FULLNAME
+              valueFrom:
+                secretKeyRef:
+                  name: pinepods-secret
+                  key: ADMIN_FULLNAME
+            - name: EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: pinepods-secret
+                  key: ADMIN_EMAIL
+            - name: DB_TYPE
+              value: postgresql
+            - name: DB_HOST
+              value: pinepods-postgres
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pinepods-secret
+                  key: POSTGRES_PASSWORD
+            - name: DB_NAME
+              value: pinepods_database
+            - name: VALKEY_HOST
+              value: pinepods-valkey
+            - name: VALKEY_PORT
+              value: "6379"
+            - name: DEBUG_MODE
+              value: "false"
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: data
+              mountPath: /opt/pinepods/downloads
+              subPath: downloads
+            - name: data
+              mountPath: /opt/pinepods/backups
+              subPath: backups
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pinepods-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pinepods
+  namespace: media
+spec:
+  selector:
+    app: pinepods
+  ports:
+    - port: 8040
+      targetPort: 8040
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pinepods
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - pinepods.phoenyxlab.xyz
+  rules:
+    - host: pinepods.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pinepods
+                port:
+                  number: 8040
