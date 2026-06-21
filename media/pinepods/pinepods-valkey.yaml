@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pinepods-valkey
+  namespace: media
+  labels:
+    app: pinepods-valkey
+    app.kubernetes.io/name: pinepods-valkey
+    app.kubernetes.io/instance: pinepods-valkey
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pinepods-valkey
+  template:
+    metadata:
+      labels:
+        app: pinepods-valkey
+        app.kubernetes.io/name: pinepods-valkey
+        app.kubernetes.io/instance: pinepods-valkey
+    spec:
+      containers:
+        - name: valkey
+          image: valkey/valkey:8-alpine
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pinepods-valkey
+  namespace: media
+spec:
+  selector:
+    app: pinepods-valkey
+  ports:
+    - port: 6379
+      targetPort: 6379
+  type: ClusterIP
