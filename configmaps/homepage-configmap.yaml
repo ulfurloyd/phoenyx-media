@@ -93,7 +93,7 @@ data:
   services.yaml: |
     - Dash:
       - FreshRSS:
-          href: freshrss.phoenyxlab.xyz
+          href: https://freshrss.phoenyxlab.xyz
           widget:
             type: freshrss
             url: http://freshrss.media:80
