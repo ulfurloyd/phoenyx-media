@@ -35,7 +35,6 @@ data:
         columns: 2
         header: false
         headerStyle: boxed
-        useEqualHeights: true
       Core Infrastructure:
         tab: Infrastructure
         style: row
