@@ -29,6 +29,12 @@ data:
         style: row
         columns: 8
         header: false
+      Dash:
+        tab: Dash
+        style: row
+        header: false
+        headerStyle: boxed
+        useEqualHeights: true
       Core Infrastructure:
         tab: Infrastructure
         style: row
@@ -85,6 +91,15 @@ data:
   bookmarks.yaml: ""
 
   services.yaml: |
+    - Dash:
+      - FreshRSS:
+          href: freshrss.phoenyxlab.xyz
+          widget:
+            type: freshrss
+            url: http://freshrss.media:80
+            username: wolf
+            password: "{{ HOMEPAGE_VAR_FRESHRSS_API_PASSWORD }}"
+
     - Glances:
         - CPU:
             href: https://glances.phoenyxlab.xyz
