@@ -116,6 +116,9 @@ data:
 
       - FreshRSS:
           href: https://freshrss.phoenyxlab.xyz
+          icon: freshrss
+          namespace: media
+          app: freshrss
           widget:
             type: freshrss
             url: http://freshrss.media:80
