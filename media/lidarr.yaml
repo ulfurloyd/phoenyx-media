@@ -15,6 +15,10 @@ kind: Deployment
 metadata:
   name: lidarr
   namespace: media
+  labels:
+    app: lidarr
+    app.kubernetes.io/name: lidarr
+    app.kubernetes.io/instance: lidarr
 spec:
   replicas: 1
   selector:
@@ -24,6 +28,8 @@ spec:
     metadata:
       labels:
         app: lidarr
+        app.kubernetes.io/name: lidarr
+        app.kubernetes.io/instance: lidarr
     spec:
       containers:
         - name: lidarr

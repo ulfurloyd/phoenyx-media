@@ -60,7 +60,7 @@ data:
       Arr Stack:
         tab: Media
         style: row
-        columns: 3
+        columns: 4
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -225,24 +225,34 @@ data:
         - Sonarr:
             href: https://sonarr.phoenyxlab.xyz
             icon: sonarr
-            enableQueue: true
             namespace: media
             app: sonarr
             widget:
               type: sonarr
+              enableQueue: true
               url: http://sonarr.media:8989
               key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
 
         - Radarr:
             href: https://radarr.phoenyxlab.xyz
             icon: radarr
-            enableQueue: true
             namespace: media
             app: radarr
             widget:
               type: radarr
+              enableQueue: true
               url: http://radarr.media:7878
               key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
+
+        - Lidarr:
+            href: https://lidarr.phoenyxlab.xyz
+            icon: lidarr
+            namespace: media
+            app: lidarr
+            widget:
+              type: lidarr
+              url: http://lidarr.media:8686
+              key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
 
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
