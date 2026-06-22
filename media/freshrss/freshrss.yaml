@@ -35,34 +35,25 @@ spec:
               value: "Asia/Kolkata"
             - name: CRON_MIN
               value: "20,50"
-            - name: FRESHRSS_INSTALL
-              value: |
-                --api-enabled
-                --base-url https://freshrss.phoenyxlab.xyz
-            - name: FRESHRSS_USER
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-secret
-                  key: ADMIN_USERNAME
-            - name: FRESHRSS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: freshrss-secret
-                  key: ADMIN_PASSWORD
-            - name: FRESHRSS_EMAIL
+            - name: BASE_URL
+              value: https://freshrss.phoenyxlab.xyz
+            - name: ADMIN_EMAIL
               valueFrom:
                 secretKeyRef:
                   name: freshrss-secret
                   key: ADMIN_EMAIL
-            - name: FRESHRSS_DB_TYPE
-              value: pgsql
-            - name: FRESHRSS_DB_HOST
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: freshrss-secret
+                  key: ADMIN_PASSWORD
+            - name: DB_HOST
               value: freshrss-postgres
-            - name: FRESHRSS_DB_BASE
+            - name: DB_BASE
               value: freshrss
-            - name: FRESHRSS_DB_USER
+            - name: DB_USER
               value: freshrss
-            - name: FRESHRSS_DB_PASSWORD
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: freshrss-secret
