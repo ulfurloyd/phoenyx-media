@@ -32,6 +32,7 @@ data:
       Dash:
         tab: Dash
         style: row
+        columns: 2
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -92,6 +93,25 @@ data:
 
   services.yaml: |
     - Dash:
+      - Calendar:
+          widget:
+            type: calendar
+            firstDayInWeek: monday
+            view: monthly
+            maxEvents: 10
+            showTime: true
+            timeZone: Asia/Kolkata
+            integrations:
+              - type: sonarr
+                service_group: Arr Stack
+                service_name: Sonarr
+              - type: radarr
+                service_group: Arr Stack
+                service_name: Radarr
+              - type: lidarr
+                service_group: Arr Stack
+                service_name: Lidarr
+
       - FreshRSS:
           href: https://freshrss.phoenyxlab.xyz
           widget:
