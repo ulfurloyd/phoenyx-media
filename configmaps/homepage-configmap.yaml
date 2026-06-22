@@ -98,7 +98,7 @@ data:
             type: freshrss
             url: http://freshrss.media:80
             username: wolf
-            password: "{{ HOMEPAGE_VAR_FRESHRSS_API_PASSWORD }}"
+            password: "{{HOMEPAGE_VAR_FRESHRSS_API_PASSWORD}}"
 
     - Glances:
         - CPU:
