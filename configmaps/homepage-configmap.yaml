@@ -110,6 +110,9 @@ data:
               - type: lidarr
                 service_group: Arr Stack
                 service_name: Lidarr
+              - type: ical
+                url: "{{HOMEPAGE_VAR_ICAL_PUBLIC_URL}}"
+                name: Events
 
       - FreshRSS:
           href: https://freshrss.phoenyxlab.xyz
