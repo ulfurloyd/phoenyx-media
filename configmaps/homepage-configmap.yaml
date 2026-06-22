@@ -96,7 +96,7 @@ data:
           href: freshrss.phoenyxlab.xyz
           widget:
             type: freshrss
-            url: http://freshrss.media/api/misc.php/Extension%20name/
+            url: http://freshrss.media/api/greader.php
             username: wolf
             password: "{{ HOMEPAGE_VAR_FRESHRSS_API_PASSWORD }}"
 
