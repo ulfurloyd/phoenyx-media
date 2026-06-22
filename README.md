@@ -39,6 +39,7 @@ new version is available.
 | pi-hole            | pihole         | infra       | 80    | DNS            |
 | vaultwarden        | vaultwarden    | infra       | 80    | Passwords      |
 | jellyfin           | phoenyxfin     | media       | 8096  | Media Server   |
+| lidarr             | lidarr         | media       | 8686  | Music          |
 | navidrome          | navidrome      | media       | 4533  | Music Server   |
 | radarr             | radarr         | media       | 7878  | Movies         |
 | seerr              | seerr          | media       | 5055  | Requests       |
