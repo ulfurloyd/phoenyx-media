@@ -37,7 +37,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: grafana
-          image: grafana/grafana:13.0.2
+          image: grafana/grafana:13.1.0
           env:
             - name: GF_SECURITY_ALLOW_EMBEDDING
               value: "true"
