@@ -97,12 +97,12 @@ data:
   bookmarks.yaml: ""
 
   services.yaml: |
+    - GrafanaEmbed:
+        widget:
+          type: iframe
+          name: nodeExporterDashboard
+          src: https://grafana.phoenyxlab.xyz/public-dashboards/4f49b3952b444c2995eb121932d1446d
     - Dash:
-      - GrafanaEmbed:
-          widget:
-            type: iframe
-            name: nodeExporterDashboard
-            src: https://grafana.phoenyxlab.xyz/public-dashboards/4f49b3952b444c2995eb121932d1446d
       - Calendar:
           widget:
             type: calendar
