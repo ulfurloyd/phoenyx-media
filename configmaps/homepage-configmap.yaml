@@ -92,6 +92,12 @@ data:
 
   services.yaml: |
     - Dash:
+      - GrafanaEmbed:
+          widget:
+            type: iframe
+            name: nodeExporterDashboard
+            src: https://grafana.phoenyxlab.xyz/public-dashboards/8dfa5c50505a4cab8c577cb8f9865540
+
       - Calendar:
           widget:
             type: calendar
