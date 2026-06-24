@@ -35,6 +35,12 @@ data:
         columns: 2
         header: false
         headerStyle: boxed
+      GrafanaEmbed:
+        tab: Dash
+        style: row
+        columns: 1
+        header: false
+        headerStyle: boxed
       Core Infrastructure:
         tab: Infrastructure
         style: row
