@@ -35,12 +35,6 @@ data:
         columns: 2
         header: false
         headerStyle: boxed
-      GrafanaEmbed:
-        tab: Dash
-        style: row
-        columns: 1
-        header: false
-        headerStyle: boxed
       Core Infrastructure:
         tab: Infrastructure
         style: row
@@ -98,11 +92,6 @@ data:
 
   services.yaml: |
     - Dash:
-      - GrafanaEmbed:
-          widget:
-            type: iframe
-            name: nodeExporterDashboard
-            src: https://grafana.phoenyxlab.xyz/public-dashboards/4f49b3952b444c2995eb121932d1446d
       - Calendar:
           widget:
             type: calendar
