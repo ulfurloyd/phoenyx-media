@@ -32,7 +32,7 @@ data:
       Dash:
         tab: Dash
         style: row
-        columns: 2
+        columns: 3
         header: false
         headerStyle: boxed
       Core Infrastructure:
@@ -92,6 +92,28 @@ data:
 
   services.yaml: |
     - Dash:
+      - Agenda:
+          widget:
+            type: calendar
+            firstDayInWeek: monday
+            view: agenda
+            maxEvents: 10
+            showTime: true
+            timeZone: Asia/Kolkata
+            integrations:
+              - type: sonarr
+                service_group: Arr Stack
+                service_name: Sonarr
+              - type: radarr
+                service_group: Arr Stack
+                service_name: Radarr
+              - type: lidarr
+                service_group: Arr Stack
+                service_name: Lidarr
+              - type: ical
+                url: "{{HOMEPAGE_VAR_ICAL_PUBLIC_URL}}"
+                name: Events
+
       - Calendar:
           widget:
             type: calendar
