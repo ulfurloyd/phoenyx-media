@@ -50,7 +50,7 @@ spec:
             path: /sys
         - name: containerd
           hostPath:
-            path: /var/lib/containerd
+            path: /var/lib/rancher/k3s/agent/containerd
         - name: kubelet
           hostPath:
             path: /var/lib/kubelet
