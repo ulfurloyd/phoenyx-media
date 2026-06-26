@@ -12,15 +12,23 @@ data:
         static_configs:
           - targets:
               - cadvisor.monitoring:8080
+            labels:
+              cluster: phoenyxlab
       - job_name: node-exporter
         static_configs:
           - targets:
               - node-exporter.monitoring:9100
+            labels:
+              cluster: phoenyxlab
       - job_name: prometheus
         static_configs:
           - targets:
               - localhost:9090
+            labels:
+              cluster: phoenyxlab
       - job_name: "kube-state-metrics"
         static_configs:
           - targets:
               - kube-state-metrics.monitoring:8080
+            labels:
+              cluster: phoenyxlab
