@@ -20,3 +20,12 @@ data:
         static_configs:
           - targets:
               - localhost:9090
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+          - role: pod
+            namespaces:
+              names:
+                - media
+                - downloads
+                - monitoring
+                - infra
