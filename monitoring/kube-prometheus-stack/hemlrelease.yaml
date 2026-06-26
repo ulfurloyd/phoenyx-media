@@ -18,6 +18,23 @@ spec:
       enabled: false
     grafana:
       enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        tls:
+          hosts:
+            - grafana-helm.phoenyxlab.xyz
+        rules:
+          - host: grafana-helm.phoenyxlab.xyz
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: kube-prometheus-stack-grafana
+                      port:
+                        number: 3000
     prometheus:
       enabled: true
     kubeStateMetrics:
