@@ -19,39 +19,21 @@ spec:
       ingress:
         enabled: true
         ingressClassName: traefik
+        hosts:
+          - alertmanager.phoenyxlab.xyz
         tls:
           - hosts:
-            - alertmanager.phoenyxlab.xyz
-        rules:
-          - host: alertmanager.phoenyxlab.xyz
-            http:
-              paths:
-                - path: /
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: kube-prometheus-stack-alertmanager
-                      port:
-                        number: 9093
+              - alertmanager.phoenyxlab.xyz
     grafana:
       enabled: true
       ingress:
         enabled: true
         ingressClassName: traefik
+        hosts:
+          - grafana-helm.phoenyxlab.xyz
         tls:
           - hosts:
-            - grafana-helm.phoenyxlab.xyz
-        rules:
-          - host: grafana-helm.phoenyxlab.xyz
-            http:
-              paths:
-                - path: /
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: kube-prometheus-stack-grafana
-                      port:
-                        number: 3000
+              - grafana-helm.phoenyxlab.xyz
     prometheus:
       enabled: true
     kubeStateMetrics:
