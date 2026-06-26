@@ -26,7 +26,6 @@ data:
             regex: __meta_kubernetes_node_label_(.+)
           - target_label: cluster
             replacement: phoenyxlab
-              metrics_path: /metrics/cadvisor
       - job_name: node-exporter
         static_configs:
           - targets:
