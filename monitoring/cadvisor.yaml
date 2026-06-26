@@ -32,6 +32,12 @@ spec:
             - name: containerd
               mountPath: /var/lib/containerd
               readOnly: true
+            - name: kubelet
+              mountPath: /var/lib/kubelet
+              readOnly: true
+            - name: disk
+              mountPath: /dev/disk
+              readOnly: true
       volumes:
         - name: rootfs
           hostPath:
@@ -45,6 +51,12 @@ spec:
         - name: containerd
           hostPath:
             path: /var/lib/containerd
+        - name: kubelet
+          hostPath:
+            path: /var/lib/kubelet
+        - name: disk
+          hostPath:
+            path: /dev/disk
 ---
 apiVersion: v1
 kind: Service
