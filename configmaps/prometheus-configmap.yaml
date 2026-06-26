@@ -37,7 +37,7 @@ data:
         kubernetes_sd_configs:
           - role: node
         relabel_configs:
-          - target_labels: __address__
+          - target_label: __address__
             replacement: kubernetes.default.svc:443
           - source_labels:
               - __meta_kubernetes_node_name
