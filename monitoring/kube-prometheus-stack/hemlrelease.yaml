@@ -15,7 +15,24 @@ spec:
         namespace: flux-system
   values:
     alertmanager:
-      enabled: false
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        tls:
+          - hosts:
+            - alertmanager.phoenyxlab.xyz
+        rules:
+          - host: alertmanager.phoenyxlab.xyz
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: kube-prometheus-stack-alertmanager
+                      port:
+                        number: 9093
     grafana:
       enabled: true
       ingress:
