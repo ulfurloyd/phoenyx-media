@@ -22,7 +22,7 @@ spec:
         enabled: true
         ingressClassName: traefik
         tls:
-          hosts:
+          - hosts:
             - grafana-helm.phoenyxlab.xyz
         rules:
           - host: grafana-helm.phoenyxlab.xyz
