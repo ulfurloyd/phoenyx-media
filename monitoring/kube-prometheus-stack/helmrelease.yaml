@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
-  namespace: monitoring-helm
+  namespace: monitoring
 spec:
   interval: 30m
   chart:
@@ -34,11 +34,19 @@ spec:
         enabled: true
         ingressClassName: traefik
         hosts:
-          - grafana-helm.phoenyxlab.xyz
+          - grafana.phoenyxlab.xyz
         tls:
           - hosts:
-              - grafana-helm.phoenyxlab.xyz
+              - grafana.phoenyxlab.xyz
     prometheus:
       enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - prometheus.phoenyxlab.xyz
+        tls:
+          - hosts:
+              - prometheus.phoenyxlab.xyz
     prometheus-node-exporter:
       enabled: true
