@@ -1,80 +1,93 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: kube-prometheus-stack
-  namespace: monitoring
+    name: kube-prometheus-stack
+    namespace: monitoring
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: kube-prometheus-stack
-      version: "*"
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-community
-        namespace: flux-system
-  values:
-    alertmanager:
-      enabled: true
-      alertmanagerSpec:
-        secrets:
-          - alertmanager-secret
-      config:
-        global: {}
-        route:
-          receiver: discord
-          group_by:
-            - alertname
-            - severity
-          group_wait: 30s
-          group_interval: 5m
-          repeat_interval: 12h
-        receivers:
-          - name: "null"
-          - name: discord
-            discord_configs:
-              - webhook_url_file: /etc/alertmanager/secrets/alertmanager-secret/webhook_url
-                send_resolved: true
-                title: >-
-                  [{{ .Status | toUpper }}]
-                  {{ .CommonLabels.alertname }}
-                message: |
-                  {{ range .Alerts }}
-                  **Severity:** {{ .Labels.severity }}
-                  **Summary:** {{ .Annotations.summary }}
-                  {{ .Annotations.description }}
-                  {{ end }}
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        hosts:
-          - alertmanager.phoenyxlab.xyz
-        tls:
-          - hosts:
-              - alertmanager.phoenyxlab.xyz
-    cAdvisor:
-      enabled: true
-    kubeStateMetrics:
-      enabled: true
-    grafana:
-      enabled: true
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        hosts:
-          - grafana.phoenyxlab.xyz
-        tls:
-          - hosts:
-              - grafana.phoenyxlab.xyz
-    prometheus:
-      enabled: true
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        hosts:
-          - prometheus.phoenyxlab.xyz
-        tls:
-          - hosts:
-              - prometheus.phoenyxlab.xyz
-    prometheus-node-exporter:
-      enabled: true
+    interval: 30m
+    chart:
+        spec:
+            chart: kube-prometheus-stack
+            version: '*'
+            sourceRef:
+                kind: HelmRepository
+                name: prometheus-community
+                namespace: flux-system
+    values:
+        alertmanager:
+            enabled: true
+            alertmanagerSpec:
+                secrets:
+                    - alertmanager-secret
+            config:
+                global: {}
+                route:
+                    receiver: discord
+                    group_by:
+                        - alertname
+                        - severity
+                    group_wait: 30s
+                    group_interval: 5m
+                    repeat_interval: 12h
+                receivers:
+                    - name: "null"
+                    - name: discord
+                      discord_configs:
+                        - webhook_url: ENC[AES256_GCM,data:xaWeEBjaMpdVPpQk0FuiEptm0fIl1TANpHYJ+a3c9MzuocVDAQLIONrd2WFlyC8s0wVjBHRIGU2hmno2nleJY9iGzpKit1swcOFJ5R5SsIu8dwHzTfXtRXv1QuKdAK5SL6EXV3dZ3oc6ogllv8fvYiQiKtDu0ffqvQ==,iv:kbu1Lt6CeETe2pbg4KXB9l/VVh9qMv+iNJ4uE8BFrlc=,tag:g1yE9fEaDJerLpDHgZLw4w==,type:str]
+                          send_resolved: true
+                          title: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}'
+                          message: |
+                            {{ range .Alerts }}
+                            **Severity:** {{ .Labels.severity }}
+                            **Summary:** {{ .Annotations.summary }}
+                            {{ .Annotations.description }}
+                            {{ end }}
+            ingress:
+                enabled: true
+                ingressClassName: traefik
+                hosts:
+                    - alertmanager.phoenyxlab.xyz
+                tls:
+                    - hosts:
+                        - alertmanager.phoenyxlab.xyz
+        cAdvisor:
+            enabled: true
+        kubeStateMetrics:
+            enabled: true
+        grafana:
+            enabled: true
+            ingress:
+                enabled: true
+                ingressClassName: traefik
+                hosts:
+                    - grafana.phoenyxlab.xyz
+                tls:
+                    - hosts:
+                        - grafana.phoenyxlab.xyz
+        prometheus:
+            enabled: true
+            ingress:
+                enabled: true
+                ingressClassName: traefik
+                hosts:
+                    - prometheus.phoenyxlab.xyz
+                tls:
+                    - hosts:
+                        - prometheus.phoenyxlab.xyz
+        prometheus-node-exporter:
+            enabled: true
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGZVN1WkppKzkvK080Mk5k
+            MkRqYW5IK1V2eGlPSnJmNlFuRSszY1hhTVdZCitMNWZIb29hbXF4VjBORkpGbGd2
+            VkJldlE2SDNiN3JPWXM3WTNmK2t1UlEKLS0tIEQ4OUpja0hDSm0xVkJUWjZZV29M
+            WEYwSnVNbUFxVUFQOE5iMjZ1ZWVyRTAK2b2CTy/HDLqxB/0zrj12rzKbU8Gj29tU
+            5Vu713me7ivDyKFnBby9FiS5d/vN8Mrw4CwNjURy4zwv98nXf4q6UQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1q8u7ap4warcxem7dr6wtre2xqfx65j0jqdxq9dvwl0lm7kap3f4qp3fqxe
+    encrypted_regex: ^(webhook_url)$
+    lastmodified: "2026-06-27T15:28:58Z"
+    mac: ENC[AES256_GCM,data:ft7HDSsFudFdisDvNBCp+sRjCoKTQf6XFCba7zfKH3hbc7hNVkQDooyLuT3VapTk17O81UXwDGglJQDosevjYYp6AsgJ+14ILiw0BUWHRqjxN7J+hFzpssZgUEBBSJzKVvHSqkOkHHfjnjERL8bTGAQ3JAcOhekRxAedqQlAAfI=,iv:1ZV9O+1kiC6zV0hX1QXj/03PsoOpaeck8ZQQt/B7Qws=,tag:eWXlSMjcI4S0Q56cAjU94Q==,type:str]
+    version: 3.13.1
