@@ -38,5 +38,5 @@ spec:
       enabled: true
     kubeStateMetrics:
       enabled: true
-    nodeExporter:
-      enabled: false
+    prometheus-node-exporter:
+      enabled: true
