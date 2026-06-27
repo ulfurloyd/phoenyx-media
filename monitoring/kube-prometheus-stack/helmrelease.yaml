@@ -33,7 +33,7 @@ spec:
                     - name: "null"
                     - name: discord
                       discord_configs:
-                        - webhook_url: ENC[AES256_GCM,data:sF2bIdA/+iCT9s6mH9ZLFhtYjthmIm8EUm7dcjssymbVxHq6HADNmB9hTxt7QGbJ/XvVQEVzf89qYnArVtZkttU7g8QQ2S/DquMpcAlbT5sSLGckuCogxRGsC/BfRSPD9m2YpDShItnup7qepyhJ8olM0kNHH5UO8A==,iv:Zccv0dYPC7Wym+X1GCA1IBNgsmucyfWVWM/EUgSlSQ8=,tag:ibtG1jdbjCvOnnjqJnUnnA==,type:str]
+                        - webhook_url: ENC[AES256_GCM,data:/vVUFqw5IXM43Yh/Yr49BLuAQkG2BmfnR34HLhH6321rKY0vSJ47xpWDHjhrghDpJdhCS1JmBpJ8jpGjDkTnxaeV50SLfgRQp36VoFIxqeEcUfxQbyTm32Mns5mmTPjM3P5qHn4otg+EE0+UoYz327J00oI3zzY85g==,iv:EoUutNr2S3PYiUUOMmNjeWQlkONYU20DGYlncGLxYJk=,tag:suWDjptjPG9wjHIyFCvV4Q==,type:str]
                           send_resolved: true
                           title: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}'
                           message: |
@@ -57,7 +57,7 @@ spec:
         grafana:
             enabled: true
             adminUser: wolf
-            adminPassword: ENC[AES256_GCM,data:rQKjnjI6SYiETIY=,iv:M9UXXLITtNuUeN8CV5uhmgsfFHFzGd5Dh8SFimgb1Ts=,tag:wvabutlovmuu10ND9KpokQ==,type:str]
+            adminPassword: ENC[AES256_GCM,data:NVfu/i3GreruajM=,iv:9h8RNnyVoSrQPNK5eNpePRRpjTguAPEX/J6q2x6us2Y=,tag:vzaswOomH2ubJmX6AeUjIA==,type:str]
             persistence:
                 enabled: true
                 type: pvc
@@ -84,18 +84,24 @@ spec:
                         - prometheus.phoenyxlab.xyz
         prometheus-node-exporter:
             enabled: true
+        kubeProxy:
+            enabled: false
+        kubeControllerManager:
+            enabled: false
+        kubeScheduler:
+            enabled: false
 sops:
     age:
         - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjenI1dzAxOUVMY25rWkJQ
-            YVExV1dZSmZhblNZUzhrNjhYMms5cjRiQTFzCmpvZk53M2hPaXlwSEs1enRhSnVF
-            NVB5QlNmQmwwQkhsWDVCNnpqWFFSNncKLS0tIGs2cVhFM0Izc0J5Tkg1UCs5eU15
-            WWRCS0RVWTJ2WWlqVGlWQTQ2ZmVFNDgK9tInP7mWyz0b7t8hgGapJ1Zs/mP8Iks5
-            13aFyOiha71gHs3JBlkgbZuDxuc1h0sqUMJnM6XFrj0Al0PW61UmKw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByTTJTRzRxOVNxbDRNNXVp
+            M2taLzc0TERlYjNYUWJQUEF0SUpMQmptM1FVCmtISEx0cDNMOTdadHBtM3JOb0l4
+            QUpaeDdZRC8rc1k1czlLSnRxOW1wK0UKLS0tIENyOHlQM0h0V013SlhGZnBNcHJG
+            NHRKYW1sMWppT0JrUWxlVVQzc2hBWm8KZL3ygSeAr2rZdRqSZV3Zmya5kSeMTEq7
+            aXYOqZ8dB0N3Sxwe3ulxUbMCF3AGh5yjExjrSx/Fb8FDHQWyGRjGzA==
             -----END AGE ENCRYPTED FILE-----
           recipient: age1q8u7ap4warcxem7dr6wtre2xqfx65j0jqdxq9dvwl0lm7kap3f4qp3fqxe
     encrypted_regex: ^(webhook_url|adminPassword)$
-    lastmodified: "2026-06-27T16:18:32Z"
-    mac: ENC[AES256_GCM,data:+PQvIbH6hRZgbgnS51UD1UPlpigXxz3sA3UznIuW39Tl/NNBr/vCdxgdbYY6FPoGTmv7nqsjhkjsipByDyxRciufGvJwi6oDAYtbWGgYv+UT5WJBuHwA283PgFjyiN8rqCjsiQQ05PcHW7kGXX0xn/uuKbV3bVHWp7hmoXGsG80=,iv:hoGL1q6S6p0zX2FLeJr/zzJLqTAOV2+ix7bkh0fBjAI=,tag:QWUeRBtyTcJqP/Nzh32oAA==,type:str]
+    lastmodified: "2026-06-27T16:32:59Z"
+    mac: ENC[AES256_GCM,data:DrxeMfoHW0cLVm76XNBcnG4phM+EecLX3tjWBrOTrBFM2Aa4O+L7pBlnv5sIYOPxrpEeYP9BZYciORraLhPgjw+0oVa31Pixx2jsbMmsOZM9E1yLNhbCp4rb2tVm1FLWeRavfC7ykCowc2WGm4xUCoeFodpIcbnMF95d0wPG7Q8=,iv:iE1SSDM4lUF+k+sk37wKoxGiyTvxI8y+eoCNN6y7Z3c=,tag:/U++BfXshV3s9eWQJGxA+w==,type:str]
     version: 3.13.1
