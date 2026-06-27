@@ -10,6 +10,15 @@ spec:
     - name: phoenyxlab.host
       interval: 30s
       rules:
+        - alert: TestAlert
+          expr: vector(1)
+          for: 30s
+          labels:
+            severity: warning
+            category: host
+          annotations:
+            summary: Test alert
+            description: This is a test alert.
         - alert: NodeDown
           expr: up{job="node-exporter"} == 0
           for: 2m
