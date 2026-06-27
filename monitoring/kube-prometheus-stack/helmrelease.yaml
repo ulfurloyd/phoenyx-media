@@ -24,6 +24,10 @@ spec:
         tls:
           - hosts:
               - alertmanager.phoenyxlab.xyz
+    cAdvisor:
+      enabled: true
+    kubeStateMetrics:
+      enabled: true
     grafana:
       enabled: true
       ingress:
@@ -35,8 +39,6 @@ spec:
           - hosts:
               - grafana-helm.phoenyxlab.xyz
     prometheus:
-      enabled: true
-    kubeStateMetrics:
       enabled: true
     prometheus-node-exporter:
       enabled: true
