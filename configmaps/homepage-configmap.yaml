@@ -226,7 +226,7 @@ data:
             widget:
               type: grafana
               version: 2
-              url: http://grafana.monitoring:3000
+              url: http://kube-prometheus-stack-grafana.monitoring
               username: wolf
               password: "{{HOMEPAGE_VAR_GRAFANA_PASSWD}}"
               fields:
@@ -240,7 +240,7 @@ data:
             app: prometheus
             widget:
               type: prometheus
-              url: http://prometheus.monitoring:9090
+              url: http://kube-prometheus-stack-prometheus.monitoring:9090
 
         - Alertmanager:
             href: https://alertmanager.phoenyxlab.xyz
