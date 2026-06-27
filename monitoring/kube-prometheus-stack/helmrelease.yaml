@@ -40,11 +40,3 @@ spec:
       enabled: true
     prometheus-node-exporter:
       enabled: true
-      hostNetwork: true
-      hostPID: true
-      service:
-        port: 9100
-      extraArgs:
-        - --path.rootfs=/host
-      hostRootFsMount:
-        enabled: true
