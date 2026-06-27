@@ -3,6 +3,8 @@ kind: PrometheusRule
 metadata:
   name: host-alerts
   namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
 spec:
   groups:
     - name: phoenyxlab.host
