@@ -2,5 +2,5 @@ creation_rules:
   - path_regex: .*secret.*\.yaml$
     age: age1q8u7ap4warcxem7dr6wtre2xqfx65j0jqdxq9dvwl0lm7kap3f4qp3fqxe
   - path_regex: .*\.ya?ml$
-    encrypted_regex: ^(webhook_url)$
+    encrypted_regex: ^(webhook_url|adminPassword)$
     age: age1q8u7ap4warcxem7dr6wtre2xqfx65j0jqdxq9dvwl0lm7kap3f4qp3fqxe
