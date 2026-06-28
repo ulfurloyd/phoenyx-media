@@ -36,7 +36,7 @@ jobs:
 
           echo "$files"
 
-          if echo "$files" | grep -qE '^(downloads|infra|media|monitoring|configmaps|flyx-system)/'; then
+          if echo "$files" | grep -qE '^(downloads|infra|media|monitoring|configmaps|flux-system)/'; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
