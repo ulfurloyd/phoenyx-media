@@ -27,7 +27,7 @@ data:
         useEqualHeights: true
       Quick Links:
         style: row
-        columns: 8
+        columns: 5
         header: false
       Dash:
         tab: Dash
@@ -385,6 +385,14 @@ data:
         - Homepage:
             icon: homepage
             href: https://gethomepage.dev/
+
+        - Oracle Cloud:
+            icon: oracle-cloud
+            href: https://cloud.oracle.com
+
+        - Cloudflare:
+            icon: cloudflare
+            href: https://dash.cloudflare.com
 
         - Reddit:
             icon: reddit
