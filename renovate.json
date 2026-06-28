@@ -6,7 +6,7 @@
 
 	"kubernetes": {
 		"managerFilePatterns": [
-			"/(^|/)(downloads|infra|media|monitoring)/.*\\.ya?ml$/"
+			"/(^|/)(cluster|downloads|infra|media|monitoring)/.*\\.ya?ml$/"
 		]
 	},
 
