@@ -18,13 +18,17 @@ home network.
 
 secure HTTPS routing for all services from a domain I own (`phoenyxlab.xyz`).
 
+services are routed through private LAN DNS and remote access is handled via
+Tailscale; the cluster is not intended to be publicly reachable.
+
 reverse-proxy and ingress management via `traefik`.
 
-container images are locked to explicit versions.
+container images and Helm charts are pinned to explicit versions where practical.
 `renovate` monitors upstream releases and opens a PR whenever a
 new version is available.
 
-`sops` and `age` encrypt `secrets/*`
+`sops` and `age` encrypt Kubernetes Secrets and selected sensitive values in
+manifests.
 
 
 ## network
@@ -33,14 +37,17 @@ new version is available.
 +--------------------+----------------+-------------+-------+----------------+
 | hostname           | service        | namespace   | port  | description    |
 |--------------------+----------------+-------------+-------+----------------|
+| traefik            | api@internal   | kube-system | 443   | Proxy dashboard|
 | homarr             | homarr         | infra       | 7575  | Dashboard      |
 | homepage           | homepage       | infra       | 3000  | Dashboard      |
 | notifiarr          | notifiarr      | infra       | 5454  | Notifications  |
 | pi-hole            | pihole         | infra       | 80    | DNS            |
 | vaultwarden        | vaultwarden    | infra       | 80    | Passwords      |
+| freshrss           | freshrss       | media       | 80    | RSS Reader     |
 | jellyfin           | phoenyxfin     | media       | 8096  | Media Server   |
 | lidarr             | lidarr         | media       | 8686  | Music          |
 | navidrome          | navidrome      | media       | 4533  | Music Server   |
+| pinepods           | pinepods       | media       | 8040  | Podcasts       |
 | radarr             | radarr         | media       | 7878  | Movies         |
 | seerr              | seerr          | media       | 5055  | Requests       |
 | sonarr             | sonarr         | media       | 8989  | Shows          |
@@ -55,9 +62,10 @@ new version is available.
 | grafana            | grafana        | monitoring  | 3000  | Dashboards     |
 | node-exporter      | node-exporter  | monitoring  | 9100  | Host metrics   |
 | prometheus         | prometheus     | monitoring  | 9090  | Metrics        |
+| uptime             | uptime-kuma    | external    | 443   | Uptime checks  |
 +--------------------+----------------+-------------+-------+----------------+
 ```
-...all accessible at `https://<service>.phoenyxlab.xyz`
+exposed web services are accessible at `https://<hostname>.phoenyxlab.xyz`
 
 ## kubernetes
 
@@ -86,6 +94,7 @@ Kubernetes
 - **cert-manager** for automatic TLS certificate issuance and renewal
 - **pi-hole** for network-wide DNS and local service discovery
 - **prometheus** + **grafana** for monitoring
+- **uptime-kuma** runs externally on OCI for out-of-cluster monitoring
 - **homarr** as the primary service dashboard
 
 ### monitoring
@@ -111,10 +120,19 @@ looking for `<service>.<namespace>:<port>`. for example,
 
 ### persistent storage
 
-all service configuration files are stored in **Persistent
-Volume Claims**.
+app state is primarily stored in **Persistent Volume Claims**, while
+declarative configuration lives in Git as manifests, ConfigMaps, and
+SOPS-encrypted Secrets.
 
-configuration is backed up monthly to Cloudflare R2 using **Restic**.
+PVC-backed app data is backed up monthly to Cloudflare R2 using **Restic**.
+
+### validation
+
+GitHub Actions validate Kubernetes manifests with `kubeconform` and verify
+changed container image tags before deployment.
+
+`renovate` tracks Kubernetes image tags and Flux HelmRelease chart versions
+across cluster and application manifests.
 
 ### continuous deployment
 
@@ -147,7 +165,7 @@ the arr stack automates the full pipeline:
 
 ## uptime monitoring
 
-- **uptime-kuma** is hosted externally via a Oracle Cloud Infrastructure
+- **uptime-kuma** is hosted externally on an Oracle Cloud Infrastructure
 (OCI) virtual machine.
 - it's accessible at `uptime.phoenyxlab.xyz`, secured behind 2FA.
 - the VM is configured as a tailscale node so cluster services can
