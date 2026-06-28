@@ -198,7 +198,7 @@ data:
             app: traefik
             widget:
               type: traefik
-              url: http://traefik.kube-system:8080
+              url: https://traefik.kube-system:443
 
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
