@@ -38,7 +38,7 @@ data:
       Core Infrastructure:
         tab: Infrastructure
         style: row
-        columns: 2
+        columns: 3
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -190,6 +190,15 @@ data:
                 - queries
                 - blocked
                 - gravity
+
+        - Traefik:
+            href: https://traefik.phoenyxlab.xyz
+            icon: traefik
+            namespace: kube-system
+            app: traefik
+            widget:
+              type: traefik
+              url: https://traefik.phoenyxlab.xyz
 
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
