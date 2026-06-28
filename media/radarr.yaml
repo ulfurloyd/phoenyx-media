@@ -81,6 +81,9 @@ metadata:
   namespace: media
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - radarr.phoenyxlab.xyz
   rules:
     - host: radarr.phoenyxlab.xyz
       http:

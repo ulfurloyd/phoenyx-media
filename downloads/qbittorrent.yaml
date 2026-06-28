@@ -105,6 +105,9 @@ metadata:
   namespace: downloads
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - qbittorrent.phoenyxlab.xyz
   rules:
     - host: qbittorrent.phoenyxlab.xyz
       http:

@@ -64,6 +64,9 @@ metadata:
   namespace: media
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - seerr.phoenyxlab.xyz
   rules:
     - host: seerr.phoenyxlab.xyz
       http:
