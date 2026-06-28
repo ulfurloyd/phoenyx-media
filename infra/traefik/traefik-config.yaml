@@ -9,3 +9,6 @@ spec:
       traefik:
         expose:
           default: true
+      metrics:
+        expose:
+          default: true
