@@ -196,9 +196,9 @@ data:
             icon: traefik
             namespace: kube-system
             app: traefik
-            widget:
-              type: traefik
-              url: https://traefik.kube-system:443
+            # widget:
+            #   type: traefik
+            #   url: https://traefik.kube-system:443
 
         - Notifiarr:
             href: https://notifiarr.phoenyxlab.xyz
