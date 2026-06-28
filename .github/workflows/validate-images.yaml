@@ -61,7 +61,7 @@ jobs:
             | grep '^+' \
             | grep -Po 'image:\s*\K\S+' \
             | sort -u
-          )
+          ) || images=""
 
           if [ -z "$images" ]; then
             echo "No image changes detected."
