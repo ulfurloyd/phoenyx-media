@@ -5,10 +5,10 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    ports:
-      traefik:
-        expose:
-          default: true
-      metrics:
-        expose:
-          default: true
+    # ports:
+    #   traefik:
+    #     expose:
+    #       default: true
+    #   metrics:
+    #     expose:
+    #       default: true
