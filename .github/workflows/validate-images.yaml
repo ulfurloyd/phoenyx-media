@@ -42,18 +42,33 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Validate image tags
+      - name: Validate changed image tags
         if: steps.changes.outputs.changed == 'true'
         run: |
           set -euo pipefail
 
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            diff_range="origin/${{ github.base_ref }}...HEAD"
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            diff_range="${{ github.event.before }} ${{ github.sha }}"
+          else
+            echo "Manual run; validating all changed manifests"
+            diff_range="HEAD~1 HEAD"
+          fi
+
           images=$(
-            grep -RhoP 'image:\s*\K\S+' \
-              downloads infra media monitoring |
-            sort -u
+            git diff -U0 $diff_range \
+            | grep '^+' \
+            | grep -Po 'image:\s*\K\S+' \
+            | sort -u
           )
 
-          echo "Found images:"
+          if [ -z "$images" ]; then
+            echo "No image changes detected."
+            exit 0
+          fi
+
+          echo "Images to validate:"
           echo "$images"
 
           while read -r image; do
