@@ -46,17 +46,22 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads
-              mountPath: /downloads
+            - name: downloads-qbittorrent
+              mountPath: /downloads/qbittorrent
+            - name: downloads-slskd
+              mountPath: /downloads/completed
             - name: media
               mountPath: /music
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: lidarr-config
-        - name: downloads
+        - name: downloads-qbittorrent
           hostPath:
             path: /downloads/qbittorrent
+        - name: downloads-slskd
+          hostPath:
+            path: /downloads/slskd/completed
         - name: media
           hostPath:
             path: /media/music
