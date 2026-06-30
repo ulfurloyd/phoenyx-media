@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - alertmanager-configmap.yaml
   - gluetun-configmap.yaml
-  - homepage-configmap.yaml
   - prometheus-configmap.yaml
