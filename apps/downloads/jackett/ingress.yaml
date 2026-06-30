@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jackett
+  namespace: downloads
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - jackett.phoenyxlab.xyz
+  rules:
+    - host: jackett.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jackett
+                port:
+                  number: 9117

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jackett
+  namespace: downloads
+spec:
+  selector:
+    app: jackett
+  ports:
+    - port: 9117
+      targetPort: 9117
+  type: ClusterIP
