@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pinepods
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - pinepods.phoenyxlab.xyz
+  rules:
+    - host: pinepods.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pinepods
+                port:
+                  number: 8040
