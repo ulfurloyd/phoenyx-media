@@ -4,4 +4,5 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - flux-alerts.yaml
+- flux-discord-secret.yaml
 - discord-provider.yaml
