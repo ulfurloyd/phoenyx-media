@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: navidrome
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - navidrome.phoenyxlab.xyz
+  rules:
+    - host: navidrome.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: navidrome
+                port:
+                  number: 4533
