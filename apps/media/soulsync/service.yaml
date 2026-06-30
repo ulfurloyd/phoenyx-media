@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: soulsync
+  namespace: media
+spec:
+  selector:
+    app: soulsync
+  ports:
+    - port: 8008
+      targetPort: 8008
+  type: ClusterIP

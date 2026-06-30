@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: soulsync
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - soulsync.phoenyxlab.xyz
+  rules:
+    - host: soulsync.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: soulsync
+                port:
+                  number: 8008

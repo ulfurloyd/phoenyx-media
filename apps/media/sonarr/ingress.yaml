@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - sonarr.phoenyxlab.xyz
+  rules:
+    - host: sonarr.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sonarr
+                port:
+                  number: 8989
