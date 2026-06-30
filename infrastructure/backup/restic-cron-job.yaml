@@ -4,7 +4,7 @@ metadata:
   name: restic-backup
   namespace: backup
 spec:
-  schedule: "0 2 1 * *"
+  schedule: "0 2 * * *"
   timeZone: "Asia/Kolkata"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
@@ -53,6 +53,7 @@ spec:
 
                   echo "Applying retention policy..."
                   restic forget \
+                    --keep-weekly 8 \
                     --keep-monthly 12 \
                     --prune
 
