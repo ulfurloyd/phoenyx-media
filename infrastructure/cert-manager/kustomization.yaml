@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - certificate.yaml
   - clusterissuer.yaml
-  - godaddy-api-secret.yaml
+  - secret.yaml
   - helmrelease.yaml
   - helmrepository.yaml
   - namespace.yaml

@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - tlsstore.yaml
-  - traefik-config.yaml
-  - traefik-dashboard.yaml
+  - dashboard.yaml
