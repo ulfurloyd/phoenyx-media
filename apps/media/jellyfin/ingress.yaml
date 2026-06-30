@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - jellyfin.phoenyxlab.xyz
+  rules:
+    - host: jellyfin.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phoenyxfin
+                port:
+                  number: 8096
