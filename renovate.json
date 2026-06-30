@@ -6,12 +6,19 @@
 
 	"kubernetes": {
 		"managerFilePatterns": [
-			"/.*\\.ya?ml$/"
+			"/(^|/)(apps|infrastructure|clusters)/.*\\.ya?ml$/"
+		]
+	},
+
+	"flux": {
+		"managerFilePatterns": [
+			"/(^|/)(apps|infrastructure|clusters)/.*\\.ya?ml$/"
 		]
 	},
 
 	"packageRules": [
 		{
+			"matchDatasources": ["docker"],
 			"matchUpdateTypes": ["major"],
 			"enabled": false
 		},
