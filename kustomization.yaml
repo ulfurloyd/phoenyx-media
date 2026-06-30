@@ -5,6 +5,5 @@ resources:
   - infrastructure
   - configmaps
   - flux-system
-  - infra
   - monitoring
   - secrets
