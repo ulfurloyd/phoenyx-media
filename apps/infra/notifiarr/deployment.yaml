@@ -1,15 +1,3 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: notifiarr-config
-  namespace: infra
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -59,40 +47,3 @@ spec:
         - name: machine-id
           hostPath:
             path: /etc/machine-id
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: notifiarr
-  namespace: infra
-spec:
-  selector:
-    app: notifiarr
-  type: ClusterIP
-  ports:
-  - name: notifiarr
-    protocol: TCP
-    port: 5454
-    targetPort: 5454
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: notifiarr
-  namespace: infra
-spec:
-  ingressClassName: traefik
-  tls:
-    - hosts:
-        - notifiarr.phoenyxlab.xyz
-  rules:
-    - host: notifiarr.phoenyxlab.xyz
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: notifiarr
-                port:
-                  number: 5454

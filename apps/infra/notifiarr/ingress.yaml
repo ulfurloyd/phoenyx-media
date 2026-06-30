@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notifiarr
+  namespace: infra
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - notifiarr.phoenyxlab.xyz
+  rules:
+    - host: notifiarr.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: notifiarr
+                port:
+                  number: 5454

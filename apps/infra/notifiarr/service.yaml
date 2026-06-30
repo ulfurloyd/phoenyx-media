@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifiarr
+  namespace: infra
+spec:
+  selector:
+    app: notifiarr
+  type: ClusterIP
+  ports:
+  - name: notifiarr
+    protocol: TCP
+    port: 5454
+    targetPort: 5454
