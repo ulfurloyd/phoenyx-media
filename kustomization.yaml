@@ -4,7 +4,6 @@ resources:
   - apps
   - infrastructure
   - configmaps
-  - downloads
   - flux-system
   - infra
   - monitoring
