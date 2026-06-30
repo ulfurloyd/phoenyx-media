@@ -3,6 +3,4 @@ kind: Kustomization
 resources:
   - apps
   - infrastructure
-  - configmaps
   - flux-system
-  - secrets
