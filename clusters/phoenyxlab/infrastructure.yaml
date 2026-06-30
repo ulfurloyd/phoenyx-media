@@ -4,6 +4,7 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
+  interval: 10m0s
   path: ./infrastructure
   prune: true
   decryption:
