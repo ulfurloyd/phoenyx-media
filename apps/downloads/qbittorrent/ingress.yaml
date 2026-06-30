@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent
+  namespace: downloads
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - qbittorrent.phoenyxlab.xyz
+  rules:
+    - host: qbittorrent.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  number: 8080
