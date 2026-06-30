@@ -4,6 +4,7 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
+  interval: 10m0s
   path: ./apps
   prune: true
   decryption:
