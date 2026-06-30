@@ -4,6 +4,7 @@ metadata:
   name: homarr-config
   namespace: infra
 spec:
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
