@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homepage
+  namespace: infra
+  labels:
+    app: homepage
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/instance: homepage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homepage
+  template:
+    metadata:
+      labels:
+        app: homepage
+        app.kubernetes.io/name: homepage
+        app.kubernetes.io/instance: homepage
+    spec:
+      serviceAccountName: homepage
+      automountServiceAccountToken: true
+      containers:
+        - name: homepage
+          image: ghcr.io/gethomepage/homepage:v1.13.2
+          ports:
+            - containerPort: 3000
+          env:
+            - name: HOMEPAGE_ALLOWED_HOSTS
+              value: "homepage.phoenyxlab.xyz,gethomepage.dev"
+          envFrom:
+            - secretRef:
+                name: homepage-apis-secret
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+            - name: logs
+              mountPath: /app/config/logs
+            - name: assets
+              mountPath: /app/public/images
+      volumes:
+        - name: config
+          configMap:
+            name: homepage-configmap
+        - name: logs
+          emptyDir: {}
+        - name: assets
+          persistentVolumeClaim:
+            claimName: homepage-assets
