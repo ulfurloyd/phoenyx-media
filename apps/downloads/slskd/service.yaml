@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: slskd
+  namespace: downloads
+spec:
+  selector:
+    app: slskd
+  ports:
+    - name: web
+      port: 5030
+      targetPort: 5030
+  type: ClusterIP
