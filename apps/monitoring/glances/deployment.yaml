@@ -1,16 +1,3 @@
-# https://kubernetes.io/docs/concepts/storage/persistent-volumes/
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: glances-config
-  namespace: monitoring
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -70,38 +57,3 @@ spec:
             claimName: glances-config
         - name: tmp
           emptyDir: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: glances
-  namespace: monitoring
-spec:
-  selector:
-    app: glances
-  ports:
-    - port: 61208
-      targetPort: 61208
-  type: ClusterIP
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: glances
-  namespace: monitoring
-spec:
-  ingressClassName: traefik
-  tls:
-    - hosts:
-        - glances.phoenyxlab.xyz
-  rules:
-    - host: glances.phoenyxlab.xyz
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: glances
-                port:
-                  number: 61208

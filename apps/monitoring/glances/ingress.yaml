@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: glances
+  namespace: monitoring
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - glances.phoenyxlab.xyz
+  rules:
+    - host: glances.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: glances
+                port:
+                  number: 61208
