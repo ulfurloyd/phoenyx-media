@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seerr
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - seerr.phoenyxlab.xyz
+  rules:
+    - host: seerr.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: seerr
+                port:
+                  number: 5055
