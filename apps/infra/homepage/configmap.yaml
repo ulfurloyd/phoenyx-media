@@ -336,7 +336,7 @@ data:
               url: http://lidarr.media:8686
               key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
 
-      - Requests:
+    - Requests:
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
             icon: seerr
