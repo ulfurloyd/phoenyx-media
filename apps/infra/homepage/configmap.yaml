@@ -19,13 +19,6 @@ data:
     statusStyle: dot
 
     layout:
-      Glances:
-        tab: Observability
-        style: row
-        columns: 3
-        header: false
-        headerStyle: boxed
-        useEqualHeights: true
       Quick Links:
         tab: Dash
         style: row
@@ -48,6 +41,13 @@ data:
         tab: Infrastructure
         style: row
         columns: 1
+        header: false
+        headerStyle: boxed
+        useEqualHeights: true
+      Glances:
+        tab: Observability
+        style: row
+        columns: 3
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -156,33 +156,46 @@ data:
             username: wolf
             password: "{{HOMEPAGE_VAR_FRESHRSS_API_PASSWORD}}"
 
-    - Glances:
-        - CPU:
-            href: https://glances.phoenyxlab.xyz
-            widget:
-              type: glances
-              url: http://glances.monitoring:61208
-              refreshInterval: 10000
-              version: 4
-              metric: cpu
+    - Quick Links:
+        - PhoenyxLab:
+            icon: /images/phoenyx.png
+            href: https://github.com/ulfurloyd/phoenyxlab
 
-        - Memory:
-            href: https://glances.phoenyxlab.xyz
-            widget:
-              type: glances
-              url: http://glances.monitoring:61208
-              refreshInterval: 10000
-              version: 4
-              metric: memory
+        - Phoenyx:
+            icon: /images/phoenyx.png
+            href: https://github.com/ulfurloyd/phoenyx
 
-        - Disk Usage:
-            href: https://glances.phoenyxlab.xyz
-            widget:
-              type: glances
-              url: http://glances.monitoring:61208
-              refreshInterval: 10000
-              version: 4
-              metric: fs:/rootfs
+        - Homepage:
+            icon: homepage
+            href: https://gethomepage.dev/
+
+        - Oracle Cloud:
+            icon: oracle-cloud
+            href: https://cloud.oracle.com
+
+        - Cloudflare:
+            icon: cloudflare
+            href: https://dash.cloudflare.com
+
+        - Reddit:
+            icon: reddit
+            href: https://www.reddit.com/
+
+        - YouTube:
+            icon: youtube
+            href: https://youtube.com/
+
+        - ProtonMail:
+            icon: proton-mail
+            href: https://mail.proton.me/
+
+        - GitHub:
+            icon: github
+            href: https://github.com/
+
+        - Amazon:
+            icon: amazon
+            href: https://www.amazon.in/
 
     - Core Infrastructure:
         - Pi-hole:
@@ -225,6 +238,34 @@ data:
             icon: vaultwarden
             namespace: infra
             app: vaultwarden
+
+    - Glances:
+        - CPU:
+            href: https://glances.phoenyxlab.xyz
+            widget:
+              type: glances
+              url: http://glances.monitoring:61208
+              refreshInterval: 10000
+              version: 4
+              metric: cpu
+
+        - Memory:
+            href: https://glances.phoenyxlab.xyz
+            widget:
+              type: glances
+              url: http://glances.monitoring:61208
+              refreshInterval: 10000
+              version: 4
+              metric: memory
+
+        - Disk Usage:
+            href: https://glances.phoenyxlab.xyz
+            widget:
+              type: glances
+              url: http://glances.monitoring:61208
+              refreshInterval: 10000
+              version: 4
+              metric: fs:/rootfs
 
     - Monitoring:
         - Uptime Kuma:
@@ -392,47 +433,6 @@ data:
               type: jackett
               url: http://jackett.downloads:9117
               password: "{{HOMEPAGE_VAR_JACKETT_PASSWD}}"
-
-    - Quick Links:
-        - PhoenyxLab:
-            icon: /images/phoenyx.png
-            href: https://github.com/ulfurloyd/phoenyxlab
-
-        - Phoenyx:
-            icon: /images/phoenyx.png
-            href: https://github.com/ulfurloyd/phoenyx
-
-        - Homepage:
-            icon: homepage
-            href: https://gethomepage.dev/
-
-        - Oracle Cloud:
-            icon: oracle-cloud
-            href: https://cloud.oracle.com
-
-        - Cloudflare:
-            icon: cloudflare
-            href: https://dash.cloudflare.com
-
-        - Reddit:
-            icon: reddit
-            href: https://www.reddit.com/
-
-        - YouTube:
-            icon: youtube
-            href: https://youtube.com/
-
-        - ProtonMail:
-            icon: proton-mail
-            href: https://mail.proton.me/
-
-        - GitHub:
-            icon: github
-            href: https://github.com/
-
-        - Amazon:
-            icon: amazon
-            href: https://www.amazon.in/
 
   widgets.yaml: |
     - kubernetes:
