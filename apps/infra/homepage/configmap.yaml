@@ -66,7 +66,14 @@ data:
       Arr Stack:
         tab: Media
         style: row
-        columns: 4
+        columns: 3
+        header: false
+        headerStyle: boxed
+        useEqualHeights: true
+      Requests:
+        tab: Media
+        style: row
+        columns: 2
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -329,6 +336,7 @@ data:
               url: http://lidarr.media:8686
               key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
 
+      - Requests:
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
             icon: seerr
@@ -338,6 +346,12 @@ data:
               type: seerr
               url: http://seerr.media:5055
               key: "{{HOMEPAGE_VAR_SEERR_API_KEY}}"
+
+        - MusicSeerr:
+            href: https://musicseerr.phoenyxlab.xyz
+            icon: musicseerr.png
+            namespace: media
+            app: musicseerr
 
     - Downloads:
         - qBittorrent:
