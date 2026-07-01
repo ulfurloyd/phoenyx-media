@@ -13,4 +13,5 @@ spec:
       metrics:
         port: 9101
         exposedPort: 9101
-        expose: true
+        expose:
+          default: true
