@@ -15,6 +15,7 @@ spec:
   template:
     metadata:
       labels:
+        app: speedtest-tracker
         app.kubernetes.io/name: speedtest-tracker
         app.kubernetes.io/instance: speedtest-tracker
     spec:
