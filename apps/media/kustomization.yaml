@@ -4,6 +4,7 @@ resources:
   - freshrss
   - jellyfin
   - lidarr
+  - musicseerr
   - navidrome
   - pinepods
   - radarr

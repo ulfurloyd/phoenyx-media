@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musicseerr
+  namespace: media
+  labels:
+    app: musicseerr
+    app.kubernetes.io/name: musicseerr
+    app.kubernetes.io/instance: musicseerr
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: musicseerr
+  template:
+    metadata:
+      labels:
+        app: musicseerr
+        app.kubernetes.io/name: musicseerr
+        app.kubernetes.io/instance: musicseerr
+    spec:
+      containers:
+        - name: musicseerr
+          image: habirabbu/musicseerr:v1.4.2
+          ports:
+            - containerPort: 8686
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+            - name: cache
+              mountPath: /app/cache
+            - name: music
+              mountPath: /music
+              readOnly: true
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: musicseerr
+        - name: cache
+          emptyDir: {}
+        - name: music
+          hostPath:
+            path: /media/music

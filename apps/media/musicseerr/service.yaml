@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicseerr
+  namespace: media
+spec:
+  selector:
+    app: musicseerr
+  ports:
+    - port: 8688
+      targetPort: 8688
+  type: ClusterIP
