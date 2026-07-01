@@ -20,12 +20,14 @@ data:
 
     layout:
       Glances:
+        tab: Observability
         style: row
         columns: 3
         header: false
         headerStyle: boxed
         useEqualHeights: true
       Quick Links:
+        tab: Dash
         style: row
         columns: 5
         header: false
