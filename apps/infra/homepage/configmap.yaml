@@ -275,6 +275,7 @@ data:
             widget:
               type: speedtest
               url: http://speedtest-tracker.monitoring
+              key: "{{HOMEPAGE_VAR_SPEEDTEST_TRACKER_KEY}}"
               version: 2
 
     - Monitoring:
