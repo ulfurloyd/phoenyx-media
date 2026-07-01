@@ -470,5 +470,12 @@ data:
           hourCycle: h23
           hour12: false
 
+    - openmeteo:
+        latitude: "{{HOMEPAGE_VAR_WEATHER_LAT}}"
+        longitude: "{{HOMEPAGE_VAR_WEATHER_LON}}"
+        timezone: Asia/Kolkata
+        units: metric
+        cache: 5
+
   docker.yaml: ""
   proxmox.yaml: ""
