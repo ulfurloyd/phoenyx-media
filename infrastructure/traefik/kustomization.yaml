@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   - tlsstore.yaml
   - dashboard.yaml
+  - helmchartconfig.yaml
