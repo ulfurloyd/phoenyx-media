@@ -349,7 +349,7 @@ data:
 
         - MusicSeerr:
             href: https://musicseerr.phoenyxlab.xyz
-            icon: /images/musicseerr.png
+            icon: sh-musicseerr
             namespace: media
             app: musicseerr
 
