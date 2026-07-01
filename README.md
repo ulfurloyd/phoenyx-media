@@ -7,182 +7,266 @@
 
 [![.github/workflows/validate-images.yaml](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml/badge.svg?branch=main)](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-images.yaml) [![Validate Kubernetes](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-kubernetes.yaml/badge.svg)](https://github.com/ulfurloyd/phoenyxlab/actions/workflows/validate-kubernetes.yaml)
 
-self-hosted home network server running via **kubernetes**
+personal GitOps-managed homelab running on Kubernetes
 
 
 ## overview
 
-`phoenyxlab` is a personal self-hosting stack running in `kubernetes`,
-providing media, monitoring, DNS, and infrastructure services for my
-home network.
+phoenyxlab is my self-hosted platform for media, infrastructure,
+monitoring, automation, and experimentation. What began as a way to
+learn Kubernetes has evolved into the primary operating environment
+for my home network.
 
-secure HTTPS routing for all services from a domain I own (`phoenyxlab.xyz`).
+the cluster is managed declaratively using FluxCD and GitOps
+principles: Git is the single source of truth and Flux continuously
+reconciles desired state.
 
-services are routed through private LAN DNS and remote access is handled via
-Tailscale; the cluster is not intended to be publicly reachable.
+## philosophy
 
-reverse-proxy and ingress management via `traefik`.
+the primary goals of this project are:
 
-container images and Helm charts are pinned to explicit versions where practical.
-`renovate` monitors upstream releases and opens a PR whenever a
-new version is available.
+- learn Kubernetes by operating real workloads
+- maintain a fully declarative infrastructure
+- minimize manual cluster changes
+- ensure services are reproducible and recoverable
+- keep application state separate from cluster state
+- treat infrastructure as software
 
-`sops` and `age` encrypt Kubernetes Secrets and selected sensitive values in
-manifests.
+in practice this means:
 
+- Kubernetes manifests live in Git
+- FluxCD continuously reconciles cluster state
+- secrets are encrypted using SOPS + age
+- application data lives on PVCs
+- backups are performed automatically
+- upgrades are proposed automatically through Renovate
 
-## network
+## architecture
 
-```
-+--------------------+----------------+-------------+-------+----------------+
-| hostname           | service        | namespace   | port  | description    |
-|--------------------+----------------+-------------+-------+----------------|
-| traefik            | api@internal   | kube-system | 443   | Proxy dashboard|
-| homarr             | homarr         | infra       | 7575  | Dashboard      |
-| homepage           | homepage       | infra       | 3000  | Dashboard      |
-| notifiarr          | notifiarr      | infra       | 5454  | Notifications  |
-| pi-hole            | pihole         | infra       | 80    | DNS            |
-| vaultwarden        | vaultwarden    | infra       | 80    | Passwords      |
-| freshrss           | freshrss       | media       | 80    | RSS Reader     |
-| jellyfin           | phoenyxfin     | media       | 8096  | Media Server   |
-| lidarr             | lidarr         | media       | 8686  | Music          |
-| navidrome          | navidrome      | media       | 4533  | Music Server   |
-| pinepods           | pinepods       | media       | 8040  | Podcasts       |
-| radarr             | radarr         | media       | 7878  | Movies         |
-| seerr              | seerr          | media       | 5055  | Requests       |
-| sonarr             | sonarr         | media       | 8989  | Shows          |
-| soulsync           | soulsync       | media       | 8008  | Music Syncing  |
-| jackett            | jackett        | downloads   | 9117  | Indexers       |
-| prowlarr           | prowlarr       | downloads   | 9696  | Indexers       |
-| qbittorrent        | qbittorrent    | downloads   | 8080  | Torrents       |
-| slskd              | slskd          | downloads   | 5030  | Soulseek       |
-| alertmanager       | alertmanager   | monitoring  | 9093  | Alerts         |
-| cadvisor           | cadvisor       | monitoring  | 8080  | Containers     |
-| glances            | glances        | monitoring  | 61208 | System Stats   |
-| grafana            | grafana        | monitoring  | 3000  | Dashboards     |
-| node-exporter      | node-exporter  | monitoring  | 9100  | Host metrics   |
-| prometheus         | prometheus     | monitoring  | 9090  | Metrics        |
-| uptime             | uptime-kuma    | external    | 443   | Uptime checks  |
-+--------------------+----------------+-------------+-------+----------------+
-```
-exposed web services are accessible at `https://<hostname>.phoenyxlab.xyz`
-
-## kubernetes
-
-while the choice of using **kubernetes** started as a way to learn the tech,
-it's quickly become a beloved set of tools that runs my entire infra.
-
-### cluster architecture
-
-```
+```text
 Git
- ↓
+ │
+ ▼
 FluxCD
- ↓
-Kubernetes
- ├─ media
- ├─ downloads
- ├─ infra
- ├─ monitoring
- ├─ cert-manager
- └─ backup
+ │
+ ├── infrastructure
+ │   ├── traefik
+ │   ├── cert-manager
+ │   ├── monitoring
+ │   └── backup
+ │
+ └── applications
+     ├── infra
+     ├── media
+     ├── downloads
+     └── monitoring
 ```
 
-### core infrastructure
+## repo structure
 
-- **traefik** for ingress and HTTPS routing
-- **cert-manager** for automatic TLS certificate issuance and renewal
-- **pi-hole** for network-wide DNS and local service discovery
-- **prometheus** + **grafana** for monitoring
-- **uptime-kuma** runs externally on OCI for out-of-cluster monitoring
-- **homarr** as the primary service dashboard
+```
+.
+├── apps/
+│   ├── downloads/
+│   ├── infra/
+│   ├── media/
+│   └── monitoring/
+│
+├── infrastructure/
+│   ├── backup/
+│   ├── cert-manager/
+│   ├── monitoring/
+│   └── traefik/
+│
+├── clusters/
+│   └── phoenyxlab/
+│
+└── docs/
+```
+
+### applications
+
+application manifests follow a resource-oriented layout:
+
+```
+application/
+├── deployment.yaml
+├── service.yaml
+├── ingress.yaml
+├── pvc.yaml
+├── secret.yaml
+└── kustomization.yaml
+```
+
+applications requiring supporting services keep those resources
+alongside the application:
+
+```
+pinepods/
+├── postgres-deployment.yaml
+├── postgres-service.yaml
+├── valkey-deployment.yaml
+├── deployment.yaml
+└── ...
+```
+
+## cluster infrastructure
+
+### networking
+
+- traefik ingress controller
+- wildcard TLS certificate via cert-manager
+- Pi-hole for internal DNS
+- private access via Tailscale
+
+### GitOps
+
+- FluxCD reconciliation
+- Flux alerts to Discord
+- SOPS + age encrypted secrets
+- Renovate automated dependency updates
 
 ### monitoring
 
-- **prometheus** for metrics collection
-- **grafana** for dashboards
-- **cadvisor** for container metrics
-- **node exporter** for host metrics
+- kube-prometheus-stack
+- prometheus
+- grafana
+- alertmanager
+- node-exporter
+- glances
+
+### backup
+
+- restic cronjobs
+- encrypted backups
+- cloudflare R2 storage
+- monthly retention policies
 
 ### namespaces
 
-namespaces provide logical partitioning between pods.
-services in different namespaces can find each other by
-looking for `<service>.<namespace>:<port>`. for example,
-`soulsync` finds `slskd` at `slskd.downloads:5030`
+```
++---------------+-----------------------------------+
+| namespace     | purpose                           |
++---------------+-----------------------------------+
+| infra         | core self-hosted infrastructure   |
+| media         | media management and consumption  |
+| downloads     | acquisition pipeline              |
+| monitoring    | cluster and host observability    |
+| cert-manager  | acquisition pipeline              |
+| backup        | backup infrastructure             |
++---------------+-----------------------------------+
+```
 
-- media
-- downloads
-- infra
-- monitoring
-- cert-manager
-- backup
+### service inventory
 
-### persistent storage
+#### self-hosted applications
 
-app state is primarily stored in **Persistent Volume Claims**, while
-declarative configuration lives in Git as manifests, ConfigMaps, and
-SOPS-encrypted Secrets.
+```
++--------------------+-------------+---------------------+
+| hostname           | namespace   | description         |
+|--------------------+-------------+---------------------|
+| homarr             | infra       | dashboard           |
+| homepage           | infra       | dashboard           |
+| notifiarr          | infra       | notification relay  |
+| pi-hole            | infra       | DNS and adblock     |
+| vaultwarden        | infra       | password manager    |
+| freshrss           | media       | RSS Reader          |
+| jellyfin           | media       | media server        |
+| lidarr             | media       | music acquisition   |
+| navidrome          | media       | music server        |
+| pinepods           | media       | podcast server      |
+| radarr             | media       | movie management    |
+| seerr              | media       | media requests      |
+| sonarr             | media       | tv management       |
+| soulsync           | media       | music syncing       |
+| jackett            | downloads   | indexer management  |
+| prowlarr           | downloads   | indexer management  |
+| qbittorrent        | downloads   | torrent client      |
+| slskd              | downloads   | soulseek client     |
+| glances            | monitoring  | system stats        |
++--------------------+-------------+---------------------+
+```
 
-PVC-backed app data is backed up monthly to Cloudflare R2 using **Restic**.
+#### cluster infrastructure
 
-### validation
+```
++---------------------+-----------------------------+
+| component           | purpose                     |
++---------------------+-----------------------------+
+| traefik             | ingress controller          |
+| FluxCD              | GitOps                      |
+| cert-manager        | TLS certificate management  |
+| prometheus          | metrics collection          |
+| grafana             | dashboards                  |
+| alertmanager        | alert routing               |
+| node-exporter       | host metrics                |
+| kube-state-metrics  | kubernetes metrics          |
+| restic              | backups                     |
+| SOPS + age          | secret management           |
+| renovate            | dependency updates          |
++---------------------+-----------------------------+
+```
 
-GitHub Actions validate Kubernetes manifests with `kubeconform` and verify
-changed container image tags before deployment.
+#### external services
 
-`renovate` tracks Kubernetes image tags and Flux HelmRelease chart versions
-across cluster and application manifests.
+```
++----------------------+-----------------------------+
+| service              | purpose                     |
++----------------------+-----------------------------+
+| uptime kuma (OCI VM) | external uptime monitoring  |
+| cloudflare R2        | backup storage              |
+| GoDaddy DNS          | authoritative DNS           |
+| Tailscale            | private remote access       |
++----------------------+-----------------------------+
+```
 
-### continuous deployment
+### media automation
 
-`FluxCD` watches the repo for changes and reconciles
-cluster state automatically.
+```
+Request
+   │
+   ▼
+Seerr / Musicseerr
+   │
+   ▼
+Sonarr / Radarr / Lidarr
+   │
+   ▼
+Prowlarr
+   │
+   ▼
+qBittorrent / slskd
+   │
+   ▼
+Import → Organize → Cleanup
+   │
+   ▼
+Jellyfin / Navidrome
+```
 
-deployment events and failures are sent to Discord via
-Flux notifications.
+### validation and automation
 
-## download + media workflow
+- kubeconform validates manifests
+- container image tags are verified in CI
+- Renovate tracks images and Helm charts
+- Flux continuously reconciles desired state
+- deployment failures generate Discord alerts
 
-the arr stack automates the full pipeline:
+### backup and recovery
 
-- jackett aggregates indexers
-- sonarr / radarr handle search and download requests
-- qbittorrent downloads content
-- completed downloads are:
-    - imported into /media
-    - organized automatically
-    - removed from the download client
+the cluster is designed around recoverability.
 
-## automation features
+- declarative state exists in Git
+- secrets exist as SOPS-encrypted manifests
+- application data exists on PVCs
+- persistent data is backed up using Restic
+- storage uses `Retain` reclaim policies where appropriate
 
-- **auto-fetches** requested content via `sonarr`, `radarr` and `soulsync`
-- **cleans up** finished downloads after import into `/media`
-- **centralized indexer management** through `prowlarr`
-- **VPN-secured downloads** with Gluetun + ProtonVPN
-- **Seerr integration** for user requests
-- **Homarr dashboard** for quick access to all services
-
-## uptime monitoring
-
-- **uptime-kuma** is hosted externally on an Oracle Cloud Infrastructure
-(OCI) virtual machine.
-- it's accessible at `uptime.phoenyxlab.xyz`, secured behind 2FA.
-- the VM is configured as a tailscale node so cluster services can
-access it via a private, internal connection.
-
-## bootstrap
+cluster recovery consists of:
 
 1. install k3s
 2. install FluxCD
 3. restore the SOPS age key
-4. bootstrap Flux against the repo
-5. Flux reconciles cluster state
-
-## disaster recovery
-
-- monthly Restic backups run via a Kubernetes CronJob
-- backups are encrypted client-side before upload
-- snapshots are stored in a Cloudflare R2 bucket
-- monthly retention policy keeps 12 snapshots
-- `restic-r2-secret` contains repo credentials
+4. bootstrap Flux
+5. allow Flux to reconcile infrastructure and applications
+6. restore PVC data if necessary
