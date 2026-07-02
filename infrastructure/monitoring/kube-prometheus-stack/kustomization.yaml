@@ -4,6 +4,5 @@ resources:
   - alertmanager-secret.yaml
   - helmrelease.yaml
   - helmrepository.yaml
-  - navidrome-servicemonitor.yaml
-  - traefik-servicemonitor.yaml
+  - servicemonitors
   - rules
