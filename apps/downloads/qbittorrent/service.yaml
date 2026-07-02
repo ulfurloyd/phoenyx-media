@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: qbittorrent
   namespace: downloads
+  labels:
+    app: qbittorrent
 spec:
   selector:
     app: qbittorrent
@@ -10,4 +12,7 @@ spec:
     - name: webui
       port: 8080
       targetPort: 8080
+    - name: metrics
+      port: 8090
+      targetPort: 8090
   type: ClusterIP

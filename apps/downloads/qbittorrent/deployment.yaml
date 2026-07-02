@@ -38,6 +38,20 @@ spec:
               mountPath: /config
             - name: downloads
               mountPath: /downloads
+
+        - name: qbittorrent-exporter
+          image: ghcr.io/martabal/qbittorrent-exporter:v2.0.1
+          env:
+            - name: QBITTORRENT_BASE_URL
+              value: "http://qbittorrent.downloads:8080"
+            - name: QBITTORRENT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: qbittorrent-secret
+                  key: QBITTORRENT_API_KEY
+          ports:
+            - containerPort: 8090
+              name: metrics
       initContainers:
         - name: gluetun
           image: qmcgaw/gluetun:v3.41
