@@ -68,23 +68,25 @@ Init container runs flaresolverr on port 8191.
 | External URL   | https://prowlarr.phoenyxlab.xyz                            |
 | Dependencies   | gluetun (initContainer)                                    |
 | Storage        | prowlarr-config PVC (5Gi), /dev/net/tun                    |
+| Observability  | exportarr-prowlarr sidecar (:9707/metrics), ServiceMonitor |
 +----------------+------------------------------------------------------------+
 ```
 
 ## qbittorrent
 
 ```
-+----------------+------------------------------------------------------------+
-| Property       | Value                                                      |
-+----------------+------------------------------------------------------------+
-| Namespace      | downloads                                                  |
-| Service        | qbittorrent                                                |
-| Container Port | 8080                                                       |
-| Service Type   | ClusterIP                                                  |
-| External URL   | https://qbittorrent.phoenyxlab.xyz                         |
-| Dependencies   | gluetun (initContainer, port forwarding)                   |
-| Storage        | qbittorrent-config PVC (2Gi), /downloads/qbittorrent       |
-+----------------+------------------------------------------------------------+
++----------------+--------------------------------------------------------------+
+| Property       | Value                                                        |
++----------------+--------------------------------------------------------------+
+| Namespace      | downloads                                                    |
+| Service        | qbittorrent                                                  |
+| Container Port | 8080                                                         |
+| Service Type   | ClusterIP                                                    |
+| External URL   | https://qbittorrent.phoenyxlab.xyz                           |
+| Dependencies   | gluetun (initContainer, port forwarding)                     |
+| Storage        | qbittorrent-config PVC (2Gi), /downloads/qbittorrent         |
+| Observability  | qbittorrent-exporter sidecar (:8090/metrics), ServiceMonitor |
++----------------+--------------------------------------------------------------+
 ```
 
 ## slskd
@@ -173,6 +175,7 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 | Dependencies   | qbittorrent (downloads), slskd (downloads)                 |
 | Storage        | lidarr-config PVC (5Gi), /downloads/qbittorrent,           |
 |                | /downloads/slskd/completed, /media/music                   |
+| Observability  | exportarr-lidarr sidecar (:9707/metrics), ServiceMonitor   |
 +----------------+------------------------------------------------------------+
 ```
 
@@ -205,6 +208,7 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 | External URL   | https://navidrome.phoenyxlab.xyz                           |
 | Dependencies   | music library                                              |
 | Storage        | navidrome-config PVC (10Gi), /media/music                  |
+| Observability  | native /metrics endpoint (:4533/metrics), ServiceMonitor   |
 +----------------+------------------------------------------------------------+
 ```
 
@@ -268,6 +272,7 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 | Dependencies   | qbittorrent (downloads)                                    |
 | Storage        | radarr-config PVC (5Gi), /downloads/qbittorrent,           |
 |                | /media/movies                                              |
+| Observability  | exportarr-radarr sidecar (:9707/metrics), ServiceMonitor   |
 +----------------+------------------------------------------------------------+
 ```
 
@@ -301,6 +306,7 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 | Dependencies   | qbittorrent (downloads)                                    |
 | Storage        | sonarr-config PVC (5Gi), /downloads/qbittorrent,           |
 |                | /media/tv                                                  |
+| Observability  | exportarr-sonarr sidecar (:9707/metrics), ServiceMonitor   |
 +----------------+------------------------------------------------------------+
 ```
 
@@ -560,7 +566,7 @@ Restic backups to Cloudflare R2. Encrypted with SOPS-stored credentials.
 +-----------------------+-------------+-------------------------------------|
 ```
 
-Alertmanager uses Discord webhook receiver. Grafana admin user: wolf. Prometheus scrapes traefik via ServiceMonitor in `monitoring`.
+Alertmanager uses Discord webhook receiver. Grafana admin user: wolf. Prometheus scrapes traefik and cert-manager via ServiceMonitors in `monitoring`. App ServiceMonitors for sonarr, radarr, lidarr, prowlarr, qbittorrent (exportarr sidecars) and navidrome (native /metrics).
 
 ---
 
