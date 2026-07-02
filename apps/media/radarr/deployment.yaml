@@ -38,6 +38,22 @@ spec:
               mountPath: /media
             - name: media
               mountPath: /movies
+
+        - name: exportarr-radarr
+          image: ghcr.io/onedr0p/exportarr:v2.0.0
+          args:
+            - radarr
+          env:
+            - name: URL
+              value: "http://radarr.media:7878"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: radarr-secret
+                  key: RADARR_API_KEY
+          ports:
+            - containerPort: 9707
+              name: metrics
       volumes:
         - name: config
           persistentVolumeClaim:
