@@ -4,6 +4,7 @@ metadata:
   name: glances-config
   namespace: monitoring
 spec:
+  storageClassName: local-path
   accessModes:
   - ReadWriteOnce
   resources:

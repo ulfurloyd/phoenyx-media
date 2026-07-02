@@ -4,6 +4,5 @@ resources:
   - alertmanager-secret.yaml
   - helmrelease.yaml
   - helmrepository.yaml
-  - namespace.yaml
   - traefik-servicemonitor.yaml
   - rules

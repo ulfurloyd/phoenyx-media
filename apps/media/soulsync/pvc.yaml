@@ -4,6 +4,7 @@ metadata:
   name: soulsync-config
   namespace: media
 spec:
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
