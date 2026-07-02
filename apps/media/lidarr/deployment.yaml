@@ -40,7 +40,6 @@ spec:
               mountPath: /downloads/completed
             - name: media
               mountPath: /music
-
         - name: exportarr-lidarr
           image: ghcr.io/onedr0p/exportarr:v2.3.0
           args:

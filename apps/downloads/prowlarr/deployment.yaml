@@ -28,7 +28,6 @@ spec:
               value: "1000"
             - name: TZ
               value: "Asia/Kolkata"
-
         - name: exportarr-prowlarr
           image: ghcr.io/onedr0p/exportarr:v2.3.0
           args:
