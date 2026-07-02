@@ -40,6 +40,22 @@ spec:
               mountPath: /downloads/completed
             - name: media
               mountPath: /music
+
+        - name: exportarr-lidarr
+          image: ghcr.io/onedr0p/exportarr:v2.0.0
+          args:
+            - lidarr
+          env:
+            - name: URL
+              value: "http://lidarr.media:8686"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: lidarr-secret
+                  key: LIDARR_API_KEY
+          ports:
+            - containerPort: 9707
+              name: metrics
       volumes:
         - name: config
           persistentVolumeClaim:
