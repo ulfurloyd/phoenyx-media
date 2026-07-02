@@ -134,6 +134,8 @@ pinepods/
 - alertmanager
 - node-exporter
 - glances
+- speedtest-tracker
+- uptime kuma (external)
 
 ### backup
 
@@ -152,7 +154,7 @@ pinepods/
 | media         | media management and consumption  |
 | downloads     | acquisition pipeline              |
 | monitoring    | cluster and host observability    |
-| cert-manager  | acquisition pipeline              |
+| cert-manager  | TLS certificate management        |
 | backup        | backup infrastructure             |
 +---------------+-----------------------------------+
 ```
@@ -177,6 +179,7 @@ pinepods/
 | pinepods           | media       | podcast server      |
 | radarr             | media       | movie management    |
 | seerr              | media       | media requests      |
+| musicseerr         | media       | music requests      |
 | sonarr             | media       | tv management       |
 | soulsync           | media       | music syncing       |
 | jackett            | downloads   | indexer management  |
@@ -184,6 +187,7 @@ pinepods/
 | qbittorrent        | downloads   | torrent client      |
 | slskd              | downloads   | soulseek client     |
 | glances            | monitoring  | system stats        |
+| speedtest-tracker  | monitoring  | network speed tests |
 +--------------------+-------------+---------------------+
 ```
 

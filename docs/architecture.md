@@ -434,6 +434,21 @@ Signups disabled, admin panel enabled.
 
 Host PID namespace enabled. SMART plugin active.
 
+## uptime kuma
+
+```
++----------------+------------------------------------------------------------+
+| Property       | Value                                                      |
++----------------+------------------------------------------------------------+
+| External URL   | https://uptime.phoenyxlab.xyz                              |
+| Internal URL   | https://uptime-internal.phoenyxlab.xyz (Tailscale)         |
+| Hosting        | OCI VM (external to cluster, connected via Tailscale)      |
+| Usage          | external uptime monitoring for all services                |
++----------------+------------------------------------------------------------+
+```
+
+Not deployed in-cluster. The OCI VM is part of the Tailscale network; the homepage widget accesses it via the internal Tailscale URL.
+
 ---
 
 # infrastructure
