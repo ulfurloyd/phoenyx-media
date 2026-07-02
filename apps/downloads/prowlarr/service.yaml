@@ -3,10 +3,16 @@ kind: Service
 metadata:
   name: prowlarr
   namespace: downloads
+  labels:
+    app: prowlarr
 spec:
   selector:
     app: prowlarr
   ports:
-    - port: 9696
+    - name: http
+      port: 9696
       targetPort: 9696
+    - name: metrics
+      port: 9707
+      targetPort: 9707
   type: ClusterIP
