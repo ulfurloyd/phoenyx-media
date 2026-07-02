@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: navidrome
   namespace: media
+  labels:
+    app: navidrome
 spec:
   selector:
     app: navidrome
