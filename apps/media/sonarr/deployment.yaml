@@ -38,6 +38,21 @@ spec:
               mountPath: /media
             - name: media
               mountPath: /shows
+        - name: exportarr-sonarr
+          image: ghcr.io/onedr0p/exportarr:v2.0.0
+          args:
+            - sonarr
+          env:
+            - name: URL
+              value: "http://sonarr.media:8989"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: sonarr-secret
+                  key: SONARR_API_KEY
+          ports:
+            - containerPort: 9707
+              name: metrics
       volumes:
         - name: config
           persistentVolumeClaim:
