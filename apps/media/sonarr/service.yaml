@@ -7,7 +7,8 @@ spec:
   selector:
     app: sonarr
   ports:
-    - port: 8989
+    - name: http
+      port: 8989
       targetPort: 8989
     - name: metrics
       port: 9707
