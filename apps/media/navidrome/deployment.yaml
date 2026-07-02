@@ -22,6 +22,11 @@ spec:
       containers:
         - name: navidrome
           image: deluan/navidrome:0.62.0
+          env:
+            - name: ND_PROMETHEUS_ENABLED
+              value: "true"
+            - name: ND_PROMETHEUS_METRICSPATH
+              value: "/metrics"
           ports:
             - containerPort: 4533
           volumeMounts:
