@@ -22,6 +22,9 @@ spec:
       containers:
         - name: slskd
           image: slskd/slskd:0.25.1
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
