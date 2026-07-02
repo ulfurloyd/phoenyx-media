@@ -1,0 +1,129 @@
+name: Validate HelmReleases
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate-helmreleases:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Install yq
+        uses: mikefarah/yq@v4
+
+      - name: Check for HelmRelease changes
+        id: changes
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            files=$(git diff --name-only \
+              origin/${{ github.base_ref }}...HEAD)
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            files=$(git diff --name-only \
+              ${{ github.event.before }} \
+              ${{ github.sha }})
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          helmreleases=$(
+            while read -r file; do
+              [ -f "$file" ] || continue
+              grep -q 'kind: HelmRelease' "$file" && echo "$file"
+            done <<< "$files" | sort -u
+          )
+
+          echo "$helmreleases"
+
+          if [ -n "$helmreleases" ]; then
+            printf '%s\n' "$helmreleases" > helmreleases.txt
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate changed HelmRelease versions
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+
+          while read -r file; do
+            [ -z "$file" ] && continue
+
+            echo "::group::$file"
+
+            chart=$(
+              yq '
+                select(.kind == "HelmRelease")
+                .spec.chart.spec.chart
+              ' "$file"
+            )
+
+            version=$(
+              yq '
+                select(.kind == "HelmRelease")
+                .spec.chart.spec.version
+              ' "$file"
+            )
+
+            repo_name=$(
+              yq '
+                select(.kind == "HelmRelease")
+                .spec.chart.spec.sourceRef.name
+              ' "$file"
+            )
+
+            repo_file=$(
+              grep -rl \
+                "kind: HelmRepository" \
+                .
+            )
+
+            repo_url=$(
+              yq "
+                select(.kind == \"HelmRepository\") |
+                select(.metadata.name == \"$repo_name\") |
+                .spec.url
+              " $repo_file
+            )
+
+            echo "Repository: $repo_name"
+            echo "URL:        $repo_url"
+            echo "Chart:      $chart"
+            echo "Version:    $version"
+
+            helm repo add "$repo_name" "$repo_url" >/dev/null
+            helm repo update >/dev/null
+
+            helm pull \
+              "$repo_name/$chart" \
+              --version "$version" \
+              >/dev/null
+
+            echo "OK"
+            echo "::endgroup::"
+
+          done < helmreleases.txt
+
+          echo
+          echo "All HelmRelease versions validated successfully."
+
+      - name: Skip validation
+        if: steps.changes.outputs.changed == 'false'
+        run: |
+          echo "No HelmRelease changes detected."
+          echo "Skipping HelmRelease validation"
