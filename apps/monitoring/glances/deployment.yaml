@@ -36,6 +36,16 @@ spec:
               value: "/tmp/py_caches"
           ports:
             - containerPort: 61208
+          livenessProbe:
+            tcpSocket:
+              port: 61208
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 61208
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: rootfs
               mountPath: /rootfs
