@@ -32,6 +32,16 @@ spec:
         ports:
         - containerPort: 5454
           name: notifiarr
+        livenessProbe:
+          tcpSocket:
+            port: 5454
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          tcpSocket:
+            port: 5454
+          initialDelaySeconds: 10
+          periodSeconds: 10
         volumeMounts:
           - name: config
             mountPath: /config

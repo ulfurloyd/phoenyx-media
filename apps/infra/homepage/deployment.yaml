@@ -30,6 +30,16 @@ spec:
           image: ghcr.io/gethomepage/homepage:v1.13.2
           ports:
             - containerPort: 3000
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: "homepage.phoenyxlab.xyz,gethomepage.dev"

@@ -28,6 +28,16 @@ spec:
           image: vaultwarden/server:1.36.0
           ports:
             - containerPort: 80
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
           env:
             - name: DOMAIN
               value: "https://vaultwarden.phoenyxlab.xyz"

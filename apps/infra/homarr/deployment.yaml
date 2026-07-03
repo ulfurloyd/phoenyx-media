@@ -31,6 +31,16 @@ spec:
                 name: homarr-secret
           ports:
             - containerPort: 7575
+          livenessProbe:
+            tcpSocket:
+              port: 7575
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 7575
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /appdata
