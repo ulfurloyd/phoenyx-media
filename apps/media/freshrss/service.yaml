@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: freshrss
   namespace: media
+  labels:
+    app: freshrss
+    app.kubernetes.io/name: freshrss
+    app.kubernetes.io/instance: freshrss
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: freshrss

@@ -3,6 +3,12 @@ kind: Deployment
 metadata:
   name: freshrss-postgres
   namespace: media
+  labels:
+    app: freshrss-postgres
+    app.kubernetes.io/name: freshrss-postgres
+    app.kubernetes.io/instance: freshrss-postgres
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
@@ -13,6 +19,9 @@ spec:
       labels:
         app: freshrss-postgres
         app.kubernetes.io/name: freshrss-postgres
+        app.kubernetes.io/instance: freshrss-postgres
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: postgres

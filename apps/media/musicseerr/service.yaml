@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: musicseerr
   namespace: media
+  labels:
+    app: musicseerr
+    app.kubernetes.io/name: musicseerr
+    app.kubernetes.io/instance: musicseerr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: musicseerr

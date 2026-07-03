@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: soulsync
   namespace: media
+  labels:
+    app: soulsync
+    app.kubernetes.io/name: soulsync
+    app.kubernetes.io/instance: soulsync
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: soulsync

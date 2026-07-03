@@ -7,6 +7,8 @@ metadata:
     app: soulsync
     app.kubernetes.io/name: soulsync
     app.kubernetes.io/instance: soulsync
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 0
   selector:
@@ -18,6 +20,8 @@ spec:
         app: soulsync
         app.kubernetes.io/name: soulsync
         app.kubernetes.io/instance: soulsync
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: soulsync

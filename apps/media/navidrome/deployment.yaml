@@ -7,6 +7,8 @@ metadata:
     app: navidrome
     app.kubernetes.io/name: navidrome
     app.kubernetes.io/instance: navidrome
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
@@ -18,6 +20,8 @@ spec:
         app: navidrome
         app.kubernetes.io/name: navidrome
         app.kubernetes.io/instance: navidrome
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: navidrome

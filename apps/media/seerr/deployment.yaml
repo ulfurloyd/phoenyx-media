@@ -7,6 +7,8 @@ metadata:
     app: seerr
     app.kubernetes.io/name: seerr
     app.kubernetes.io/instance: seerr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
@@ -18,6 +20,8 @@ spec:
         app: seerr
         app.kubernetes.io/name: seerr
         app.kubernetes.io/instance: seerr
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: seerr

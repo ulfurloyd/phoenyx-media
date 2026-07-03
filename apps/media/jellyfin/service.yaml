@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: phoenyxfin
   namespace: media
+  labels:
+    app: jellyfin
+    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/instance: jellyfin
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: jellyfin

@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: seerr
   namespace: media
+  labels:
+    app: seerr
+    app.kubernetes.io/name: seerr
+    app.kubernetes.io/instance: seerr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: seerr

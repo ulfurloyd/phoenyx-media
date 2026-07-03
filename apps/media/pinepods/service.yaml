@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: pinepods
   namespace: media
+  labels:
+    app: pinepods
+    app.kubernetes.io/name: pinepods
+    app.kubernetes.io/instance: pinepods
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: pinepods

@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: pinepods-postgres
   namespace: media
+  labels:
+    app: pinepods-postgres
+    app.kubernetes.io/name: pinepods-postgres
+    app.kubernetes.io/instance: pinepods-postgres
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: pinepods-postgres

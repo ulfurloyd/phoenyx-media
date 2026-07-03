@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: freshrss-postgres
   namespace: media
+  labels:
+    app: freshrss-postgres
+    app.kubernetes.io/name: freshrss-postgres
+    app.kubernetes.io/instance: freshrss-postgres
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: freshrss-postgres

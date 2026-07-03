@@ -5,6 +5,10 @@ metadata:
   namespace: media
   labels:
     app: lidarr
+    app.kubernetes.io/name: lidarr
+    app.kubernetes.io/instance: lidarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: lidarr

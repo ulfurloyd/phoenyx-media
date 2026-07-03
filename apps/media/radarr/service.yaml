@@ -5,6 +5,10 @@ metadata:
   namespace: media
   labels:
     app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: radarr

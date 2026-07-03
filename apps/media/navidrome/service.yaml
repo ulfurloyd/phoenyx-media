@@ -5,6 +5,10 @@ metadata:
   namespace: media
   labels:
     app: navidrome
+    app.kubernetes.io/name: navidrome
+    app.kubernetes.io/instance: navidrome
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: navidrome

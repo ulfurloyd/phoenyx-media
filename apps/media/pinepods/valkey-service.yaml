@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: pinepods-valkey
   namespace: media
+  labels:
+    app: pinepods-valkey
+    app.kubernetes.io/name: pinepods-valkey
+    app.kubernetes.io/instance: pinepods-valkey
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: pinepods-valkey
