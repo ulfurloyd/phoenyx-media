@@ -5,8 +5,8 @@ metadata:
   namespace: infra
   labels:
     app: pihole
-    app.kubernetes.io/name: pihole-dns
-    app.kubernetes.io/instance: pihole-dns
+    app.kubernetes.io/name: pihole
+    app.kubernetes.io/instance: pihole
     app.kubernetes.io/part-of: phoenyxlab
     app.kubernetes.io/managed-by: kustomize
 spec:

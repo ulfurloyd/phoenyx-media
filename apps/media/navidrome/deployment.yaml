@@ -37,12 +37,12 @@ spec:
             tcpSocket:
               port: 4533
             initialDelaySeconds: 30
-            delaySeconds: 15
+            periodSeconds: 15
           readinessProbe:
             tcpSocket:
               port: 4533
             initialDelaySeconds: 10
-            delaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /data
