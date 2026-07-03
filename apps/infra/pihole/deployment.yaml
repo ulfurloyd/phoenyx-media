@@ -38,6 +38,16 @@ spec:
               protocol: UDP
             - containerPort: 80
               protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: pihole
               mountPath: /etc/pihole
