@@ -56,6 +56,16 @@ spec:
                   key: POSTGRES_PASSWORD
           ports:
             - containerPort: 80
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: data
               mountPath: /var/www/FreshRSS/data
