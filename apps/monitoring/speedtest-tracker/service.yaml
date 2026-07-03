@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: speedtest-tracker
   namespace: monitoring
+  labels:
+    app: speedtest-tracker
+    app.kubernetes.io/name: speedtest-tracker
+    app.kubernetes.io/instance: speedtest-tracker
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: speedtest-tracker

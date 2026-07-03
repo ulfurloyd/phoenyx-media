@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: glances
   namespace: monitoring
+  labels:
+    app: glances
+    app.kubernetes.io/name: glances
+    app.kubernetes.io/instance: glances
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: glances
