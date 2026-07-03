@@ -28,6 +28,16 @@ spec:
           image: lscr.io/linuxserver/prowlarr:2.4.0
           ports:
             - containerPort: 9696
+          livenessProbe:
+            tcpSocket:
+              port: 9696
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 9696
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /config
@@ -53,6 +63,16 @@ spec:
           ports:
             - containerPort: 9707
               name: metrics
+          livenessProbe:
+            tcpSocket:
+              port: 9707
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 9707
+            initialDelaySeconds: 10
+            periodSeconds: 10
       initContainers:
         - name: gluetun
           image: qmcgaw/gluetun:v3.41
