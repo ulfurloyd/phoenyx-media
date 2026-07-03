@@ -28,16 +28,6 @@ spec:
           image: lscr.io/linuxserver/qbittorrent:5.2.2
           ports:
             - containerPort: 8080
-          livenessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 15
-          readinessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 10
           env:
             - name: PUID
               value: "1000"
