@@ -28,6 +28,16 @@ spec:
           image: boulderbadgedad/soulsync:2.8.4
           ports:
             - containerPort: 8008
+          livenessProbe:
+            tcpSocket:
+              port: 8008
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 8008
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /app/config

@@ -28,6 +28,16 @@ spec:
           image: ghcr.io/seerr-team/seerr:v3.3.0
           ports:
             - containerPort: 5055
+          livenessProbe:
+            tcpSocket:
+              port: 5055
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 5055
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /app/config
