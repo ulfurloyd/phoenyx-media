@@ -3,6 +3,12 @@ kind: Deployment
 metadata:
   name: prowlarr
   namespace: downloads
+  labels:
+    app: prowlarr
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/instance: prowlarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
@@ -12,6 +18,10 @@ spec:
     metadata:
       labels:
         app: prowlarr
+        app.kubernetes.io/name: prowlarr
+        app.kubernetes.io/instance: prowlarr
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: prowlarr

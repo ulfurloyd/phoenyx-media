@@ -5,6 +5,10 @@ metadata:
   namespace: downloads
   labels:
     app: qbittorrent
+    app.kubernetes.io/name: qbittorrent
+    app.kubernetes.io/instance: qbittorrent
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: qbittorrent

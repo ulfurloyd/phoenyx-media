@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: jackett
   namespace: downloads
+  labels:
+    app: jackett
+    app.kubernetes.io/name: jackett
+    app.kubernetes.io/instance: jackett
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: jackett

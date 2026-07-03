@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: slskd
   namespace: downloads
+  labels:
+    app: slskd
+    app.kubernetes.io/name: slskd
+    app.kubernetes.io/instance: slskd
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: slskd
