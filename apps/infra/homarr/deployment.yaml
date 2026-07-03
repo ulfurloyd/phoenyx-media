@@ -7,6 +7,8 @@ metadata:
     app: homarr
     app.kubernetes.io/name: homarr
     app.kubernetes.io/instance: homarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 0
   selector:
@@ -18,6 +20,8 @@ spec:
         app: homarr
         app.kubernetes.io/name: homarr
         app.kubernetes.io/instance: homarr
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: homarr

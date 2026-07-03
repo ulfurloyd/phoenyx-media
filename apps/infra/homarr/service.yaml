@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: homarr
   namespace: infra
+  labels:
+    app: homarr
+    app.kubernetes.io/name: homarr
+    app.kubernetes.io/instance: homarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: homarr

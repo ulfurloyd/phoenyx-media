@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: notifiarr
   namespace: infra
+  labels:
+    app: notifiarr
+    app.kubernetes.io/name: notifiarr
+    app.kubernetes.io/instance: notifiarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: notifiarr

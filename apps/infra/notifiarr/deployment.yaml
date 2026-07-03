@@ -7,6 +7,8 @@ metadata:
     app: notifiarr
     app.kubernetes.io/name: notifiarr
     app.kubernetes.io/instance: notifiarr
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
@@ -18,6 +20,8 @@ spec:
         app: notifiarr
         app.kubernetes.io/name: notifiarr
         app.kubernetes.io/instance: notifiarr
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
       - name: notifiarr

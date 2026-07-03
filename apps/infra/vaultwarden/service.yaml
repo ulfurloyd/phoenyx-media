@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: vaultwarden
   namespace: infra
+  labels:
+    app: vaultwarden
+    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/instance: vaultwarden
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     app: vaultwarden
