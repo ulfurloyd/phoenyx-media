@@ -35,6 +35,16 @@ spec:
           ports:
             - containerPort: 5030
             - containerPort: 50300
+          livenessProbe:
+            tcpSocket:
+              port: 5030
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 5030
+            initialDelaySeconds: 10
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /app
