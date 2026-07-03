@@ -28,6 +28,17 @@ spec:
           image: jellyfin/jellyfin:10.11.11
           ports:
             - containerPort: 8096
+          livenessProbe:
+            tcpSocket:
+              port: 8096
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8096
+            initialDelaySeconds: 30
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /config
