@@ -27,15 +27,15 @@ spec:
         - name: musicseerr
           image: habirabbu/musicseerr:v1.4.2
           ports:
-            - containerPort: 8686
+            - containerPort: 8688
           livenessProbe:
             tcpSocket:
-              port: 8686
+              port: 8688
             initialDelaySeconds: 30
             periodSeconds: 15
           readinessProbe:
             tcpSocket:
-              port: 8686
+              port: 8688
             initialDelaySeconds: 10
             periodSeconds: 10
           volumeMounts:
