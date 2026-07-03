@@ -33,6 +33,16 @@ spec:
               value: "/metrics"
           ports:
             - containerPort: 4533
+          livenessProbe:
+            tcpSocket:
+              port: 4533
+            initialDelaySeconds: 30
+            delaySeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 4533
+            initialDelaySeconds: 10
+            delaySeconds: 10
           volumeMounts:
             - name: config
               mountPath: /data
