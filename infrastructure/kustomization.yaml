@@ -5,4 +5,5 @@ resources:
   - cert-manager
   - godaddy-webhook
   - monitoring
+  - network-policies
   - traefik

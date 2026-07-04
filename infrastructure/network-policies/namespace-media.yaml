@@ -1,0 +1,104 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: media
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-traefik-ingress
+  namespace: media
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: traefik
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-homepage-ingress
+  namespace: media
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: infra
+          podSelector:
+            matchLabels:
+              app: homepage
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-monitoring-ingress
+  namespace: media
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-pinepods-postgres
+  namespace: media
+spec:
+  podSelector:
+    matchLabels:
+      app: pinepods-postgres
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: pinepods
+      ports:
+        - port: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-pinepods-valkey
+  namespace: media
+spec:
+  podSelector:
+    matchLabels:
+      app: pinepods-valkey
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: pinepods
+      ports:
+        - port: 6379
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-freshrss-postgres
+  namespace: media
+spec:
+  podSelector:
+    matchLabels:
+      app: freshrss-postgres
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: freshrss
+      ports:
+        - port: 5432
