@@ -525,7 +525,7 @@ DNS-01 ACME solver for cert-manager.
 +----------------+------------------------------------------------------------+
 | Namespace      | backup                                                     |
 | Type           | CronJob (restic)                                           |
-| Schedule       | 0 2 * * * (Asia/Kolkata)                                   |
+| Schedule       | 0 2 * * 1 (Asia/Kolkata)                                   |
 | Repository     | s3://...r2.cloudflarestorage.com/phoenyxlab-backups        |
 | Retention      | keep-weekly 8, keep-monthly 12, prune                      |
 | Dependencies   | Cloudflare R2 (S3-compatible)                              |
@@ -567,6 +567,22 @@ Restic backups to Cloudflare R2. Encrypted with SOPS-stored credentials.
 ```
 
 Alertmanager uses Discord webhook receiver. Grafana admin user: wolf. Prometheus scrapes traefik and cert-manager via ServiceMonitors in `monitoring`. App ServiceMonitors for sonarr, radarr, lidarr, prowlarr, qbittorrent (exportarr sidecars) and navidrome (native /metrics).
+
+## network policies
+
+```
++----------------+------------------------------------------------------------+
+| Property       | Value                                                      |
++----------------+------------------------------------------------------------+
+| Enforced by    | K3s built-in controller (kube-router)                      |
+| Strategy       | default-deny ingress, unrestricted egress                  |
+| Namespaces     | media, downloads, infra, monitoring, backup                |
+| Exceptions     | Traefik (any NS), homepage (infra), monitoring NS,         |
+|                |   intranamespace (all NS), cross-ns media↔downloads        |
++----------------+------------------------------------------------------------+
+```
+
+Allows unrestricted intranamespace traffic (pod-to-pod within the same namespace) and specific cross-namespace exceptions. Initiated egress is not restricted.
 
 ---
 

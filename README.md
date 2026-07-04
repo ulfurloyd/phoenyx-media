@@ -76,6 +76,7 @@ FluxCD
 │   ├── backup/
 │   ├── cert-manager/
 │   ├── monitoring/
+│   ├── network-policies/
 │   └── traefik/
 │
 ├── clusters/
@@ -118,6 +119,7 @@ pinepods/
 - wildcard TLS certificate via cert-manager
 - Pi-hole for internal DNS
 - private access via Tailscale
+- NetworkPolicies: default-deny ingress, explicit allow rules by namespace
 
 ### GitOps
 
