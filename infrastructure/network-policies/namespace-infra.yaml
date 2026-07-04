@@ -12,16 +12,15 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-traefik-ingress
+  name: allow-kube-system-ingress
   namespace: infra
 spec:
   podSelector: {}
   ingress:
     - from:
-        - namespaceSelector: {}
-          podSelector:
+        - namespaceSelector:
             matchLabels:
-              app.kubernetes.io/name: traefik
+              kubernetes.io/metadata.name: kube-system
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
