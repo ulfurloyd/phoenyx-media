@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: soulsync
-          image: boulderbadgedad/soulsync:2.8.4
+          image: boulderbadgedad/soulsync:2.8.51
           ports:
             - containerPort: 8008
           livenessProbe:
