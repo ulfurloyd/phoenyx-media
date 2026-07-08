@@ -401,11 +401,11 @@ data:
               url: http://seerr.media:5055
               key: "{{HOMEPAGE_VAR_SEERR_API_KEY}}"
 
-        - MusicSeerr:
-            href: https://musicseerr.phoenyxlab.xyz
+        - DroppedNeedle:
+            href: https://droppedneedle.phoenyxlab.xyz
             icon: sh-musicseerr
             namespace: media
-            app: musicseerr
+            app: droppedneedle
 
     - Downloads:
         - qBittorrent:
