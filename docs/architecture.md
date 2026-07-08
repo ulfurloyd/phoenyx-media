@@ -179,19 +179,20 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 +----------------+------------------------------------------------------------+
 ```
 
-## musicseerr
+## droppedneedle
 
 ```
 +----------------+------------------------------------------------------------+
 | Property       | Value                                                      |
 +----------------+------------------------------------------------------------+
 | Namespace      | media                                                      |
-| Service        | musicseerr                                                 |
+| Service        | droppedneedle                                              |
 | Container Port | 8688                                                       |
 | Service Type   | ClusterIP                                                  |
-| External URL   | https://musicseerr.phoenyxlab.xyz                          |
-| Dependencies   | music library                                              |
-| Storage        | musicseerr PVC (1Gi), /media/music                         |
+| External URL   | https://droppedneedle.phoenyxlab.xyz                       |
+| Dependencies   | slskd (downloads), music library                           |
+| Storage        | droppedneedle PVC (1Gi), slskd downloads (hostPath),       |
+|                | /media/music                                               |
 +----------------+------------------------------------------------------------+
 ```
 
@@ -606,7 +607,7 @@ music library
   └─► lidarr (music mount)
   └─► navidrome (music mount)
   └─► jellyfin (music mount)
-  └─► musicseerr (music mount)
+  └─► droppedneedle (music mount)
 
 freshrss-postgres
   └─► freshrss

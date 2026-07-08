@@ -181,7 +181,7 @@ pinepods/
 | pinepods           | media       | podcast server      |
 | radarr             | media       | movie management    |
 | seerr              | media       | media requests      |
-| musicseerr         | media       | music requests      |
+| droppedneedle      | media       | music requests      |
 | sonarr             | media       | tv management       |
 | soulsync           | media       | music syncing       |
 | jackett            | downloads   | indexer management  |
