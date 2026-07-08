@@ -1,31 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: musicseerr
+  name: droppedneedle
   namespace: media
   labels:
-    app: musicseerr
-    app.kubernetes.io/name: musicseerr
-    app.kubernetes.io/instance: musicseerr
+    app: droppedneedle
+    app.kubernetes.io/name: droppedneedle
+    app.kubernetes.io/instance: droppedneedle
     app.kubernetes.io/part-of: phoenyxlab
     app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: musicseerr
+      app: droppedneedle
   template:
     metadata:
       labels:
-        app: musicseerr
-        app.kubernetes.io/name: musicseerr
-        app.kubernetes.io/instance: musicseerr
+        app: droppedneedle
+        app.kubernetes.io/name: droppedneedle
+        app.kubernetes.io/instance: droppedneedle
         app.kubernetes.io/part-of: phoenyxlab
         app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
-        - name: musicseerr
-          image: habirabbu/musicseerr:v1.4.2
+        - name: droppedneedle
+          image: habirabbu/droppedneedle:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: PORT
+              value: "8688"
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: SLSKD_DOWNLOADS_PATH
+              value: "/downloads"
           ports:
             - containerPort: 8688
           livenessProbe:
@@ -45,13 +56,17 @@ spec:
               mountPath: /app/cache
             - name: music
               mountPath: /music
-              readOnly: true
+            - name: slskd-downloads
+              mountPath: /downloads
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: musicseerr
+            claimName: droppedneedle
         - name: cache
           emptyDir: {}
         - name: music
           hostPath:
             path: /media/music
+        - name: slskd-downloads
+          hostPath:
+            path: /downloads/slskd/completed

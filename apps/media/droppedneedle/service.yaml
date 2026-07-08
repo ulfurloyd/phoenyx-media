@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: musicseerr
+  name: droppedneedle
   namespace: media
   labels:
-    app: musicseerr
-    app.kubernetes.io/name: musicseerr
-    app.kubernetes.io/instance: musicseerr
+    app: droppedneedle
+    app.kubernetes.io/name: droppedneedle
+    app.kubernetes.io/instance: droppedneedle
     app.kubernetes.io/part-of: phoenyxlab
     app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
-    app: musicseerr
+    app: droppedneedle
   ports:
     - port: 8688
       targetPort: 8688
