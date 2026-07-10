@@ -63,7 +63,8 @@ spec:
           persistentVolumeClaim:
             claimName: droppedneedle
         - name: cache
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: droppedneedle-cache
         - name: music
           hostPath:
             path: /media/music
