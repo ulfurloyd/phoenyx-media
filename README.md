@@ -232,7 +232,7 @@ pinepods/
 Request
    │
    ▼
-Seerr / Musicseerr
+Seerr / Droppedneedle
    │
    ▼
 Sonarr / Radarr / Lidarr

@@ -191,8 +191,8 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 | Service Type   | ClusterIP                                                  |
 | External URL   | https://droppedneedle.phoenyxlab.xyz                       |
 | Dependencies   | slskd (downloads), music library                           |
-| Storage        | droppedneedle PVC (1Gi), slskd downloads (hostPath),       |
-|                | /media/music                                               |
+| Storage        | droppedneedle PVC (1Gi), droppedneedle-cache PVC (1Gi),    |
+|                | /downloads/slskd/completed (hostPath), /media/music        |
 +----------------+------------------------------------------------------------+
 ```
 
