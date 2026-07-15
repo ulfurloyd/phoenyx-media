@@ -403,7 +403,7 @@ data:
 
         - DroppedNeedle:
             href: https://droppedneedle.phoenyxlab.xyz
-            icon: sh-musicseerr
+            icon: sh-droppedneedle
             namespace: media
             app: droppedneedle
 
