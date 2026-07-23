@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: prowlarr
-          image: lscr.io/linuxserver/prowlarr:2.4.0
+          image: lscr.io/linuxserver/prowlarr:2.5.2
           ports:
             - containerPort: 9696
           livenessProbe:
