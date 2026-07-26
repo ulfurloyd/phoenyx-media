@@ -24,14 +24,20 @@ spec:
         app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
-      - name: notifiarr
-        image: golift/notifiarr:0.9.5
-        env:
-          - name: TZ
-            value: "Asia/Kolkata"
-        ports:
-        - containerPort: 5454
-          name: notifiarr
+        - name: notifiarr
+          image: golift/notifiarr:0.9.5
+          env:
+            - name: TZ
+              value: "Asia/Kolkata"
+          ports:
+          - containerPort: 5454
+            name: notifiarr
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 768Mi
         livenessProbe:
           tcpSocket:
             port: 5454
