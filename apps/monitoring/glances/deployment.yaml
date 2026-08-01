@@ -26,7 +26,7 @@ spec:
       hostPID: true
       containers:
         - name: glances
-          image: nicolargo/glances:4.5.5
+          image: nicolargo/glances:4.5.6
           env:
             - name: GLANCES_OPT
               value: "-w --enable-plugin smart"
