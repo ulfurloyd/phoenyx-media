@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: seerr
-          image: ghcr.io/seerr-team/seerr:v3.4.0
+          image: ghcr.io/seerr-team/seerr:v3.4.1
           ports:
             - containerPort: 5055
           livenessProbe:
