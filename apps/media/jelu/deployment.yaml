@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jelu
+  namespace: media
+  labels:
+    app: jelu
+    app.kubernetes.io/name: jelu
+    app.kubernetes.io/instance: jelu
+    app.kubernetes.io/part-of: phoenyxlab
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jelu
+  template:
+    metadata:
+      labels:
+        app: jelu
+        app.kubernetes.io/name: jelu
+        app.kubernetes.io/instance: jelu
+        app.kubernetes.io/part-of: phoenyxlab
+        app.kubernetes.io/managed-by: kustomize
+    spec:
+      containers:
+        - name: jelu
+          image: wabayang/jelu:0.84.4
+          env:
+            - name: TZ
+              value: "Asia/Kolkata"
+            - name: JELU_DATABASE_PATH
+              value: "/database/"
+            - name: JELU_FILES_IMAGES
+              value: "/files/images/"
+            - name: JELU_FILES_IMPORTS
+              value: "/files/imports/"
+          ports:
+            - containerPort: 11111
+          livenessProbe:
+            tcpSocket:
+              port: 11111
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 11111
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: data
+              mountPath: /database
+            - name: images
+              mountPath: /files/images
+            - name: images
+              mountPath: /files/imports
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: jelu-data
+        - name: images
+          persistentVolumeClaim:
+            claimName: jelu-images

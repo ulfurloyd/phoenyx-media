@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - freshrss
   - jellyfin
+  - jelu
   - lidarr
   - droppedneedle
   - navidrome

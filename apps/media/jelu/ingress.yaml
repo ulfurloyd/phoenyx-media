@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jelu
+  namespace: media
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - jelu.phoenyxlab.xyz
+  rules:
+    - host: jelu.phoenyxlab.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jelu
+                port:
+                  number: 11111

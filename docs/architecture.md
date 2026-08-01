@@ -161,6 +161,23 @@ Soulseek client. P2P port 50300 is not exposed via Service.
 +----------------+------------------------------------------------------------+
 ```
 
+## jelu
+
+```
++----------------+------------------------------------------------------------+
+| Property       | Value                                                      |
++----------------+------------------------------------------------------------+
+| Namespace      | media                                                      |
+| Service        | jelu                                                       |
+| Container Port | 11111                                                      |
+| Service Type   | ClusterIP                                                  |
+| External URL   | https://jelu.phoenyxlab.xyz                                |
+| Dependencies   | none                                                       |
+| Storage        | jelu-data PVC (1Gi) /config + /database,                   |
+|                | jelu-images PVC (2Gi) /files/images + /files/imports       |
++----------------+------------------------------------------------------------+
+```
+
 ## lidarr
 
 ```

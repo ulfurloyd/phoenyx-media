@@ -176,6 +176,7 @@ pinepods/
 | vaultwarden        | infra       | password manager    |
 | freshrss           | media       | RSS Reader          |
 | jellyfin           | media       | media server        |
+| jelu               | media       | book library        |
 | lidarr             | media       | music acquisition   |
 | navidrome          | media       | music server        |
 | pinepods           | media       | podcast server      |
