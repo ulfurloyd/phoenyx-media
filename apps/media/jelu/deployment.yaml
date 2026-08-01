@@ -48,7 +48,7 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 10
           volumeMounts:
-            - name: data
+            - name: config
               mountPath: /config
             - name: data
               mountPath: /database
@@ -57,6 +57,9 @@ spec:
             - name: images
               mountPath: /files/imports
       volumes:
+        - name: config
+          configMap:
+            name: jelu-config
         - name: data
           persistentVolumeClaim:
             claimName: jelu-data

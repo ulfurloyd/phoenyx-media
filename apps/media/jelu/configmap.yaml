@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jelu-config
+  namespace: media
+data:
+  application.yml: |
+    jelu:
+      cors.allowed-origins:
+        - https://jelu.phoenyxlab.xyz
