@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/part-of: phoenyxlab
     app.kubernetes.io/managed-by: kustomize
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: radarr
