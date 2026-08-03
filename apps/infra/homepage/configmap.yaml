@@ -258,14 +258,14 @@ data:
               version: 4
               metric: memory
 
-        - Disk Usage:
+        - Media Storage:
             href: https://glances.phoenyxlab.xyz
             widget:
               type: glances
               url: http://glances.monitoring:61208
               refreshInterval: 10000
               version: 4
-              metric: fs:/rootfs
+              metric: fs:/rootfs/media/movies
 
         - Speedtest Tracker:
             href: https://speedtest.phoenyxlab.xyz
