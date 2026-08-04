@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/part-of: phoenyxlab
     app.kubernetes.io/managed-by: kustomize
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: jelu
