@@ -68,7 +68,7 @@ data:
       Arr Stack:
         tab: Media
         style: row
-        columns: 3
+        columns: 4
         header: false
         headerStyle: boxed
         useEqualHeights: true
@@ -395,6 +395,10 @@ data:
             icon: bazarr
             namespace: media
             app: bazarr
+            widget:
+              type: bazarr
+              url: http://bazarr.media:6767
+              key: "{{HOMEPAGE_VAR_BAZARR_API_KEY}}"
 
     - Requests:
         - Seerr:
