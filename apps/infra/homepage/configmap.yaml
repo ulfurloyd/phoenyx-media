@@ -390,6 +390,12 @@ data:
               url: http://lidarr.media:8686
               key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
 
+        - Bazarr:
+            href: https://bazarr.phoenyxlab.xyz
+            icon: bazarr
+            namespace: media
+            app: bazarr
+
     - Requests:
         - Seerr:
             href: https://seerr.phoenyxlab.xyz
