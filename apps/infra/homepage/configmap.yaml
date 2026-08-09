@@ -68,7 +68,7 @@ data:
       Arr Stack:
         tab: Media
         style: row
-        columns: 3
+        columns: 4
         header: false
         headerStyle: boxed
         useEqualHeights: true
