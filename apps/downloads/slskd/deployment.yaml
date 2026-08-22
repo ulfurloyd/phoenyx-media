@@ -32,6 +32,8 @@ spec:
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
+            - name: SLSKD_SHARED_DIR
+              value: "/music"
           ports:
             - containerPort: 5030
             - containerPort: 50300
@@ -52,6 +54,8 @@ spec:
               mountPath: /downloads/completed
             - name: downloads-incomplete
               mountPath: /downloads/incomplete
+            - name: music
+              mountPath: /music
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -63,3 +67,7 @@ spec:
           hostPath:
             path: /downloads/slskd/incomplete
             type: DirectoryOrCreate
+        - name: music
+          hostPath:
+            path: /media/music
+            type: Directory
