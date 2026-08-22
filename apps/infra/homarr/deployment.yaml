@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: homarr
-          image: ghcr.io/homarr-labs/homarr:v1.75.0
+          image: ghcr.io/homarr-labs/homarr:v1.76.0
           envFrom:
             - secretRef:
                 name: homarr-secret
