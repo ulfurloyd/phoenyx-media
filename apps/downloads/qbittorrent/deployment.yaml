@@ -44,7 +44,7 @@ spec:
               mountPath: /downloads
 
         - name: qbittorrent-exporter
-          image: ghcr.io/martabal/qbittorrent-exporter:v2.0.1
+          image: ghcr.io/martabal/qbittorrent-exporter:v2.0.2
           env:
             - name: QBITTORRENT_BASE_URL
               value: "http://qbittorrent.downloads:8080"
