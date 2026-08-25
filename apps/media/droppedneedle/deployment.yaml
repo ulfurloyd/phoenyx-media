@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: droppedneedle
-          image: habirabbu/droppedneedle:v2.6.0
+          image: habirabbu/droppedneedle:v2.6.1
           env:
             - name: PUID
               value: "1000"
