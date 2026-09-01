@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: lidarr
-          image: lscr.io/linuxserver/lidarr:3.1.4-nightly
+          image: lscr.io/linuxserver/lidarr:3.1.5-nightly
           ports:
             - containerPort: 8686
           livenessProbe:
